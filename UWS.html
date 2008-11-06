@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- $Id:$ 
+Universal Worker Service WD 
+Note that this file should be xhtml with div to mark sections
+Paul Harrison -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Universal Worker Service Specification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta name="Title" content="IVOA WG Internal Draft" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
+<meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
+<link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_wd.css" type="text/css" />
+<style type="text/css"></style>
+<link href="XMLPrint.css" rel="stylesheet" type="text/css" />
+</head>
+<body bgcolor="#FFFFFF">
+<div class="head">
+<table>
+  <tr>
+    <td><a href="http://www.ivoa.net/"><img alt="IVOA" src="http://www.ivoa.net/icons/ivoa_logo_small.jpg" /></a></td>
+  </tr>
+</table>
+<h1>Universal Worker Service<br/>
+  Version @VERSION@</h1>
+<h2 >IVOA
+  Internal Working Draft @RELEASEDATE@</h2>
+<dl>
+  <dt>Working Group</dt>
+  <dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd>
+  <dt><b>This version:</b></dt>
+  <dd> 0.4</dd>
+  <dt><b>Latest version:</b></dt>
+  <dd> not issued outside
+    GWS-WG</dd>
+  <dt><b>Previous version(s):</b></dt>
+  <dd> Internal Working Draft
+    v0.1, 2005-01-24
+  Internal Working Draft
+  v0.2, 2006-05-11 Internal
+    Working Draft v.0.3, 2007-04-26  Internal
+    Working Draft v.04  2008-05-10</dd>
+    <dt><b>Author(s):</b></dt>
+  <dd>  Paul
+    Harrison, Guy Rixon</dd>
+</dl>
+
+<h2>Abstract</h2>
+<p >The Universal Worker Service pattern
+  (UWS) defines how to manage asynchronous execution of jobs on a
+  service. Any application of the pattern defines a family of related
+  services with a common service contract. Four possible applications
+  are described.</p>
+<h2> Status of This Document</h2>
+<p >This is an  working draft of
+  the GWS-WG. The first release of this document was on 2005-01-24
+  within the working group; This version is the first public WD.</p>
+<p  ><em >This
+  is an IVOA Working Draft for review by IVOA members and other
+  interested parties. It is a draft document and may be updated,
+  replaced, or made obsolete by other documents at any time. It is
+  inappropriate to use IVOA Working Drafts as reference materials or to
+  cite them as other than &ldquo;work in progress&rdquo;.</em></p>
+<p> <em >A list of </em><span style="background: transparent"><a  href="http://www.ivoa.net/Documents/"><i>current
+  IVOA Recommendations and other technical documents</i></a></span><em > can be found at http://www.ivoa.net/Documents/.</em></p>
+<h2 class="prologue-heading-western"  >Acknowledgements</h2>
+<p >The need for the UWS pattern was
+  inspired by AstroGrid&rsquo;s Common Execution Architecture and
+  particularly by discussions with Noel Winstanley. The ideas about
+  statefulness are distilled from debates in the Global Grid Forum in
+  respect of the Open Grid Services Infrastructure that was the
+  fore-runner of Web Services Resource Framework. The REST binding came
+  initially from suggestions by Norman Gray. The pattern was further
+  refined following Pat Dowler's feedback from the implementation of a TAP prototype.</p>
+<p class="prologue-heading-western"  >ISSUES TO BE
+  RESOLVED</p>
+<ol>
+  <li>
+    <p >Possible blocking behaviour on
+      getResults &ndash; or what behaviour for for allowing results to appear
+      before the app is finished to allow streaming.</p>
+  </li>
+  <li>
+    <p >Perhaps remove the SOAP binding
+      section &ndash;  although the most basic of the WS-* standards, it not
+      clear how well supported WS-Addressing is in tools, and how best to
+      use it for UWS to really achieve interoperability (see <a  href="http://wiki.apache.org/ws/StackComparison">http://wiki.apache.org/ws/StackComparison</a> for a SOAP stack comparison). Possibly re-introduce SOAP binding in
+      a later version (2.x?) of the UWS standard, when there is more
+      experience.</p>
+  </li>
+</ol>
+</div>
+<h2  >Contents</h2>
+<div id="TOC">
+<?toc ?>
+</div>
+<div class="body">
+<div class="section">
+<h1><a name="Introduction" id="Introduction"></a>Introduction</h1>
+  <p >The Universal Worker Service (UWS)
+    pattern defines how to build <i>asynchronous</i>, <i>stateful</i>, <i>job-oriented</i> services<i> </i>(the italicized terms are defined
+    in sub-sections of this introduction). It does so in a way that
+    allows for wide-scale reuse of software and support from software
+    toolkits.</p>
+  <p >Section 2 of this document describes
+    the pattern and lists the aspects that are common to all its
+    applications. Any such application would involve a service contract
+    that embodies the pattern and fixes the issues left undefined in the
+    pattern itself. The contract would include the XML schemata (XSD and
+    WSDL) for the application. It is intended that each such contract
+    cover a family of related applications, such that the implementations
+    may be widely reused.</p>
+  <p >Section 3 outlines several possible
+    applications of the pattern. These use-cases may be expanded into
+    full IVOA standards that are siblings of the current document.</p>
+  <p >Section 4 describes the preferred
+    method of creating a synchronous facade to a UWS system.</p>
+  <div class="section">
+    <h2 ><a name="SynchronousStateless" id="SynchronousStateless"></a> Synchronous, stateless services</h2>
+    <p >Simple web services are <i>synchronous</i> and <i>stateless</i>. Synchronous means that the client waits for
+      each request to be fulfilled; if the client disconnects from the
+      service then the activity is abandoned. <i>Stateless</i> means that
+      the service does not remember results of a previous activity (or, at
+      least, the client cannot ask the service about them).</p>
+    <p >Synchronous, stateless services work
+      well when two criteria apply.</p>
+    <ol>
+      <li>
+        <p >The length of each activity is
+          less than the &ldquo;attention span&rdquo; of the connection.</p>
+      </li>
+      <li>
+        <p >The results of each activity are
+          compact enough to be easily passed back to the client via the
+          connection on which the request was made (and possibly pushed back
+          to the service as parameters of the next activity).</p>
+      </li>
+      </ol>
+    <p >There are various limits to the
+      attention span.</p>
+    <ul>
+      <li>
+        <p >HTTP assumes that the start of a
+          reply quickly follows its request, even if the body of the reply
+          takes a long time to stream. If the service takes too long to
+          compute the results and to start the reply, then HTTP times out at
+          the request is lost.</p>
+      </li>
+      <li>
+        <p >A client runs computer which
+          will not stay on-line indefinitely.</p>
+      </li>
+      <li>
+        <p >A network with finite
+          reliability will eventually break communications during an activity.</p>
+      </li>
+      <li>
+        <p >A service is sometimes shut down
+          for maintenance.</p>
+      </li>
+      </ul>
+    <p >Synchronous, stateless services, in
+      short, do not scale well.</p>
+  </div>
+  <div class="section">
+    <h2><a name="IVOOutGrow" id="IVOOutGrow"></a> Some IVO activities that outgrow synchronous, stateless services</h2>
+    <p >These cases are examples. They are
+      not a complete list!</p>
+    <ol>
+      <li>
+        <p >An ADQL [1] service gives access
+          to a large object-catalogue. Most queries run in less than a minute,
+          but some legitimate queries involve a full-table traverse and take
+          hours or days. The service needs to run these special cases in a
+          low-priority queue.</p>
+      </li>
+      <li>
+        <p >An object-finding service runs
+          the SExtractor application on a list of images. Normally, the list
+          is short and the request is quickly satisfied. Occasionally, a list
+          of 10,000 images is sent in the expectation that the work will be
+          finished over the weekend.</p>
+      </li>
+      <li>
+        <p >A cone-search [2] request on a
+          rich catalogue raises 10,000,000 rows of results, but the client is
+          connected via a slow link and cannot read all the results in a
+          reasonable time. The client needs the service to send the results
+          into storage over a faster link. This could mean sending them to
+          VOSpace, or simply holding them temporarily until the user can
+          retrieve them on a fast link.</p>
+      </li>
+      <li>
+        <p >An ADQL service allows users to
+          save query results into new tables such that they can be the target
+          of later queries. However, space is limited and the results tables
+          can only be kept for a short time. The client and service negotiate
+          the lifetime of the results tables.</p>
+      </li>
+      <li>
+        <p >A service performs image
+          stacking on a list of fields. Each field can be processed by a
+          synchronous service but the list is long and the user wants to
+          retrieve the results of the early fields before the last fields are
+          processed.</p>
+      </li>
+      </ol>
+  </div>
+  <div class="section">
+    <h2 ><a name="AsynchronousServices" id="AsynchronousServices"></a> Asynchronous and stateful services</h2>
+    <p >Services can be made to scale better
+      by making them <i>asynchronous</i> and <i>stateful</i>. Asynchronous
+      means that a client makes two or more separate requests to the
+      service in the course of one activity, and that the client and
+      service may be disconnected, possibly for days or more, in between
+      those requests. Stateful means that the service stores state
+      information about the activity and the client addresses requests to
+      this state.</p>
+    <p >Web services that are asynchronous
+      are almost always stateful. Most of special extra arrangements for
+      asynchronous activities are actually managing the state of the
+      activity.</p>
+    <p >There is an important class of
+      stateful services where the state is peculiar to one job or session
+      and the job is &ldquo;owned&rdquo; by one user. These, for the purpose of
+      this document, are called <i>job-oriented</i> services. There are
+      stateful services that are not job-oriented (e.g. a service managing
+      a shared, client-writeable DB table), but UWS does not apply to
+      these.</p>
+    <p >For the purpose of this discussion,
+      let the term <i>job</i> refer to the work specified by the JDL
+      instructions and the term <i>resource</i> refer to the state of the
+      job as recorded by the service. Both have a finite duration. The <i>lifetime</i> of the resource &ndash; i.e. the time from inception
+      until the service forgets the state &ndash; is generally finite and must
+      be at least as long the duration of the job.</p>
+  </div>
+  <div class="section">
+    <h2 ><a name="JDL" id="JDL"></a> Job description language, service contracts and universality</h2>
+    <p >Consider the web-service operation
+      that starts off a job. This operation must express what is to be done
+      in the activity: it must carry parameters in some form.</p>
+    <p >The parameters may be expressed as a
+      list. E.g., a cone search service takes a list of three parameters:
+      RA, DEC, RADIUS. Alternatively, the parameters may be arranged as an
+      XML document (e.g. ADQL, CEA). The rules for setting and arranging
+      the parameters for a job are called the<i> Job-Description Language </i>(JDL).</p>
+    <p >The combination of the UWS pattern, a
+      JDL and details of the job state visible to the client defines a
+      service contract; for a SOAP service, this contract can be captured
+      in WSDL. Changing the JDL changes the contract. Thus, it is not
+      meaningful to &ldquo;implement UWS&rdquo; in isolation; any implementation
+      standard must specify the rest of the contract.</p>
+    <p >If the JDL is very general, a single
+      service-contract can be reused for many kinds of service. AstroGrid&rsquo;s
+      CEA exploits this: one JDL covers all services offering parameterized
+      applications and even ADQL services. In the limit, a
+      sufficiently-general JDL turns a specialized worker service into a
+      universal worker service.</p>
+  </div>
+</div>
+  <div class="section">
+    <h1><a name="UWSpattern" id="UWSpattern"></a> Universal Worker Service pattern</h1>
+    <div class="section">
+      <h2 ><a name="UWSObjects" id="UWSObjects"></a> Objects within a UWS</h2>
+      <p >A UWS consists logically in a set of
+        objects that may be read and written to in order to control jobs.</p>
+      <p >In a SOAP binding of UWS, these
+        components are exposed as properties of the object that lives at the
+        endpoint registered for the service. In a REST binding, the
+        components are distinct web-resources each with its own URI.</p>
+      <p> The following sub-sections explain the semantics of the objects. The
+        UML diagram shows the relationships more succinctly.</p>
+      <p><img src="Class_Diagram__UWS__UWSObjects.png" alt="UWS Objects Class Diagram" name="graphics2" width="418" height="369" border="0" align="top" id="graphics2" /></p>
+      <div class="section">
+        <h3 ><a name="Joblist" id="Joblist"></a>
+        Job list </h3>
+        <p >The Job List is the outermost object:
+          it contains all the other objects in the UWS. The immediate children
+          of the job list are Job objects (see next sub-section).</p>
+        <p >The job list may be read to find the
+          extant jobs.</p>
+        <p >The job list may be updated to add a
+          new job.</p>
+        <p >The job list itself does not allow
+          jobs to be deleted. Instead, when a job is destroyed by an action on
+          its job object, then the list updates itself accordingly.</p>
+      </div>
+      <div class="section">
+        <h3 ><a name="Job" id="Job"></a>Job</h3>
+        <p >A Job object contains the state of
+          one job. The state is a collection of other objects. Each Job
+          aggregates</p>
+        <ul>
+          <li>
+            <p >Exactly one Execution Phase.</p>
+        </li>
+        <li>
+          <p >Exactly one Execution Duration.</p>
+        </li>
+        <li>
+          <p >Exactly one Deletion Time</p>
+        </li>
+        <li>
+          <p >Exactly one Quote.</p>
+        </li>
+        <li>
+          <p >Exactly one Results List.</p>
+        </li>
+        <li>
+          <p >Zero or one Error.</p>
+        </li>
+          </ul>
+      </div>
+      <div class="section">
+        <h3><a name="ExecutionPhase" id="ExecutionPhase"></a> Execution Phase</h3>
+        <p >The job is treated as a state machine
+          with the Execution Phase naming the state. The phases are</p>
+        <ul>
+          <li>
+            <p >PENDING: the job is accepted by
+              the service but not yet committed for execution by the client. In
+              this state, the job quote can be read and evaluated. This is the
+              state into which a job enters when it is first created.</p>
+        </li>
+        <li>
+          <p >QUEUED: the job is committed for
+            execution by the client but the service has not yet assigned it to a
+            processor. No Results are produced in this phase.</p>
+        </li>
+        <li>
+          <p >EXECUTING: the job has been
+            assigned to a processor. Results may be produced at any time during
+            this phase.</p>
+        </li>
+        <li>
+          <p >COMPLETED: the execution of the
+            job is over. The Results may be collected.</p>
+        </li>
+        <li>
+          <p >ERROR: the job failed to
+            complete. No further work will be done nor Results produced. Results
+            may be unavailable or available but invalid; either way the Results
+            should not be trusted.</p>
+        </li>
+        <li>
+          <p >ABORTED: the job has been
+            manually aborted by the user, or the system has aborted the job due
+            to lack of or overuse of resources.</p>
+        </li>
+          </ul>
+      </div>
+      <div class="section">
+        <h3 ><a name="ExecutionDuration" id="ExecutionDuration"></a> Execution Duration</h3>
+        <p >An Execution Duration object defines
+          the duration for which a job shall run.  This represents the
+          &ldquo;computation time&rdquo; that a job is to be allowed, although because
+          a specific measure of CPU time may not be available in all
+          environments, this duration is defined in real clock seconds. An
+          execution duration of 0 implies unlimited execution duration.</p>
+        <p >When the execution duration has been
+          exceeded the service will automatically abort the job, which has the
+          same effect as when a manual &ldquo;Abort&rdquo; is requested.</p>
+        <p >Specifically, when a job is aborted:</p>
+        <ul>
+          <li>
+            <p >if the job is still executing,
+              the execution is aborted.</p>
+        </li>
+        <li>
+          <p >any previously generated results
+            of the job are retained.</p>
+        </li>
+          </ul>
+        <p >When a job is created, the service
+          sets the initial execution duration. The client may write to an
+          Execution Duration to try to change the job's cpu time allocation.
+          The service may forbid changes, or may set limits on the allowed
+          execution duration.</p>
+      </div>
+      <div class="section">
+        <h3 ><a name="DestructionTime" id="DestructionTime"></a> Destruction Time</h3>
+        <p >The Destruction Time object
+          represents the instant when the job shall be destroyed. The
+          Destruction Time is an absolute time.</p>
+        <p >Destroying a job implies;</p>
+        <ul>
+          <li>
+            <p >if the job is still executing,
+              the execution is aborted.</p>
+        </li>
+        <li>
+          <p >any results from the job are
+            destroyed and storage reclaimed.</p>
+        </li>
+          </ul>
+        <ul>
+          <li value="1">
+            <p >the service forgets that
+              the job existed.</p>
+        </li>
+          </ul>
+        <p >The Destruction Time may be viewed as
+          a measure of the amount of time that a service is prepared to
+          allocate storage for a job &ndash; typically this will be a longer
+          duration that the amount of CPU time that a service would allocate.</p>
+        <p >When a job is created the service
+          sets the initial Destruction Time. The client may write to the
+          Destruction Time to try to change the life expectancy of the job. The
+          service may forbid changes, or may set limits on the allowed
+          destruction time.</p>
+      </div>
+      <div class="section">
+        <h3 ><a name="Quote" id="Quote"></a>Quote</h3>
+        <p >A Quote object predicts when the job
+          is likely to complete. The intention is that a client creates the
+          same job on several services, compares the quotes and then accepts
+          the best quote.</p>
+        <p >Quoting for a computational job is
+          notoriously difficult. A UWS implementation must always provide a
+          quote object, in order that the two-phase committal of jobs be
+          uniform across all UWS, but it may supply a &ldquo;don't know&rdquo; answer
+          for the completion time.</p>
+      </div>
+      <div class="section">
+        <h3 ><a name="Error" id="Error"></a>Error</h3>
+        <p >The error object gives a human
+          readable error message (if any) for the underlying job. This object
+          is intended to be a detailed error message, and consequently might be
+          a large piece of text such as a stack trace. When there is an error
+          running a job a summary of the error should be given using the
+          optional errorSummary element of the JobSummary type.</p>
+      </div>
+      <div class="section">
+        <h3 ><a name="ResultsList" id="ResultsList"></a>Results List</h3>
+        <p >The Results List object is a
+          container for formal results of the job. Its children may be any
+          objects resulting from the computation that may be fetched from the
+          service when the job has completed.</p>
+        <p >Reading the Results List itself
+          enumerates the available or expected result objects.</p>
+        <p >The children of the Results List may
+          be read but not updated or deleted. The client may not add anything
+          to the Results List.</p>
+      </div>
+    </div>
+    <div class="section">
+      <h2 ><a name="Bindings" id="Bindings"></a>Bindings</h2>
+      <h3 ><a name="RESTbinding" id="RESTbinding"></a> REST binding</h3>
+      <h4 >Resources and URIs</h4>
+      <p >In a REST (Representational State
+        Transfer) binding of UWS, each of the objects defined above is
+        available as a web resource with its own URI. These URIs must form a
+        hierarchy as follows:</p>
+      <p >/{jobs}				the Job List</p>
+      <p >/{jobs}/(job-id)		a Job</p>
+      <p >/{jobs}/(job-id)/phase	the Phase of
+        (job-id)</p>
+      <p >/{jobs}/(job-id)/executionduration	the
+        maximum execution duration of (job-id)</p>
+      <p >/{jobs}/(job-id)/destruction  the
+        destruction instant for (job-id)</p>
+      <p >/{jobs}/(job-id)/error		any error
+        message associated with (job-id)</p>
+      <p >/{jobs}/(job-id)/quote		the Quote for
+        (job-id)</p>
+      <p >/{jobs}/(job-id)/results	the Results
+        List for (job-id)</p>
+      <p >The service implementor is free to
+        choose the names given in parentheses above; the other names are part
+        of the UWS standard.</p>
+      <p >The URI for the Job List, in its
+        absolute form is the root URI for the whole UWS. This URI should be
+        given as the access URL in the UWS' registration.</p>
+      <div class="section">
+        <h4 >Representations of resources</h4>
+        <p >For each of the resources, HTTP GET
+          fetches a representation.</p>
+        <p >The representation of the Job List is
+          a list of links to extant jobs. The list may be empty if the UWS is
+          idle.</p>
+        <p >The representation of a Job is a list
+          of links to its Phase, Execution Duration,  Destruction Time, Error,
+          Quote and Results List.</p>
+        <p >The representation of a Results List
+          is a list of links to the resources representing the results. These
+          resources may have any URI and any MIME type. A sensible default for
+          their URIs is to make them children of /{jobs}/(job-id)/results, but
+          this is not required. It may sometimes be easier for a service
+          implementor to point to a resource on some web server separate from
+          that running the UWS. Therefore, a client must always parse the
+          Results List to find the results. Where a protocol applying UWS
+          specifies standard results it must do so by naming those results; the
+          names then appear in the Results List in addition to the URIs. Not
+          all results need to be named; sometimes the meaning of the result is
+          obvious from the context and the name is omitted.</p>
+        <p >HTTP allows multiple representations
+          of a resource distinguished by their MIME types and selected by the
+          HTTP headers of a GET request. UWS exploits this to support both web
+          browsers and rich clients in the same tree of resources.</p>
+        <p >A UWS should return HTML or XHTML to
+          clients that accept these types. These clients are assumed to be web
+          browsers and the UWS is generating its own user interface. The HTML
+          interface generated should allow full control of the UWS via the use
+          of HTML forms and appropriate links.</p>
+        <p >Clients which are assumed to be part
+          of remote applications that drive UWS without showing the details to
+          their users should accept only application/xml. A UWS must therefore
+          return XML representations of the resources.</p>
+        <p >The XML schemata for the lists of
+          links, and for the Phase, Execution Duration and Quote documents, are
+          detailed in Appendix A of this specification. They  should not vary
+          between UWS installations.</p>
+      </div>
+      <div class="section">
+        <h4 >State changing requests</h4>
+        <p >Certain of the UWS' resources accept
+          HTTP POST and DELETE messages to change the state of the service &ndash;
+          This is the fundamental way that a client controls the execution of a
+          job. In most of the cases where a job subobject is set the response
+          will have a http 303 &ldquo;See other&rdquo; status and a Location header
+          that points back to the main job summary obtained at the <span style="font-weight: medium">/{jobs}/(job-id)
+            URI. The job summary contains the values of the main parameters
+            within the returned XML (or XHTML). This mode of operation was chosen
+            (as opposed to returning only the sub-object being altered) as it
+            makes for a more natural user interface &ndash; especially in the case of
+            the XHMTL interface. A client that wants to obtain only the value of
+            a particular sub-object can at any time request that sub-object with
+          a HTTP GET.</span></p>
+        <h5 >Creating a Job</h5>
+        <p >POSTing a request to the Job List
+          creates a new job (unless the service rejects the request). The
+          response when a job is accepted must have code 303 &ldquo;See other&rdquo;
+          and the Location header of the response must point to the created
+          job.</p>
+        <p >This initial POST will in most cases
+          carry parameters for the protocol that is using the UWS pattern, as
+          detailed in section 3.</p>
+        <h5 >Deleting a Job</h5>
+        <p >Sending a HTTP DELETE to a Job
+          resource destroys that job, with the meaning noted in the definition
+          of the Job object, above. No other resource of the UWS may be
+          directly deleted by the client. The response to this request must
+          have code 303 &ldquo;See other&rdquo; and the Location header of the response
+          must point to the Job List at the /{jobs} URI.</p>
+        <p >Posting a request  with a parameter
+          ACTION=DELETE to the Job also destroys the job, the response being as
+          for a deletion. This action supports web browsers which typically
+          cannot send DELETE requests.</p>
+        <h5 >Changing the Destruction
+          Time</h5>
+        <p >The Destruction Time may be changed
+          by POSTing to  /{jobs}/(job-id)/destruction.  In this case, the body
+          of the posted request is of type <i>application/x-www-form-urlencoded</i><b> </b><span style="font-weight: medium">and
+            contains the parameter named DESTRUCTION whose value is the new
+            destruction time in ISO8601 format; i.e. this request is what an HTML
+          form sends.</span></p>
+        <p  style="font-weight: medium">The
+          response to this request must have code 303 &ldquo;See other&rdquo; and the
+          Location header of the response must point to the /{jobs}/(job-id)
+          URI so that the client receives the value that the service has
+          actually set the Destruction Time to within the Job summary response.</p>
+        <h5 >Changing the Execution
+          Duration</h5>
+        <p >The Execution Duration may be changed
+          by POSTing to  /{jobs}/(job-id)/termination.  In this case, the body
+          of the posted request is of type <i>application/x-www-form-urlencoded</i><b> </b><span style="font-weight: medium">and
+            contains the parameter named TERMINATION whose value is the new
+          executionduration in seconds.</span></p>
+        <p  style="font-weight: medium">The
+          response to this request must have code 303 &ldquo;See other&rdquo; and the
+          Location header of the response must point to the
+          /{jobs}/(job-id)/URI so that the client receives the value that the
+          service has actually set the Execution Duration to &ndash; the service is
+          free to override the request if it needs.</p>
+        <h5  style="font-weight: medium">        Starting a Job</h5>
+        <p  style="font-weight: medium">A
+          job may be started by POSTing to the /{jobs}/(job-id)/phase URI. The
+          POST contains a single parameter PHASE=RUN which instructs the UWS to
+          attempt to start the job. The response to this request must have code
+          303 &ldquo;See other&rdquo; and the Location header of the response must
+          point to the /{jobs}/(job-id) URI so that the client receives the
+          phase that the job has been set to. Typically a UWS will put a job
+          into a QUEUED state on receipt of this command, but depending on how
+          busy the server is, the job might be put almost immediately (and
+          without client intervention) into an EXECUTING state.</p>
+        <h5  style="font-weight: medium">Aborting a Job</h5>
+        <p  style="font-weight: medium">A
+          job may be aborted by POSTing to the /{jobs}/(job-id)/phase URI. The
+          POST contains a single parameter PHASE=ABORT which instructs the UWS
+          to attempt to abort the job. The response to this request must have
+          code 303 &ldquo;See other&rdquo; and the Location header of the response must
+          point to the /{jobs}/(job-id) URI so that the client receives the
+          phase that the job has been set to.</p>
+      </div>
+      <div class="section">
+        <h4 >Message pattern</h4>
+        <p >The REST binding results in the
+          message pattern shown in figure 2.</p>
+        <p  ><i>Illustration 2:
+        Typical calling sequence for the REST binding of UWS</i></p>
+        <p  ><img src="Sequence_Diagram__UWS__Rest_Message_Pattern__Rest_Message_Pattern__Rest_Message_Pattern.png" name="graphics3" width="1970" height="1024" border="0" align="left" id="graphics3" alt="rest message pattern" /><br />
+          <br />
+          </p>
+      </div>
+    </div>
+ 
+    <div class="section">
+      <h3 ><a name="SOAPbinding" id="SOAPbinding"></a> SOAP binding</h3>
+      <h4 >Resources and URIs</h4>
+      <p >For a SOAP-bound UWS there is only
+        one web resource and therefore one URI. This resource corresponds
+        roughly to the Job List object of the UWS and all the other objects
+        are accessed via methods on the Job List.</p>
+      <p >The single URI of a SOAP-bound UWS
+        must be registered as its access URL.</p>
+      <p >Since the SOAP binding has only a
+        single URI it needs a different way to indicate the job to which a
+        request applies. Job-specific requests and reponses must carry a SOAP
+        header containing a WS-Addressing structure. In this structure, the
+        wsa:<i>ResourceIdentifier</i> element names the resource; it is an
+        opaque string to the client and is meaningful only to the service.
+        The identifier for a given job is stated in the response to the
+        request that creates it; that request is one that does not need a
+        WS-Addressing header.</p>
+      <p >The exact use of WS-Addressing will
+        be stated in the WSDL for the SOAP binding which is TDB.</p>
+      <h4 >Representations of objects</h4>
+      <p >The SOAP binding allows the client to
+        retrieve representations of some of the UWS objects. Unlike the REST
+        binding, it does not allow all the objects to be represented.
+        Further, the SOAP binding only provides XML representations; it does
+        not support HTML in any way.</p>
+      <p >Representations may be got from the
+        following methods.</p>
+      <ul>
+        <li>
+          <p >getJobs() - return the currently
+            known job identifiers</p>
+      </li>
+      <li>
+        <p >getSummary() - return a summary
+          of the job </p>
+      </li>
+      <li>
+        <p >getExecutionDuration() - return
+          the execution duration for a job </p>
+      </li>
+      <li>
+        <p >getDestructionTime() - get the
+          destruction time for a job</p>
+      </li>
+      <li>
+        <p >getQuote() - get the quote for a
+          job</p>
+      </li>
+      <li>
+        <p >getPhase() - get the phase for a
+          job</p>
+      </li>
+      <li>
+        <p >getResults() - get the Results
+          for a job</p>
+      </li>
+      <li>
+        <p >getError() - get the error
+          associated with a job</p>
+      </li>
+        </ul>
+      <p >Note that there is no representation
+        of a Job as a whole. The method getResults() packs all the results in
+        one XML document and returns that document. The details of the
+        available results are defined by applications of the UWS pattern.</p>
+      <h4 >State-changing operations</h4>
+      <p >The following methods of a UWS change
+        its state; most of them change the state of one particular job.</p>
+      <ul>
+        <li>
+          <p >createJob()</p>
+      </li>
+      <li>
+        <p >setExecutionDuration()</p>
+      </li>
+      <li>
+        <p >setDestructionTime()</p>
+      </li>
+      <li>
+        <p >execute()</p>
+      </li>
+      <li>
+        <p >abort()</p>
+      </li>
+      <li>
+        <p >destroy()</p>
+      </li>
+        </ul>
+      <p >The excute() method commits a job for
+        execution. The destroy() method destroys the target job.</p>
+      <p >The exact content posted to create a
+        job is defined by applications of the UWS pattern.</p>
+      <h4 >Message pattern</h4>
+      <p >The SOAP binding has the message
+        pattern shown in figure 3.</p>
+      <p >Note that the number of objects is
+        much lower than in the REST binding and the number of messages lower
+        by one. However, the complexity of each message is significantly
+        greater. The overall complexity of the pattern is roughly the same in
+        each binding.</p>
+      <p ><img src="SOAPSequence.gif" align="top" alt="SOAP message pattern" /><br />
+        <br />
+              </p>
+    </div>
+  </div>
+  <div class="section">
+    <h1 ><a name="SecurityConsiderations" id="SecurityConsiderations"></a>Security Considerations</h1>
+    <p >TBC</p>
+  </div>
+  <div class="section">
+    <h1 ><a name="ApplicationsOfUWS" id="ApplicationsOfUWS"></a> Applications of UWS (informative)</h1>
+    <p >The UWS pattern leaves undefined two
+      essential parts of the service contract: the content that must be
+      posted to create a job; and the pattern of results made available by
+      a completed job. An application of UWS completes a service contract
+      by defining these matters.</p>
+    <p >There follow some use cases applying
+      the UWS pattern. The descriptions are neither formal nor complete.
+      The intention is to show a range of ways that the pattern can be
+      applied without burdening the reader with the level of detail needed
+      for a standard implementation.</p>
+    <p >Any of these cases could be worked up
+      into a full IVOA standard by formalizing the description, adding
+      detail (schemata, WSDL) and generally making the specification more
+      exact and complete. I suggest that each case so treated be broken out
+      into a separate specification-document.</p>
+    <div class="section">
+      <h2 ><a name="Imageservice" id="Imageservice"></a> Image service with data staging</h2>
+      <p >Consider a service that computes
+        images from archive data. The computation takes significant time, so
+        the service is asynchronous. The service keeps the computed images in
+        its own storage until the user downloads them; this is essentially
+        the model of SIAP [9].</p>
+      <p >The asynchronous image-service is a
+        logical extension of a synchronous SIA service. Therefore it uses the
+        REST binding of UWS.</p>
+      <p >The parameters for posting a new job
+        are as for SIAP 1.0:</p>
+      <ul>
+        <li>
+          <p >POS, the position on the sky to
+            be searched;</p>
+      </li>
+      <li>
+        <p >SIZE, the size of the search
+          box;</p>
+      </li>
+      <li>
+        <p >FORMAT: the type of images to be
+          computed.</p>
+      </li>
+        </ul>
+      <p >Particular implementations are free
+        to add extra parameters.</p>
+      <p >These parameters are posted in a
+        document of type <i>application/x-www-form-urlencoded</i><span style="font-style: normal">:
+        i.e. they can be sent from an HTML form.</span></p>
+      <p  style="font-style: normal">The
+        images generated by the job are accessible as unnamed results. Each
+        image has its own URI and can be downloaded over HTTP at any time
+        until the destruction time of the job. The URIs for the images may be
+        discovered from the Results List in the normal UWS way.</p>
+      <p  style="font-style: normal">SIAP
+        1.0 produces, for each query, a table of metadata describing the
+        images. The asynchronous image-service produces a table to the same
+        schema as a named result, called &ldquo;table&rdquo;.</p>
+      <p ><span style="font-style: normal">Image
+        results are added to the results list, and to the &ldquo;table&rdquo; result,
+        as they are generated. Hence, a client that polls the service can
+        discover, download and use some of the images before the job is
+        finished. </span>If the client is satisfied with
+        these early images, the client can cancel the rest of the job by
+        destroying the job. However, destroying the job deletes the cached
+        images so the client has to download them <i>first</i>.</p>
+    </div>
+    <div class="section">
+      <h2 ><a name="ADQLservice" id="ADQLservice"></a> ADQL service with cursor</h2>
+      <p >ADQL [1] can serve as a JDL. Consider
+        an ADQL service that supports long-running queries as asynchronous
+        operations. In general, the results of the query may be a large set
+        of data. They may be too large to download comfortably. We might like
+        to cache these results on the service and to operate a cursor,
+        drawing down from the resource a few rows of the table at a time.</p>
+      <p >The parameters of a job are as
+        follows:</p>
+      <ul>
+        <li>
+          <p >ADQL: the query text</p>
+      </li>
+      <li>
+        <p >FORMAT: the format for the
+          results</p>
+      </li>
+        </ul>
+      <p >These parameters are posted in a
+        document of type <i>application/x-www-form-urlencoded</i><span style="font-style: normal">:
+        i.e. they can be sent from an HTML form.</span></p>
+      <p  style="font-style: normal">A
+        successful query generates the following, named results.</p>
+      <ul>
+        <li>
+          <p  style="font-style: normal"><i>table</i>:
+            the whole result set as one file resource.</p>
+      </li>
+      <li>
+        <p  style="font-style: normal"><i>header</i>:
+          the metadata for the output table.</p>
+      </li>
+      <li>
+        <p  style="font-style: normal"><i>cursor</i>:
+          a selection of rows of output.</p>
+      </li>
+        </ul>
+      <p >The <i>cursor</i> result is
+        parameterized by the query parameters FIRST and LAST in the query
+        string of its URI: these parameters state the index of the first and
+        last row to be returned; e.g.</p>
+      <p > http://whatever.org/adlqService/results/cursor?FIRST=1&amp;LAST=100</p>
+      <p >If the parameters are missing, the
+        service decides which rows to emit.</p>
+    </div>
+    <div class="section">
+      <h2 ><a name="ParameterizedApplications" id="ParameterizedApplications"></a> Parameterized applications</h2>
+      <p >There is a class of applications on
+        which a job may be defined by a list of simple parameters. &ldquo;Simple&rdquo;
+        here means unstructured: a scalar value such as a number, a string of
+        text or a Boolean value. If the parameters are allowed to name files,
+        so that structured data are passed indirectly, then the class of
+        applications is very large indeed: almost any non-interactive
+        application can be driven in this way.</p>
+      <p >Turning each application of choice
+        into a service (with or without UWS semantics) would be onerous.
+        However, if the application&rsquo;s interface is entirely characterized,
+        through the JDL, in terms of typed input and output parameters, then
+        one service contract will work for all the applications and a single
+        implementation of the contract can be reused for all cases.</p>
+      <p >AstroGrid&rsquo;s Common Execution
+        Architecture (CEA) [11] works in this way. It has just one service
+        contract for all applications (including ADQL services; the ADQL
+        query is passed in the list of parameters). It has four
+        implementations, one for each of the possible interfaces between the
+        service and a kind of job (jobs can be implemented with Java classes,
+        command-line applications, HTTP-get services or JDBC databases). CEA
+        also specifies stateful, asynchronous services and makes use of
+        VOSpace.</p>
+      <p >Consider a CEA reworked to use the
+        UWS pattern for consistency with other (future) IVOA standards. Call
+        it CEA v2 to distinguish it from CEA v1 as currently maintained by
+        AstroGrid. For this example, consider the particular kind of CEA
+        service that runs applications supplied as executable binaries.</p>
+      <p >A binary application-server has a
+        library of applications co-located with its service and defined in
+        the service configuration set by the service provider. It does not
+        accept code from the client for local execution.</p>
+      <p >The JDL in CEA v2 is similar to that
+        in CEA v1 [11]. It is a formal, XML vocabulary for expressing choice
+        of application and parameter lists [12]. Parameters may be inputs or
+        outputs of the job.</p>
+      <p >To start a job, a document in this
+        JDL is posted to the UWS. The document is sent in its native
+        MIME-type, application/xml, so this is not an interface that can be
+        driven directly from an HTML form, although it can be driven from the
+        emerging Xforms technology.</p>
+      <p >The results of the job depend on the
+        choice of application. They are all named results and the names and
+        types are defined in the definition of the application. That
+        application-definition is registered, so the client knows before
+        running the job what results to expect.</p>
+      <p >CEA input-parameters may be indirect:
+        i.e. they may refer to data in on-line storage. In this case, the JDL
+        document contains the URIs for those data objects Alternatively, the
+        parameters may be direct, in which case the JDL contains the actual
+        value of the parameters.</p>
+      <p >Similarly, CEA results may be made
+        indirect. In this case, the results are named as parameters in the
+        JDL where the values are the URIs to which the results are delivered.
+        The application server can then stream the results to the specified
+        destination as they become available and need not cache them locally.
+        If a job result is indirect, then the server can choose whether or
+        not to keep a local copy. If it chooses not to cache locally, then
+        the result URI in the UWS is set to the external location named in
+        the URI.</p>
+    </div>
+  </div>
+  <div class="section">
+    <h1 ><a name="SynchronousService" id="SynchronousService"></a> Implementing a Synchronous Service on top of UWS (informative)</h1>
+    <p >Whilst the provision of synchronous
+      services is not one of the design aims of the UWS pattern, there is
+      clearly a desire in second generation IVOA services to still allow a
+      simple synchronous calling pattern to be available to simple clients.
+      What follows is a recommended recipe for putting a synchronous facade
+      on UWS;</p>
+    <p >It is assumed that the core of the
+      service does provide a true UWS compliant set of endpoints rooted at
+      /async (equivalent to the /{jobs} endpoint in the nomenclature used
+      above). The desired synchronous service is to be rooted at /sync.</p>
+    <ol>
+      <li>
+        <p >The job is started by either a
+          GET (for compatibility with existing IVOA standards) or a POST
+          (preferably) of form encoded parameters to the /sync endpoint.</p>
+    </li>
+    <li>
+      <p >Internally the service creates a
+        job in the standard UWS system with the given parameters and sets
+        the PHASE to RUN, noting the returned job identifier which we will
+        call {job-id}. The /sync endpoint then responds with a STATUS 303
+        (redirection) response to the URL /sync/{job-id}.</p>
+    </li>
+    <li>
+      <p >The /sync/{job-id} endpoint then
+        blocks until it detects that the underlying job has finished at
+        which point it responds with a STATUS 303 (redirection) to the
+        /{jobs}/{job-id}/results/mainresult URL, where &ldquo;mainresult&rdquo; is
+        the name of the primary result of the job.</p>
+    </li>
+      </ol>
+    <p >In this way the service appears to be
+      a synchronous to the original client &ndash; assuming it obeys standard
+      HTTP redirection semantics, so a simple client like a web browser
+      could obtain the result with a single &ldquo;click&rdquo;. At the same time a
+      more sophisticated, UWS aware, client could control the same job from
+      the standard /{jobs} endpoint &ndash; indeed if the synchronous call
+      timed out for some reason, then it would be possible for the original
+      client to retrieve the results by looking at the /{jobs}/{job-id} URL
+      tree, because it could make the association of the job-Id from the
+      URL it receives in step 2 above.</p>
+    <p >The purely synchronous client is
+      restricted compared with the full UWS pattern in that there can only
+      be one result directly returned to the client, as noted in stage 3
+      above. This is usually not a problem for compatibility with existing
+      version 1.0 DAL services as they typically return a single VOTable
+      containing references to the desired data.</p>
+  </div>
+ 
+<div class="appendices">
+
+<div class="section">
+  <h1 class="nonum"><a name="Updates" id="Updates"></a> Updates from previous versions</h1>
+  <div class="section">
+    <h2>At Version 0.5</h2>
+    <ul>
+      <li>
+        <p >changed the POST parameter names
+          to be the same as the resource paths/</p>
+        </li>
+        <li>
+          <p >added synchronous section.</p>
+        </li>
+        <li>
+          <p >updated SOAP binding section</p>
+        </li>
+        </ul>
+  </div>
+</div>
+<div class="section">
+  <h1 ><a name="References" id="References"></a>References</h1>
+  
+  <p >[1] M. Ohishi, A. Szalay
+    (eds.), IVOA Astronomical Data query Language, <span style="background: transparent"><a  href="http://www.ivoa.net/Documents/latest/ADQL.html">http://www.ivoa.net/Documents/latest/ADQL.html</a></span></p>
+  <p >[2]
+    US NVO project, <i>NVO
+    compliance: Simple Cone Search</i>, <span style="background: transparent"><a  href="http://us-vo.org/pubs/files/conesearch.html">http://us-vo.org/pubs/files/conesearch.html</a></span></p>
+  <p ><a name="title" id="title"></a>[3]
+    D. Box, F. Curbera (eds.), <i>Web
+    Services Addressing (WS-Addressing)</i>, <span style="background: transparent"><a  href="http://www.w3.org/Submission/ws-addressing/">http://www.w3.org/Submission/ws-addressing/</a></span></p>
+  <p >[4]
+    T. Banks (ed.), <i>Web
+    Service Resource Framework (WSRF) &ndash; Primer</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-primer-1.2-primer-cd-01.pdf">http://docs.oasis-open.org/wsrf/wsrf-primer-1.2-primer-cd-01.pdf</a></span></p>
+  <p >[5]
+    S. Graham, A. Karmarkar, J. Mischkinsky, I. Robinson, I. Sedukhin
+    (eds.), <i>Web
+    Services Resource 1.2 (WS-Resource)</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-ws_resource-1.2-spec-os.pdf">http://docs.oasis-open.org/wsrf/wsrf-ws_resource-1.2-spec-os.pdf</a></span></p>
+  <p >[6]
+    S. Graham,, J. Treadwell (eds.), <i>Web
+    Services Resource Properties 1.2 (WS-ResourceProperties)</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-ws_resource_properties-1.2-spec-os.pdf">http://docs.oasis-open.org/wsrf/wsrf-ws_resource_properties-1.2-spec-os.pdf</a></span></p>
+  <p >[7]
+    L. Srinivasan, T. Banks (eds.), <i>Web
+    Services Resource Lifetime 1.2 (WS-ResourceLifetime)</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-ws_resource_lifetime-1.2-spec-os.pdf">http://docs.oasis-open.org/wsrf/wsrf-ws_resource_lifetime-1.2-spec-os.pdf</a></span></p>
+  <p >[8]
+    S. Graham, D. Hull, B. Murray, <i>Web
+    Services Base Notification 1.3</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsn/wsn-ws_base_notification-1.3-spec-pr-02.pdf">http://docs.oasis-open.org/wsn/wsn-ws_base_notification-1.3-spec-pr-02.pdf</a></span></p>
+  <p >[9]
+    D. Tody, R. Plante, <i>Simple
+    Image Access Specification</i>, <span style="background: transparent"><a  href="http://www.ivoa.net/Documents/latest/SIA.html">http://www.ivoa.net/Documents/latest/SIA.html</a></span></p>
+  <p >[10]
+    Grid and Web Services Working Group of IVOA, work in progress, <span style="background: transparent"><a  href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></span></p>
+  <p >[11]
+    P. Harrison, <i>Proposal
+    for a Common Execution Architecture</i>, <span style="background: transparent"><a  href="http://www.ivoa.net/Documents/latest/CEA.html">http://www.ivoa.net/Documents/latest/CEA.html</a></span></p>
+  <p >[12]
+    P. Harrison, XML schema for namespace <i>http://www.astrogrid.org/schema/CommonExecutionArchitectureBase/v1</i>, <span style="background: transparent"><a  href="http://software.astrogrid.org/schema/cea/CommonExecutionArchitectureBase/v1.0/CommonExecutionArchitectureBase.xsd">http://software.astrogrid.org/schema/cea/CommonExecutionArchitectureBase/v1.0/CommonExecutionArchitectureBase.xsd</a></span></p>
+  <p >[13] Boyer et al., Xforms 1.0 <a  href="http://www.w3.org/TR/xforms/">http://www.w3.org/TR/xforms/</a></p>
+  <p >[14] Gudgin et.al, Web Services
+    Addressing 1.0 - WSDL Binding,<a  href="http://www.w3.org/TR/ws-addr-wsdl/">http://www.w3.org/TR/ws-addr-wsdl/</a></p>
+  <p >[15] Gudgin et al. Web Services
+    Addressing 1.0 &ndash; Core <a  href="http://www.w3.org/TR/ws-addr-core/">http://www.w3.org/TR/ws-addr-core/</a></p>
+  <p >[16] Box et al., <a  href="http://www.w3.org/Submission/ws-addressing/">http://www.w3.org/Submission/ws-addressing/</a></p>
+</div>
+<div class="section">
+  <h1 ><a name="UWSSchema" id="UWSSchema"></a> Appendix A Schema</h1>
+    <?incxml href="http://www.astrogrid.org/viewcvs/astrogrid/contracts/src/schema/cea/UWS/v0.9/UWS.xsd?view=co"?>
+    <?incxml end?>
+
+</div>
+<div class="section">
+  <h1 ><a name="UWSWSDL" id="UWSWSDL"></a> Appendix B WSDL 1.0 for SOAP binding</h1>
+  <p >Although it is not possible to
+    provide a complete WSDL 1.0 contract for a general UWS service
+    because WSDL requires the exact form of the createJob and getResults
+    operations to be defined, the following WSDL is included as a
+    template for implementors to follow.</p>
+    <?incxml href="http://www.astrogrid.org/viewcvs/astrogrid/contracts/src/schema/cea/UWSSOAP/0.9/UWSSOAP.wsdl?view=co"?>
+    <?incxml end ?>
+</div>
+</div>
+
+</div>
+<p style="text-align: right; font-size: x-small; color: #888;">
+$Revision: 847 $ $Date: 2008-10-29 14:33:57 +0000 (Wed, 29. Oct 2008) $
+</p>
+
+</body>
+</html>
