@@ -1,0 +1,54 @@
+This directory contains files to help with the authorship of IVOA documents, which must be primarily be delivered as HTML.
+The scripts allow for features not normally associated with HTML authoring
+
+1. automated section numbering and table of contents generation
+2. automated reference handling with bibtex.
+3. formatting of included xml files.
+
+Aims
+----
+
+1. Author the document in XHTML - allows both text and popular WYSIWYG editors to be used.
+2. Allow the document created by one iteration of the processing to be used as input for the next stage - this allows tweaks to be made in a WYSIWIG editor to the final output format
+that will be then auto-numbered for instance.
+
+
+Authoring
+---------
+
+
+
+
+Requirements
+------------
+
+Ant build file - this requires that the saxon xslt processor is available to ant - an easy way to do this is to place the saxon jar 
+in ~/.ant/lib/
+
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UWSbuild">
+
+	<!-- ================================= 
+          target: createdoc              
+         ================================= -->
+	<target name="createdoc" description="description">
+		<xslt style="ivoadoc/ivoarestructure.xslt" in="UWS.html" out="out.html" force="true">
+			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+		</xslt>
+	</target>
+
+	<target name="createPDF">
+		<xslt style="ivoadoc/W3C-REC.xsl" in="UWS.html" out="out.fo" force="true">
+			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+		</xslt>
+
+	</target>
+</project>
+
+
+to crate
+
+Acknowlegements
+
+The scripts and ideas for this are derived from originals by Norman Gray, and efforts have been made to preserve his conventions. The major 
+difference being that the formatting script may be used iteratively, rather than the final output being a one-shot post processed result of the input.

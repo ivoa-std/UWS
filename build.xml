@@ -4,16 +4,37 @@
 	<!-- ================================= 
           target: createdoc              
          ================================= -->
-	<target name="createdoc" description="description">
-		<xslt style="ivoarestructure.xslt" in="UWS.html" out="out.html" force="true">
+	<target name="formatdoc" description="add TOC, numbering etc">
+		<copy file="UWS.html" tofile="UWS-old.html"/> 
+		<xslt style="ivoadoc/ivoarestructure.xslt" in="UWS-old.html" out="UWS.html" force="true" >
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
 		</xslt>
 	</target>
 
 	<target name="createPDF">
-		<xslt style="W3C-REC.xsl" in="UWS.html" out="out.fo" force="true">
+		<xslt style="ivoadoc/ivoa-fo.xsl" in="UWS.html" out="out.fo" force="true">
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
 		</xslt>
-
+		<fop format="application/pdf" 
+		        fofile="out.fo"
+		        outfile="UWS.pdf" />
 	</target>
+	
+	
+	
+	<property name="fop.home" value="/opt/packages/fop-0.95"/>
+
+	<taskdef name="fop" 
+	         classname="org.apache.fop.tools.anttasks.Fop">
+	  <classpath>
+	    <fileset dir="${fop.home}/lib">
+	      <include name="*.jar"/>
+	    </fileset>
+	    <fileset dir="${fop.home}/build">
+	      <include name="fop.jar"/>
+	      <include name="fop-hyph.jar" />
+	      <include name="fop-sandbox.jar"/>
+	    </fileset>
+	  </classpath>
+	</taskdef>
 </project>
