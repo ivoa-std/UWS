@@ -152,7 +152,7 @@
   <x:template match="h:div[@class='appendices']">
     <x:copy>
     <x:apply-templates select="@*"/>
-    <x:element name="h2"><x:text>Appendices</x:text></x:element>
+   
     <x:apply-templates select="child::node()"/>
     </x:copy>
   </x:template>
@@ -198,6 +198,7 @@
     <x:choose>
       <x:when test="ancestor-or-self::h:div[@class='section-nonum']"/>
       <x:when test="ancestor::h:div[@class='appendices']">
+        <x:text>Appendix </x:text>
         <x:number count="h:div[@class='section']" level="multiple" format="A.1."/>
         <x:text> </x:text>
       </x:when>
