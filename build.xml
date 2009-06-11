@@ -1,26 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="UWSbuild">
+<project name="UWSbuild" default="formatdoc">
+	
+	<property name="filename" value="UWS"/>
+	<property name="latexlocation" location="/opt/local/bin"/>
 
 	<!-- ================================= 
           target: createdoc              
          ================================= -->
 	<target name="formatdoc" description="add TOC, numbering etc">
-		<copy file="UWS.html" tofile="UWS-old.html"/> 
-		<xslt style="ivoadoc/ivoarestructure.xslt" in="UWS-old.html" out="UWS.html" force="true" >
+		<copy file="${filename}.html" tofile="${filename}-old.html"/> 
+		<xslt style="ivoadoc/ivoarestructure.xslt" in="${filename}-old.html" out="${filename}.html" force="true" >
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+			<param name="document-id" expression="${filename}.html"/> <!-- so that the xslt knows the filename -->
 		</xslt>
 	</target>
 
 	<target name="createPDF">
-		<xslt style="ivoadoc/ivoa-fo.xsl" in="UWS.html" out="out.fo" force="true">
+		<xslt style="ivoadoc/ivoa-fo.xsl" in="${filename}.html" out="out.fo" force="true">
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
 		</xslt>
 		<fop format="application/pdf" 
 		        fofile="out.fo"
-		        outfile="UWS.pdf" />
+		        outfile="${filename}.pdf" />
 	</target>
 	
-	
+	<target name="regenerateRefs"> 
+		<xslt style="ivoadoc/extractcite.xslt" in="${filename}.html" out="${filename}.aux" force="true"  >
+			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+			<param name="target" expression="aux"/>
+		</xslt>
+        <exec executable="/opt/local/bin/bibtex">
+        	<env key="PATH" path="${env.PATH}:${latexlocation}"/>
+        	<arg   value="${filename}" />
+        </exec>
+	</target>
 	
 	<property name="fop.home" value="/opt/packages/fop-0.95"/>
 

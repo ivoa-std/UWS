@@ -5,7 +5,7 @@
 %%
 %% Copyright 1999, 2005, 2006, Norman Gray <norman@astro.gla.ac.uk>
 %
-% $Id: plainhtml.bst,v 1.1 2007/09/15 01:17:49 norman Exp $
+% $Id: plainhtml.bst.in,v 1.2 2006/10/31 15:45:57 norman Exp $
 %
 % Released under the terms of the GNU General Public Licence --
 % see the file LICENCE, included in the distribution.
@@ -82,7 +82,7 @@ FUNCTION {init.state.consts}
   #3 'after.block :=
   #0 'close.link :=
 
-  "ref:" 'hrefprefix := % or just "" is a good alternative
+  "" 'hrefprefix := % "ref:" is a good alternative
   "xxx.arxiv.org" 'xxxmirror :=
 }
 
@@ -639,14 +639,10 @@ FUNCTION {format.incoll.inproc.crossref}
 %  " \cite{" * crossref * "}" *
 }
 
-FUNCTION {format.online}
-{ url empty$
+FUNCTION {format.lastchecked}
+{ lastchecked empty$
     { "" }
-    { lastchecked empty$
-        { "[Online]" }
-        { "[Online, cited " lastchecked * "]" * }
-      if$
-    }
+    { ", cited " lastchecked * }
   if$
 }
 
@@ -668,7 +664,6 @@ FUNCTION {article}
   format.eprint output
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -701,7 +696,6 @@ FUNCTION {book}
   format.date "year" output.check
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -716,7 +710,6 @@ FUNCTION {booklet}
   format.date output
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -751,7 +744,6 @@ FUNCTION {inbook}
   format.date "year" output.check
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -778,7 +770,6 @@ FUNCTION {incollection}
   if$
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -815,7 +806,6 @@ FUNCTION {inproceedings}
   if$
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -852,7 +842,6 @@ FUNCTION {manual}
   format.date output
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -868,16 +857,12 @@ FUNCTION {mastersthesis}
   format.date "year" output.check
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
 FUNCTION {misc}
 { output.bibitem
-  editor empty$
-    { format.authors output }
-    { format.editors output }
-  if$
+  format.authors output
   title howpublished new.block.checkb
   format.title output
   howpublished new.block.checka
@@ -886,7 +871,6 @@ FUNCTION {misc}
   format.eprint output
   new.block
   note output
-  new.block format.online output
   fin.entry
   empty.misc.check
 }
@@ -903,7 +887,6 @@ FUNCTION {phdthesis}
   format.date "year" output.check
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -939,7 +922,6 @@ FUNCTION {proceedings}
   if$
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -956,7 +938,6 @@ FUNCTION {techreport}
   format.eprint output
   new.block
   note output
-  new.block format.online output
   fin.entry
 }
 
@@ -969,7 +950,6 @@ FUNCTION {unpublished}
   note "note" output.check
   format.date output
   format.eprint output
-  new.block format.online output
   fin.entry
 }
 
@@ -989,7 +969,7 @@ FUNCTION {webpage}
   new.block
   format.title "title" output.check
   new.block
-  new.block format.online output
+  "[Online" format.lastchecked * "]" * output
   fin.entry
 }
 
@@ -1232,13 +1212,7 @@ FUNCTION {presort.by.year}
   'sort.key$ :=
 }
 
-FUNCTION {presort.by.cite}
-{
-  cite$ 'sort.key$ :=
-}
-
-%ITERATE {presort.by.author}
-ITERATE {presort.by.cite}
+ITERATE {presort.by.author}
 
 SORT
 

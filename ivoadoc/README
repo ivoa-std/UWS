@@ -16,6 +16,10 @@ that will be then auto-numbered for instance.
 Authoring
 ---------
 
+initailly can just do <cite>bibref</cite> 
+    <span class="xref">UWSSchema</span>
+    
+    note that <a> anchors need both an id attribute and a name attribute - it is the id attribute that the xslt keys off.
 
 
 
@@ -49,6 +53,10 @@ in ~/.ant/lib/
 to crate
 
 Acknowlegements
+---------------
 
 The scripts and ideas for this are derived from originals by Norman Gray, and efforts have been made to preserve his conventions. The major 
-difference being that the formatting script may be used iteratively, rather than the final output being a one-shot post processed result of the input.
+difference being that the formatting script may be used iteratively, rather than the final output being a 'one-shot' batch processed result of the input, that cannot again be used as input.
+
+
+Paul Harrison paul.harrison@manchester.ac.uk 2009

@@ -62,15 +62,13 @@
   <x:param name="target"/>
 
   <x:param name="document-id">document-id</x:param>
+  
+  <x:param name="reloadbib"/>
 
 
   <!-- process root node -->
   <x:template match="/">
     <x:choose>
-      <x:when test="$target='aux'">
-        <x:apply-templates select="//processing-instruction('bibliography')"
-                           mode="extract-aux"/>
-      </x:when>
       <x:when test="$target">
         <x:message terminate="yes">Unrecognised target <x:value-of select="$target"/>
         </x:message>
@@ -107,7 +105,10 @@
     </x:variable>
       <x:message>section <x:value-of select="$level"/></x:message>
     <x:element name='{$level}'>
-      <x:element name="a"><x:attribute name='name' select="$id"/></x:element>
+      <x:element name="a"><x:attribute name='name' select="$id"/>
+      <x:copy-of select="./(h:h2|h:h3|h:h4)/h:a/@*" />
+      
+      </x:element>
       <x:apply-templates select="." mode="make-section-name"/>
     </x:element>
     <x:apply-templates select="*[1]/following-sibling::node()"/><!-- perhaps a little dangerous perhaps better to have a template to ignore the first h1 etc after a section... -->
@@ -172,6 +173,21 @@
       </x:if>
     </li>
   </x:template>
+  
+  <x:template match="h:div[processing-instruction()[1][count(preceding-sibling::element()) = 0]]">
+  <!-- the processing instructions will replace everything with the enclosing div if they are first - used for the toc, bibliography and xmlinc processing instucctions-->
+    <x:copy>
+    <x:choose>
+      <x:when test="child::processing-instruction('bibliography') and not($reloadbib)">
+         <x:apply-templates/>
+      </x:when>
+      <x:otherwise>
+         <x:apply-templates select="child::processing-instruction()"/>
+      </x:otherwise>
+    </x:choose>
+    
+    </x:copy>
+  </x:template>
 
   <x:template match="processing-instruction('toc')">
     <div id='toc' class='toc'>
@@ -213,14 +229,30 @@
 
   <x:template match="processing-instruction('bibliography')">
     <x:copy/>
+    <x:choose><x:when test="contains(.,'replace')">
+   
     <!-- think of better way to get the document id in -->
     <x:if test="$document-id ne 'document-id'">
        <x:copy-of select="document(concat(substring-before($document-id, '.xml'),'.bbl'))"/>
     </x:if>
+    </x:when></x:choose>
   </x:template>
 
-  <x:template match="h:span[@class='cite']">
-    <em>[<a href='#ref:{text()}'><x:value-of select='.'/></a>]</em>
+  <x:template match="h:cite">
+  <!-- need to do this as numbered along with bibstyle... -->
+    <x:copy>
+    <x:variable name="ref">
+    <x:choose>
+       <x:when test="a/@href">
+        <x:value-of select="substring-after(h:a/@href,'#ref:')"/>
+       </x:when>
+       <x:otherwise>
+         <x:value-of select="."/>
+       </x:otherwise>
+    </x:choose>
+    </x:variable>
+    [<a href='#ref:{$ref}'><x:value-of select='$ref'/></a>]
+    </x:copy>
   </x:template>
 
   <x:template match="h:span[@class='url']">
@@ -229,36 +261,26 @@
     </a>
   </x:template>
 
-  <x:template match="processing-instruction('bibliography')" mode="extract-aux">
-    <x:text>\relax
-</x:text>
-    <x:apply-templates select="//h:span[@class='cite']" mode="extract-aux"/>
-    <x:if test="string-length(.) &gt; 0">
-      <x:call-template name="make-tex-command">
-        <x:with-param name="command">bibdata</x:with-param>
-        <x:with-param name="content">
-          <x:value-of select="normalize-space(.)"/>
-        </x:with-param>
-      </x:call-template>
-    </x:if>
-  </x:template>
-
-  <x:template match="h:span[@class='cite']" mode="extract-aux">
-    <x:call-template name="make-tex-command">
-      <x:with-param name="command">citation</x:with-param>
-      <x:with-param name="content">
-        <x:copy-of select="."/>
-      </x:with-param>
-    </x:call-template>
-  </x:template>
-
+ 
   <x:key name="xrefs" match="h:div/h1|h2|h3|h4|h5|h6/a" use="@id"/>
 
   <x:template match="h:span[@class='xref']">
-    <x:variable name="id" select="."/>
+  <x:copy>
+    
+    <x:variable name="id">
+      <x:choose>
+        <x:when test="a/@href">
+          <x:value-of select="substring-after(a/@href, '#')"/>
+        </x:when>
+        <x:otherwise>
+          <x:value-of select="."/> <!-- can just put in the xref span -->
+        </x:otherwise>
+      </x:choose>
+    </x:variable>
     <a href='#{$id}'>
       <x:apply-templates select="key('xrefs',$id)" mode="make-section-name"/>
     </a>
+  </x:copy>
   </x:template>
 
   <x:template match="h:span[@class='rcsinfo']">
@@ -345,17 +367,6 @@
     <x:text>  </x:text>
   </x:template>
 
-  <x:template name="make-tex-command">
-    <x:param name="command"/>
-    <x:param name="content"/>
-    <x:text>\</x:text>
-    <x:value-of select="$command"/>
-    <x:text>{</x:text>
-    <x:value-of select="$content"/>
-    <x:text>}
-</x:text>
-  </x:template>
-  
   <x:template match="processing-instruction('incxml')">
       <x:copy/>
       <x:choose>
@@ -367,6 +378,7 @@
           </x:matching-substring>
         </x:analyze-string>
         </x:when>
+        
       </x:choose>
   </x:template>
 
