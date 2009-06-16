@@ -863,6 +863,7 @@ FUNCTION {mastersthesis}
 FUNCTION {misc}
 { output.bibitem
   format.authors output
+  format.editors output
   title howpublished new.block.checkb
   format.title output
   howpublished new.block.checka

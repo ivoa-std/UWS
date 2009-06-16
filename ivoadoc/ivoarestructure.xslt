@@ -190,11 +190,13 @@
   </x:template>
 
   <x:template match="processing-instruction('toc')">
+  <copy>
     <div id='toc' class='toc'>
       <ul>
         <x:apply-templates select="//h:div[@class='body']/h:div[@class='section' or @class='section-nonum']|//h:div[@class='body']/h:div[@class='appendices']/h:div" mode="make-toc"/>
       </ul>
     </div>
+   </copy>
   </x:template>
 
   <x:template name="make-section-id">
@@ -211,7 +213,13 @@
 
   <x:template match="h:div" mode="make-section-name">
     <x:element name="span"><x:attribute name="class" select="'secnum'"></x:attribute>
-    <x:choose>
+    <x:apply-templates select="." mode="make-section-number"/>
+     </x:element>
+    <x:apply-templates select="child::*[1]/text()"/>
+  </x:template>
+  
+  <x:template match="h:div" mode="make-section-number"><!-- would named template be better? -->
+      <x:choose>
       <x:when test="ancestor-or-self::h:div[@class='section-nonum']"/>
       <x:when test="ancestor::h:div[@class='appendices']">
         <x:text>Appendix </x:text>
@@ -223,8 +231,8 @@
         <x:text> </x:text>
       </x:otherwise>
     </x:choose>
-    </x:element>
-    <x:apply-templates select="child::*[1]/text()"/>
+    
+    
   </x:template>
 
   <x:template match="processing-instruction('bibliography')">
@@ -243,7 +251,7 @@
     <x:copy>
     <x:variable name="ref">
     <x:choose>
-       <x:when test="a/@href">
+       <x:when test="h:a/@href">
         <x:value-of select="substring-after(h:a/@href,'#ref:')"/>
        </x:when>
        <x:otherwise>
@@ -262,25 +270,33 @@
   </x:template>
 
  
-  <x:key name="xrefs" match="h:div/h1|h2|h3|h4|h5|h6/a" use="@id"/>
+  <x:key name="xrefs" match="h:div[(h:h1|h:h2|h:h3|h:h4|h:h5|h:h6)/h:a]" use="*/h:a/@id"/><!-- can only reference sections at the moment -->
 
   <x:template match="h:span[@class='xref']">
-  <x:copy>
+  <h:span class="xref">
     
     <x:variable name="id">
       <x:choose>
-        <x:when test="a/@href">
-          <x:value-of select="substring-after(a/@href, '#')"/>
+        <x:when test="h:a/@href">
+          <x:value-of select="substring-after(h:a/@href, '#')"/>
         </x:when>
         <x:otherwise>
           <x:value-of select="."/> <!-- can just put in the xref span -->
         </x:otherwise>
       </x:choose>
     </x:variable>
+    <x:choose>
+      <x:when test="key('xrefs',$id)">
+      <x:message>putting in xref <x:value-of select="$id"/></x:message>
+      </x:when>
+      <x:otherwise>
+      <x:message >error putting in xref <x:value-of select="$id"/> - destination does not exist </x:message>
+      </x:otherwise>
+    </x:choose>
     <a href='#{$id}'>
-      <x:apply-templates select="key('xrefs',$id)" mode="make-section-name"/>
+      <x:apply-templates select="key('xrefs',$id)" mode="make-section-number"/>
     </a>
-  </x:copy>
+  </h:span>
   </x:template>
 
   <x:template match="h:span[@class='rcsinfo']">
@@ -398,6 +414,21 @@
   </div>
    </x:template>
   
+<x:template match="/*" mode="printxml" priority="1"><!-- try to add the namespaces for the root element -->
+  <x:message>in root element <x:value-of select="name(.)"/></x:message>
+          <div class="element">
+          <span class="markup">&lt;</span><span class="start-tag"><x:value-of select="name(.)"/></span><x:apply-templates select="@*" mode="printxml"/>
+          <x:variable  name="v" select="."/> 
+          <x:for-each select="in-scope-prefixes(.)">
+             <x:text> </x:text><span class="attribute-name"><x:text>xlmns:</x:text><x:value-of select="."/></span><span class="markup">=</span><span class="attribute-value">"<x:value-of select="namespace-uri-for-prefix(., $v)"/>"</span>
+          </x:for-each>
+          <span class="markup">&gt;</span>
+          <x:apply-templates select="child::node()"  mode="printxml"/>
+          <span class="markup">&lt;/</span><span class="end-tag"><x:value-of select="name(.)"/></span><span class="markup">&gt;</span>
+          </div>
+  </x:template>
+  
+  
   <x:template match="processing-instruction()" mode="printxml">
     <div class="indent pi">
       <x:text>&lt;?</x:text>
@@ -414,8 +445,8 @@
   </x:template>
 
 
-  <x:template match="*" mode="printxml">
-  <x:message>all</x:message>
+  <x:template match="*" mode="printxml" >
+  <x:message>all <x:value-of select="name(.)"/></x:message>
     <div class="indent">
       <span class="markup">&lt;</span>
       <span class="start-tag"><x:value-of select="name(.)"/></span>
@@ -424,7 +455,7 @@
     </div>
   </x:template>
 
-<!-- this template causes ambiguity with the next one - seems harmless in saxon, but need to understand how to remove -->
+<!-- this template causes ambiguity with the next one - seems harmless in saxon, but need to understand how to remove - possibly because of newlines... -->
   <x:template match="*[text()]" mode="printxml">
     <div class="indent">
       <span class="markup">&lt;</span>
@@ -438,18 +469,22 @@
     </div>
   </x:template>
 
-  <x:template match="*[element()]" mode="printxml">
-           <div class="element">
+
+ <x:template match="*[element()]" mode="printxml" >
+          <div class="element">
           <span class="markup">&lt;</span><span class="start-tag"><x:value-of select="name(.)"/></span><x:apply-templates select="@*" mode="printxml"/><span class="markup">&gt;</span>
           <x:apply-templates select="child::node()"  mode="printxml"/>
           <span class="markup">&lt;/</span><span class="end-tag"><x:value-of select="name(.)"/></span><span class="markup">&gt;</span>
           </div>
   </x:template>
 
+ 
+
   <x:template match="@*"  mode="printxml">
     <x:text> </x:text><span class="attribute-name"><x:value-of select="name(.)"/></span><span class="markup">=</span><span class="attribute-value">"<x:value-of select="."/>"</span>
   </x:template>
-
+  
+ 
   <x:template match="text()"  mode="printxml">
     <x:if test="normalize-space(.)">
       <div class="indent text"><x:value-of select="."/></div>

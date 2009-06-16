@@ -1,0 +1,11 @@
+.xmlelement {
+	font-family: "Courier New", Courier, monospace;
+	font-weight: bold;
+}
+div.example {
+	border: thin solid #000000;
+	background-color: #EEEEEE;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 90%;
+}
