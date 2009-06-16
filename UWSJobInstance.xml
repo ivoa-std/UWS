@@ -4,20 +4,24 @@
    xsi:schemaLocation="http://www.ivoa.net/xml/UWS/v1.0rc3 UWS.xsd "
 >
    <uws:jobId>cea-agdevel.jb.man.ac.uk-130.88.24.18-1242749568029-508182314</uws:jobId>
-   <uws:ownerId xsi:nil="true"/> 
+   <uws:ownerId xsi:nil="true"/>
    <uws:phase>COMPLETED</uws:phase>
    <uws:startTime>2009-05-19T17:12:48.038+01:00</uws:startTime>
    <uws:endTime>2009-05-19T17:12:48.041+01:00</uws:endTime>
    <uws:executionDuration>86400</uws:executionDuration>
    <uws:destruction>2009-05-29T17:12:48.035+01:00</uws:destruction>
    <uws:parameters>
-      <uws:parameter name="scaleFactor">1.8</uws:parameter>
-      <uws:parameter name="image"  byReference="true">
+      <uws:parameter id="scaleFactor">1.8</uws:parameter>
+      <uws:parameter id="image"  byReference="true">
          http://myserver.org/uws/jobs/jobid123/param/image</uws:parameter>
    </uws:parameters>
    <uws:results>
        <uws:result id="correctedImage" xlink:href="http://myserver.org/uws/jobs/jobid123/result/image"></uws:result>
    </uws:results>
+   <uws:errorSummary type="transient">
+     <uws:message>we have problem</uws:message>
+     <uws:detail xlink:href="http://myserver.org/uws/jobs/jobid123/error"/>
+   </uws:errorSummary>
    <uws:jobInfo>
        <any xmlns="urn:mynamespace"><xml><thatyouwant/></xml></any>
    </uws:jobInfo>
