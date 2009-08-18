@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?><!-- $Id:$ 
 Universal Worker Service WD 
 Note that this file should be xhtml with div to mark sections so that it can be updated with xslt.
-Paul Harrison --><!-- DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"-->
+Paul Harrison -->
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
 <html xmlns="http://www.w3.org/1999/xhtml"> 
 <head xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" profile="http://www.w3.org/1999/xhtml/vocab"><title>Universal Worker Service Specification</title><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <meta name="Title" content="IVOA WG Internal Draft"/>
@@ -18,15 +20,26 @@ Paul Harrison --><!-- DOCTYPE html
 <div class="head">
 <table><tr><td rowspan="1" colspan="1"><a href="http://www.ivoa.net/" shape="rect"><img alt="IVOA" src="http://www.ivoa.net/icons/ivoa_logo_small.jpg"/></a></td></tr></table>
 <h1>Universal Worker Service<br clear="none"/>
-  Version 0.9</h1>
+  Version 1.0</h1>
 <h2>IVOA Working Draft @RELEASEDATE@</h2>
 <dl><dt>Working Group</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd> 0.9</dd><dt><b>Latest version:</b></dt><dd> not issued outside
     GWS-WG</dd><dt><b>Previous version(s):</b></dt><dd> Internal Working Draft
-    v0.1, 2005-01-24
+      v0.1, 2005-01-24
+      <br />
       Internal Working Draft
-      v0.2, 2006-05-11 Internal
-      Working Draft v.0.3, 2007-04-26  Internal
-      Working Draft v.04  2008-05-10, Internal Working draft 0.5 </dd><dt><b>Author(s):</b></dt><dd>  P. 
+      v0.2, 2006-05-11 <br />
+      Internal
+      Working Draft v0.3, 2007-04-26<br />  
+      Internal
+      Working Draft v0.4,  2008-05-10<br />
+      Internal Working Draft v0.5, 2008-10-08<br />
+      Internal Working Draft v0.9, 2009-10-08<br />
+    </dd>
+    <dt>&nbsp;</dt>
+    <dt>&nbsp;</dt>
+    <dt>&nbsp;</dt>
+    <dt>&nbsp;  </dt>
+    <dt><b>Author(s):</b></dt><dd>  P. 
     Harrison, G. Rixon</dd>
 </dl>
 
@@ -69,18 +82,18 @@ Paul Harrison --><!-- DOCTYPE html
     in sub-sections of this introduction). It does so in a way that
     allows for wide-scale reuse of software and support from software
     toolkits.</p>
-  <p>Section <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#UWSpattern">2. </a></h:span> of this document describes
+  <p>Section <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#UWSpattern">2. </a></h:span> 
+  of this document describes
     the pattern and lists the aspects that are common to all its
     applications. Any such application would involve a service contract
     that embodies the pattern and fixes the issues left undefined in the
-    pattern itself. The contract would include the XML schemata (XSD and
-    WSDL) for the application. It is intended that each such contract
+    pattern itself (see section <a href="#JDL">1.4</a>). The contract might include the XML schemata  which form a &quot;job description language&quot; or JDL for the application, or simply a description of the input parameters for the service which are conveyed via typical HTML form encodings. It is intended that each such contract
     cover a family of related applications, such that the implementations
-    may be widely reused.</p>
-  <p>Section 3 outlines several possible
+    may be widely reused.</p> 
+  <p>Section <a href="#security">3</a> outlines several possible
     applications of the pattern. These use-cases may be expanded into
     full IVOA standards that are siblings of the current document.</p>
-  <p>Section 4 describes the preferred
+  <p>Section <a href="#ApplicationsOfUWS">4</a> describes the preferred
     method of creating a synchronous facade to a UWS system.</p>
   <div class="section"><h3><a name="SynchronousStateless" id="SynchronousStateless" shape="rect"/><span class="secnum">1.1. </span> Synchronous, stateless services</h3>
     <p>Simple web services are <i>synchronous</i> and <i>stateless</i>. Synchronous means that the client waits for
@@ -108,7 +121,7 @@ Paul Harrison --><!-- DOCTYPE html
           compute the results and to start the reply, then HTTP times out at
           the request is lost.</p>
       </li><li>
-        <p>A client runs computer which
+        <p>A client runs on a computer which
           will not stay on-line indefinitely.</p>
       </li><li>
         <p>A network with finite
@@ -201,8 +214,7 @@ Paul Harrison --><!-- DOCTYPE html
       the parameters for a job are called the<i> Job-Description Language </i>(JDL).</p>
     <p>The combination of the UWS pattern, a
       JDL and details of the job state visible to the client defines a
-      service contract; for a SOAP service, this contract can be captured
-      in WSDL. Changing the JDL changes the contract. Thus, it is not
+      service contract. Changing the JDL changes the contract. Thus, it is not
       meaningful to &#8220;implement UWS&#8221; in isolation; any implementation
       standard must specify the rest of the contract.</p>
     <p>If the JDL is very general, a single
@@ -218,11 +230,7 @@ Paul Harrison --><!-- DOCTYPE html
   <div class="section"><h2><a name="UWSpattern" id="UWSpattern" shape="rect"/><span class="secnum">2. </span> Universal Worker Service Pattern</h2>
     <div class="section"><h3><a name="UWSObjects" id="UWSObjects" shape="rect"/><span class="secnum">2.1. </span> Objects within a UWS</h3>
       <p>A UWS consists logically in a set of
-        objects that may be read and written to in order to control jobs.</p>
-      <p>In a SOAP binding of UWS, these
-        components are exposed as properties of the object that lives at the
-        endpoint registered for the service. In a REST binding, the
-        components are distinct web-resources each with its own URI.</p>
+        objects that may be read and written to in order to control jobs. In a REST binding, these objects are represented as distinct web-resources each with its own URI.</p>
       <p> The following sub-sections explain the semantics of the objects. The
         UML diagram below shows the relationships more succinctly.</p>
       <p><img src="Class_Diagram__UWS__UWSObjects.png" alt="UWS Objects Class Diagram" name="graphics2" width="460" height="390" border="0" align="top" id="graphics2"/></p>
@@ -295,7 +303,7 @@ Paul Harrison --><!-- DOCTYPE html
           environments, this duration is defined in real clock seconds. An
           execution duration of 0 implies unlimited execution duration.</p>
         <p>When the execution duration has been
-          exceeded the service will automatically abort the job, which has the
+          exceeded the service should automatically abort the job, which has the
           same effect as when a manual &#8220;Abort&#8221; is requested.</p>
         <p>Specifically, when a job is aborted:</p>
         <ul><li>
@@ -327,7 +335,7 @@ Paul Harrison --><!-- DOCTYPE html
             <p>the service forgets that
               the job existed.</p>
         </li></ul>
-        <p>The Destruction Time may be viewed as
+        <p>The Destruction Time should be viewed as
           a measure of the amount of time that a service is prepared to
           allocate storage for a job &#8211; typically this will be a longer
           duration that the amount of CPU time that a service would allocate.</p>
@@ -353,14 +361,15 @@ Paul Harrison --><!-- DOCTYPE html
           readable error message (if any) for the underlying job. This object
           is intended to be a detailed error message, and consequently might be
           a large piece of text such as a stack trace. When there is an error
-          running a job a summary of the error should be given using the
-          optional errorSummary element of the JobSummary type.</p>
+          running a job, a summary of the error should also be given using the
+          optional errorSummary element of the  Job object.</p>
       </div>
       <div class="section"><h4><a name="Error" id="Error2" shape="rect"/><span class="secnum">2.1.8. </span>Owner</h4>
-        <p>The owner object represents the identifier for the creator of the job. This object will not exist for all invocations of a UWS conformant protocol, but only in cases where the access to the service is authenticated as discussed more thoroughly in <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#security">3. </a></h:span>. </p>
+        <p>The owner object represents the identifier for the creator of the job. This object will not exist for all invocations of a UWS conformant protocol, but only in cases where the access to the service is authenticated as discussed more thoroughly in section 
+          <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#security">3. </a></h:span>. </p>
       </div>
       <div class="section"><h4><a name="Error" id="Error3" shape="rect"/><span class="secnum">2.1.9. </span>RunId</h4>
-        <p>The RunId object represents an identifier that the job creator uses to identify the job. Note that this is distinct from the Job Identifier that the UWS system itself assigns to each job. The UWS system should do no parsing or processing of the RunId, but merely pass back the value (if it exists) as it was passed to the UWS at job creation time. In particular it may be the case that multiple jobs have the same RunId, as this is a mechanism by which the calling process can identifiy jobs that belong to a particular group. The exact mechanism of setting the RunId is not specified here, but will be part of the specification of the protocol using the UWS pattern.</p>
+        <p>The RunId object represents an identifier that the job creator uses to identify the job. Note that this is distinct from the Job Identifier that the UWS system itself assigns to each job. The UWS system should do no parsing or processing of the RunId, but merely pass back the value (if it exists) as it was passed to the UWS at job creation time. In particular it may be the case that multiple jobs have the same RunId, as this is a mechanism by which the calling process can identify jobs that belong to a particular group. The exact mechanism of setting the RunId is not specified here, but will be part of the specification of the protocol using the UWS pattern.</p>
       </div>
       <div class="section"><h4><a name="ResultsList" id="ResultsList" shape="rect"/><span class="secnum">2.1.10. </span>Results List</h4>
         <p>The Results List object is a
@@ -370,14 +379,13 @@ Paul Harrison --><!-- DOCTYPE html
         <p>Reading the Results List itself
           enumerates the available or expected result objects.</p>
         <p>The children of the Results List may
-          be read but not updated or deleted. The client may not add anything
+          be read but not updated or deleted. The client cannot add anything
           to the Results List.</p>
       </div>
       <div class="section"><h4><a name="ResultsList" id="ResultsList2" shape="rect"/><span class="secnum">2.1.11. </span>Parameter List</h4>
-        <p>The Parameter List</p>
-        <p>Reading the Results List itself
-          enumerates the available or expected result objects.</p>
-        <p>A particular imlementation of UWS may choose to allow the parameters to be updated after the initial job creation step, before the Phase is set to the executing state. It is up to the individual implementation to specify exactly how these parameters may be updated, but good practice would be to choose one of the following options.</p>
+        <p>Reading the Parameter List itself
+          enumerates the Job parameters. The form that the parameters take will depend on the JDL of the implementing service - for instance if the JDL is expressed as a single XML document, then there would be a single &quot;parameter&quot; that was that XML document. For services where the JDL consists of a list of name/value pairs, then these would naturally be expressed in the parameter list.</p>
+        <p>A particular implementation of UWS may choose to allow the parameters to be updated after the initial job creation step, before the Phase is set to the executing state. It is up to the individual implementation to specify exactly how these parameters may be updated, but good practice would be to choose one of the following options.</p>
         <ol>
           <li>HTTP POST an <i>application/x-www-form-urlencoded</i><b> </b>parameter name, value pair to either
             <ol>
@@ -391,7 +399,7 @@ Paul Harrison --><!-- DOCTYPE html
     </div>
     <div class="section"><h3><a name="RESTbinding" id="RESTbinding" shape="rect"/><span class="secnum">2.2. </span>The REST Binding</h3>
       <p>In order to create a usable service the objects discussed in the section above must be exposed in a particular interface which can be addressed over a particular transport mechanism - this combination is known as a "binding". In this first version of the UWS pattern only a REST (Representational State
-      Transfer) binding <cite>
+      Transfer) style binding <cite>
     [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:fielding00">fielding00</a>]
     </cite>is presented, however, future versions of this document will add other bindings such as SOAP. <cite>
     [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:soap">std:soap</a>]
@@ -401,7 +409,7 @@ Paul Harrison --><!-- DOCTYPE html
         <p>In a REST (Representational State
           Transfer) binding of UWS, each of the objects defined above is
           available as a web resource with its own URI. These URIs must form a
-          hierarchy as shown in the rable below:</p>
+          hierarchy as shown in the table below:</p>
         <table border="1" cellpadding="2" cellspacing="0">
           <tr>
             <th scope="col">URI</th>
@@ -469,8 +477,8 @@ Paul Harrison --><!-- DOCTYPE html
             <td>and appropriate identifier as discussed in <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#security">3. </a></h:span></td>
           </tr>
         </table>
-        <p>The service implementor is free to
-          choose the names given in parentheses above, i.e. the root of the URI tree, and the form that the job identifider takes (though note that it should be a legal URI path element) - the other names are part
+        <p>The service implementer is free to
+          choose the names given in parentheses above, i.e. the root of the URI tree, and the form that the job identifier takes (though note that it should be a legal URI path element) - the other names are part
           of the UWS standard.</p>
         <p>The URI for the Job List, in its
           absolute form is the root URI for the whole UWS. This URI should be
@@ -526,7 +534,7 @@ Paul Harrison --><!-- DOCTYPE html
         <p>Certain of the UWS' resources accept
           HTTP POST and DELETE messages to change the state of the service &#8211;
           This is the fundamental way that a client controls the execution of a
-          job. In most of the cases where a job subobject is set the response
+          job. In most of the cases where a job sub-object is set the response
           will have a http 303 &#8220;See other&#8221; status and a Location header
           that points back to the main job summary obtained at the <span style="font-weight: medium">/{jobs}/(job-id)
             URI. The job summary contains the values of (or links to) all the UWS objects
@@ -602,7 +610,7 @@ Paul Harrison --><!-- DOCTYPE html
           <p style="font-weight: medium">A
             job may be aborted by POSTing to the /{jobs}/(job-id)/phase URI. The
             POST contains a single parameter PHASE=ABORT which instructs the UWS
-            to attempt to abort the job. The response to this request must have
+            to attempt to abort the job. Aborting a job has the effect of stopping a job executing, but the resources associated with a job remain intact. The response to this request must have
             code 303 &#8220;See other&#8221; and the Location header of the response must
             point to the /{jobs}/(job-id) URI so that the client receives the
             phase that the job has been set to.</p>
@@ -622,7 +630,8 @@ Paul Harrison --><!-- DOCTYPE html
   <div class="section"><h2><a name="security" id="security" shape="rect"/><span class="secnum">3. </span>Security Considerations</h2>
     <p>A UWS should follow IVOA standards for security <cite>
     [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:ssoauth">std:ssoauth</a>]
-    </cite> if it is desired that a non-public UWS be created. It is possible to imagine many different authorization policies that might be employed in an authenticated UWS, where particular groups of users have different permissions to create and view different types of jobs. A full discussion of such authorization policies is beyond the scope of this document, but a UWS should behave as described in section <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#RESTbinding">2.2. </a></h:span> for any individual authenticated user, although it is clear that a user without sufficient privileges might only obtain a restricted list of jobs withing the joblist at /{jobs}. Any attempt to retrieve a job for which the user does not have sufficient privilege should result in a 403 Forbiden HTTP status being returned.</p>
+    </cite> if it is desired that a non-public UWS be created. It is possible to imagine many different authorization policies that might be employed in an authenticated UWS, where particular groups of users have different permissions to create and view different types of jobs. A full discussion of such authorization policies is beyond the scope of this document, but a UWS should behave as described in section <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#RESTbinding">2.2. </a></h:span> 
+    for any individual authenticated user, although it is clear that a user without sufficient privileges might only obtain a restricted list of jobs within the joblist at /{jobs}. Any attempt to retrieve a job for which the user does not have sufficient privilege should result in a 403 Forbidden HTTP status being returned.</p>
     <p>When an authentication mechanism is used in the UWS then the implementation should set the owner object to the identity obtained by the authentication. </p>
   </div>
   <div class="section"><h2><a name="ApplicationsOfUWS" id="ApplicationsOfUWS" shape="rect"/><span class="secnum">4. </span> Applications of UWS (informative)</h2>
@@ -638,7 +647,7 @@ Paul Harrison --><!-- DOCTYPE html
       for a standard implementation.</p>
     <p>Any of these cases could be worked up
       into a full IVOA standard by formalizing the description, adding
-      detail (schemata, WSDL) and generally making the specification more
+      detail and generally making the specification more
       exact and complete.</p>
     <div class="section"><h3><a name="Imageservice" id="Imageservice" shape="rect"/><span class="secnum">4.1. </span> Image service with data staging</h3>
       <p>Consider a service that computes
@@ -728,7 +737,7 @@ Paul Harrison --><!-- DOCTYPE html
       <p>There is a class of applications on
         which a job may be defined by a list of simple parameters. &#8220;Simple&#8221;
         here means unstructured: a scalar value such as a number, a string of
-        text or a Boolean value. If the parameters are allowed to name files,
+        text or a boolean value. If the parameters are allowed to name files,
         so that structured data are passed indirectly, then the class of
         applications is very large indeed: almost any non-interactive
         application can be driven in this way.</p>
@@ -761,7 +770,7 @@ Paul Harrison --><!-- DOCTYPE html
       <p>The JDL in CEA v2 is similar to that
         in CEA v1 It is a formal, XML vocabulary for expressing choice
         of application and parameter lists <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:vocea">std:vocea</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:vocea">std:voc ea</a>]
     </cite>. Parameters may be inputs or
         outputs of the job.</p>
       <p>To start a job, a document in this
@@ -865,17 +874,8 @@ Paul Harrison --><!-- DOCTYPE html
 can also be used as a URL for the schema.) This location should
 represent the definitive source, the schema is reproduced below only for
 completeness of this document.</p>
-  <div><?incxml href="../UWS.xsd"?><div xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="viewxml"><div class="comment">&lt;!-- $Id: UWS.xsd,v 1.1 2009/06/15 15:30:32 pah Exp $ --&gt;</div><div class="comment">&lt;!-- proposal for basic UWS schema - Paul Harrison May 2008 --&gt;</div><div class="comment">&lt;!--
-      $Log: UWS.xsd,v $
-      Revision 1.1  2009/06/15 15:30:32  pah
-      made some of the global element defintions for job subobjects just local again
-      added runid, ownerid
-      added ParamList
-      changed some element names to be consistent with the uris
- Revision 1.6 2008/10/01 11:54:02 pah fix up cvs
-      header Revision 1.5 2008/09/25 00:22:35 pah change termination
-      time to execution duration
-   --&gt;</div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:schema</span> <span class="attribute-name">targetNamespace</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0rc3"</span> <span class="attribute-name">elementFormDefault</span><span class="markup">=</span><span class="attribute-value">"qualified"</span> <span class="attribute-name">attributeFormDefault</span><span class="markup">=</span><span class="attribute-value">"unqualified"</span> <span class="attribute-name">xlmns:xml</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/XML/1998/namespace"</span> <span class="attribute-name">xlmns:xs</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/2001/XMLSchema"</span> <span class="attribute-name">xlmns:uws</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0rc3"</span> <span class="attribute-name">xlmns:xlink</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span><span class="markup">&gt;</span><div class="indent"><span class="markup">&lt;</span><span class="start-tag">xs:import</span> <span class="attribute-name">namespace</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span> <span class="attribute-name">schemaLocation</span><span class="markup">=</span><span class="attribute-value">"http://software.astrogrid.org/schema/stc/STC/v1.30/XLINK.xsd"</span><span class="markup">/&gt;</span></div><div class="comment">&lt;!--
+  <div><?incxml href="../UWS.xsd"?><div xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="viewxml"><div class="comment">&lt;!-- $Id: UWS.xsd,v 1.1 2009/06/15 15:30:32 pah Exp $ --&gt;</div><div class="comment">&lt;!-- proposal for basic UWS schema - Paul Harrison May 2008 --&gt;</div><div class="comment"></div>
+  <div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:schema</span> <span class="attribute-name">targetNamespace</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0rc3"</span> <span class="attribute-name">elementFormDefault</span><span class="markup">=</span><span class="attribute-value">"qualified"</span> <span class="attribute-name">attributeFormDefault</span><span class="markup">=</span><span class="attribute-value">"unqualified"</span> <span class="attribute-name">xlmns:xml</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/XML/1998/namespace"</span> <span class="attribute-name">xlmns:xs</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/2001/XMLSchema"</span> <span class="attribute-name">xlmns:uws</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0rc3"</span> <span class="attribute-name">xlmns:xlink</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span><span class="markup">&gt;</span><div class="indent"><span class="markup">&lt;</span><span class="start-tag">xs:import</span> <span class="attribute-name">namespace</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span> <span class="attribute-name">schemaLocation</span><span class="markup">=</span><span class="attribute-value">"http://software.astrogrid.org/schema/stc/STC/v1.30/XLINK.xsd"</span><span class="markup">/&gt;</span></div><div class="comment">&lt;!--
       &lt;xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/&gt;
    --&gt;</div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"ShortJobDescription"</span><span class="markup">&gt;</span><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"phase"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:ExecutionPhase"</span><span class="markup">&gt;</span><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text"> the execution phase - returned at
@@ -950,30 +950,29 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
 <div class="section-nonum'"><h2><a name="References" id="References"/>References</h2>
  <div>
  <?bibliography ivoadoc/refs.bib ?> 
-<dl>
 
-<dt><a name="std:xform">[std:xform] John~M. Boyer, editor.</a></dt> <dd>
+
+<dl><dt><a name="std:xform">[std:xform] John M. Boyer, editor.</a></dt> <dd>
   <a href="http://www.w3.org/TR/xforms11/" >Xforms 1.1</a>, 2007.
 </dd>
 
 <dt><a name="std:soap">[std:soap] Don Box, David Ehnebuske, Gopal Kakivaya,
-  Andrew Layman, Noah Mendelsohn, Henrik~Frystyk Nielsen, Satish Thatte, and
+  Andrew Layman, Noah Mendelsohn, Henrik Frystyk Nielsen, Satish Thatte, and
   Dave Winer.</a></dt> <dd>
   <a href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/" >Simple object access
   protocol (soap) 1.1</a>, 2000.
 </dd>
 
-<dt><a name="fielding00">[fielding00] Roy~Thomas Fielding.</a></dt> <dd>
+<dt><a name="fielding00">[fielding00] Roy Thomas Fielding.</a></dt> <dd>
   <a href="http://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm"
   ><em>Architectural Styles and the Design of Network-based Software
   Architectures</em></a>.
   PhD thesis, University of California, Irvine, 2000.
 </dd>
 
-<dt><a name="std:iso8601">[std:iso8601] {Grid and Web Services Working Group},
-  Guy Rixon and Matthew Graham, editors.</a></dt> <dd>
-  <a href="http://www.ivoa.net/Documents/latest/SSOAuthMech.html" >Ivoa
-  single-sign-on profile: Authentication mechanisms version 1.01</a>, 2008.
+<dt><a name="std:iso8601">[std:iso8601] ISO 8601:2004 Data elements and interchange formats - Information interchange - Representation of dates and times</a></dt> <dd>
+  International Organization for
+                  Standardization, 2004.
 </dd>
 
 <dt><a name="std:ssoauth">[std:ssoauth] {Grid and Web Services Working Group},
@@ -982,14 +981,15 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
   single-sign-on profile: Authentication mechanisms version 1.01</a>, 2008.
 </dd>
 
-<dt><a name="harrison05">[harrison05] P.~Harrison.</a></dt> <dd>
+<dt><a name="harrison05">[harrison05] P. Harrison.</a></dt> <dd>
   <a href="http://www.ivoa.net/Documents/latest/CEA.html" >A proposal for a
   common execution architecture</a>.
   {IVOA Note}, May 2005.
 </dd>
 
-<dt><a name="std:vocea">[std:vocea] Paul Harrison.</a></dt> <dd>
-  Vocea - an xml schema for registering cea.
+<dt><a name="std:vocea">[std:vocea] Paul Harrison.</a></dt> 
+<dd>
+  VOCEA - an xml schema for registering cea.
 </dd>
 
 <dt><a name="sextractor">[sextractor]
@@ -999,9 +999,9 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
 </dd>
 
 <dt><a name="std:adql">[std:adql] Iñaki Ortiz, Jeff Lusted, Pat Dowler,
-  Alexander Szalay, Yuji Shirasaki, Maria~A. Nieto-Santisteba, Masatoshi
+  Alexander Szalay, Yuji Shirasaki, Maria A. Nieto-Santisteba, Masatoshi
   Ohishi, William OÕMullane, Pedro Osuna, the VOQL-TEG, and the VOQL
-  Working~Group, Pedro Osuna and Iñaki Ortiz, editors.</a></dt> <dd>
+  Working Group, Pedro Osuna and Iñaki Ortiz, editors.</a></dt> <dd>
   <a href="http://www.ivoa.net/Documents/latest/ConeSearch.html" >Ivoa
   astronomical data query language</a>.
   {IVOA Recommendation}, 2008.
