@@ -34,6 +34,15 @@
         	<arg   value="${filename}" />
         </exec>
 	</target>
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+    <target name="package"  description="create a zip file of document and associated files">
+        <zip destfile="uws.zip" basedir="${basedir}" includes="UWS.html,**/*.css,**/*.png,**/*.gif">
+        	
+        </zip>
+    </target>
+
 	
 	<property name="fop.home" value="/opt/packages/fop-0.95"/>
 

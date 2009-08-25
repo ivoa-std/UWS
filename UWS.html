@@ -12,18 +12,34 @@ Paul Harrison -->
 <meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk"/>
 <meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk"/>
 <link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css"/>
-<link rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_wd.css" type="text/css"/>
+<link rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_pr.css" type="text/css"/>
 <link href="./ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css"/>
 <link href="./ivoadoc/ivoa-extras.css" rel="stylesheet" type="text/css"/>
 </head>
 <body bgcolor="#FFFFFF">
 <div class="head">
-<table><tr><td rowspan="1" colspan="1"><a href="http://www.ivoa.net/" shape="rect"><img alt="IVOA" src="http://www.ivoa.net/icons/ivoa_logo_small.jpg"/></a></td></tr></table>
+<table style="width: 337.5pt;" border="0" cellpadding="0" cellspacing="0" width="563">
+<tbody><tr>
+ <td style="padding: 0cm;">
+ <p class="MsoNormal">
+<span style="color: black;">
+<img src="http://www.ivoa.net/pub/images/IVOA_wb_300.jpg" height="169" width="300"></span></p>
+</td>
+ <td style="padding: 0cm;">
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">&nbsp;I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">nternational</span></i></p>
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">&nbsp;&nbsp;&nbsp; V</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">irtual</span></i></p>
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">&nbsp; &nbsp;&nbsp;O</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">bservatory</span></i></p>
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">lliance</span><span style="color: black;">
+</span></i></p>
+</td>
+</tr>
+</tbody></table>
 <h1>Universal Worker Service<br clear="none"/>
   Version 1.0</h1>
-<h2>IVOA Working Draft @RELEASEDATE@</h2>
-<dl><dt>Working Group</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd> 0.9</dd><dt><b>Latest version:</b></dt><dd> not issued outside
-    GWS-WG</dd><dt><b>Previous version(s):</b></dt><dd> Internal Working Draft
+<h2>IVOA Proposed Recommendation 2009-08-25</h2>
+<dl>
+  <dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt>
+  <dd><a href="http://www.ivoa.net/Documents/latest/UWS.html">http://www.ivoa.net/Documents/PR/GWS/UWS-1.0-2009-08-25.html</a></dd><dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/latest/UWS.html">http://www.ivoa.net/Documents/latest/UWS.html</a></dd><dt><b>Previous version(s):</b></dt><dd> Internal Working Draft
       v0.1, 2005-01-24
       <br />
       Internal Working Draft
@@ -44,11 +60,10 @@ Paul Harrison -->
 </dl>
 
 <h2>Abstract</h2>
-<p>The Universal Worker Service pattern
-  (UWS) defines how to manage asynchronous execution of jobs on a
+<p>The Universal Worker Service (UWS) pattern
+  defines how to manage asynchronous execution of jobs on a
   service. Any application of the pattern defines a family of related
-  services with a common service contract. Four possible applications
-  are described.</p>
+  services with a common service contract. Possible uses of the pattern are also described.</p>
 <h2> Status of This Document</h2>
 <p>This is an  working draft of
   the GWS-WG. The first release of this document was on 2005-01-24
@@ -357,8 +372,7 @@ Paul Harrison -->
           for the completion time.</p>
       </div>
       <div class="section"><h4><a name="Error" id="Error" shape="rect"/><span class="secnum">2.1.7. </span>Error</h4>
-        <p>The error object gives a human
-          readable error message (if any) for the underlying job. This object
+        <p>The error object gives a human-readable error message for the underlying job. This object
           is intended to be a detailed error message, and consequently might be
           a large piece of text such as a stack trace. When there is an error
           running a job, a summary of the error should also be given using the
@@ -804,7 +818,7 @@ Paul Harrison -->
   <div class="section"><h2><a name="SynchronousService" id="SynchronousService" shape="rect"/><span class="secnum">5. </span> Implementing a Synchronous Service on top of UWS (informative)</h2>
     <p>Whilst the provision of synchronous
       services is not one of the design aims of the UWS pattern, there is
-      clearly a desire in second generation IVOA services to still allow a
+      clearly a desire in second generation IVOA services  still to allow a
       simple synchronous calling pattern to be available to simple clients.
       What follows is a recommended recipe for putting a synchronous facade
       on UWS;</p>
