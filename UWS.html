@@ -4,8 +4,11 @@ Note that this file should be xhtml with div to mark sections so that it can be 
 Paul Harrison -->
 
 <!DOCTYPE html
-  PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" >
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" 
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.w3.org/1999/xhtml
+                          http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd"> 
 <head xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" profile="http://www.w3.org/1999/xhtml/vocab"><title>Universal Worker Service Specification</title><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 <meta name="Title" content="IVOA WG Internal Draft"/>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
@@ -219,7 +222,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
       not a complete list!</p>
     <ol><li>
         <p>An ADQL <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:adql">std:adql</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:adql">std:adql</a>]
     </cite> service gives access
           to a large object-catalogue. Most queries run in less than a minute,
           but some legitimate queries involve a full-table traverse and take
@@ -228,14 +231,14 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
       </li><li>
         <p>An object-finding service runs
           the SExtractor <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:sextractor">sextractor</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#sextractor">sextractor</a>]
     </cite> application on a list of images. Normally, the list
           is short and the request is quickly satisfied. Occasionally, a list
           of 10,000 images is sent in the expectation that the work will be
           finished over the weekend.</p>
       </li><li>
         <p>A cone-search <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:scs">std:scs</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:scs">std:scs</a>]
     </cite> request on a
           rich catalogue raises 10,000,000 rows of results, but the client is
           connected via a slow link and cannot read all the results in a
@@ -301,7 +304,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
     <p>If the JDL is very general, a single
       service-contract can be reused for many kinds of service. AstroGrid&#8217;s
       CEA <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:harrison05">harrison05</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#harrison05">harrison05</a>]
     </cite>exploits this: one JDL covers all services offering parameterized
       applications and even ADQL services. In the limit, a
       sufficiently-general JDL turns a specialized worker service into a
@@ -480,9 +483,9 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
     <div class="section"><h3><a name="RESTbinding" id="RESTbinding" shape="rect"/><span class="secnum">2.2. </span>The REST Binding</h3>
       <p>In order to create a usable service the objects discussed in the section above must be exposed in a particular interface which can be addressed over a particular transport mechanism - this combination is known as a &quot;binding&quot;. In this first version of the UWS pattern only a REST (Representational State
       Transfer) style binding <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:fielding00">fielding00</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#fielding00">fielding00</a>]
     </cite>is presented, however, future versions of this document will add other bindings such as SOAP. <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:soap">std:soap</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:soap">std:soap</a>]
     </cite></p>
      
       <div class="section"><h4><a name="d1e834" id="d1e834"/><span class="secnum">2.2.1. </span>Resources and URIs</h4>
@@ -524,7 +527,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
             <td> the
           destruction instant for (job-id)</td>
             <td><cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:iso8601">std:iso8601</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:iso8601">std:iso8601</a>]
     </cite></td>
           </tr>
           <tr>
@@ -709,7 +712,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
     </div>
   <div class="section"><h2><a name="security" id="security" shape="rect"/><span class="secnum">3. </span>Security Considerations</h2>
     <p>A UWS should follow IVOA standards for security <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:ssoauth">std:ssoauth</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:ssoauth">std:ssoauth</a>]
     </cite> if it is desired that a non-public UWS be created. It is possible to imagine many different authorization policies that might be employed in an authenticated UWS, where particular groups of users have different permissions to create and view different types of jobs. A full discussion of such authorization policies is beyond the scope of this document, but a UWS should behave as described in section <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#RESTbinding">2.2. </a></h:span> 
     for any individual authenticated user, although it is clear that a user without sufficient privileges might only obtain a restricted list of jobs within the joblist at /{jobs}. Any attempt to retrieve a job for which the user does not have sufficient privilege should result in a 403 Forbidden HTTP status being returned.</p>
     <p>When an authentication mechanism is used in the UWS then the implementation should set the owner object to the identity obtained by the authentication. </p>
@@ -735,7 +738,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
         the service is asynchronous. The service keeps the computed images in
         its own storage until the user downloads them; this is essentially
         the model of SIAP <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:siap">std:siap</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:siap">std:siap</a>]
     </cite>.</p>
       <p>The asynchronous image-service is a
         logical extension of a synchronous SIA service. Therefore it uses the
@@ -829,7 +832,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
         implementation of the contract can be reused for all cases.</p>
       <p>AstroGrid&#8217;s Common Execution
         Architecture (CEA) <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:harrison05">harrison05</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#harrison05">harrison05</a>]
     </cite> works in this way. It has just one service
         contract for all applications (including ADQL services; the ADQL
         query is passed in the list of parameters). It has four
@@ -850,7 +853,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
       <p>The JDL in CEA v2 is similar to that
         in CEA v1 It is a formal, XML vocabulary for expressing choice
         of application and parameter lists <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:vocea">std:voc ea</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:vocea">std:voc ea</a>]
     </cite>. Parameters may be inputs or
         outputs of the job.</p>
       <p>To start a job, a document in this
@@ -858,7 +861,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
         MIME-type, application/xml, so this is not an interface that can be
         driven directly from an HTML form, although it can be driven from the
         emerging XForms technology<cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#ref:std:xform">std:xform</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:xform">std:xform</a>]
     </cite>.</p>
       <p>The results of the job depend on the
         choice of application. They are all named results and the names and
@@ -927,7 +930,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
       containing references to the desired data.</p>
   </div>
  
-<div class="appendices"><h2>Appendices</h2>
+<div class="appendices"><h2><a name="Appendices" id="Appendices"/>Appendices</h2>
 
 <div class="section"><h2><a name="Updates" id="Updates"/><span class="secnum">Appendix A. </span> Updates from previous versions</h2>
   <div class="section"><h3><a name="d1e1112" id="d1e1112"/><span class="secnum">Appendix A.1. </span>At Version 0.5</h3>

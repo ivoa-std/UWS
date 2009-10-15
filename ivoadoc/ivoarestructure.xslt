@@ -7,7 +7,7 @@
               xmlns:dcterms="http://purl.org/dc/terms/">
 
   <x:output method="xml"
-            encoding="ISO-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+            encoding="ISO-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN" doctype-system="http://www.w3.org/2002/08/xhtml/xhtml1-transitional.dtd"
             />
 
   <!--
@@ -252,14 +252,14 @@
     <x:variable name="ref">
     <x:choose>
        <x:when test="h:a/@href">
-        <x:value-of select="substring-after(h:a/@href,'#ref:')"/>
+        <x:value-of select="substring-after(h:a/@href,'#')"/>
        </x:when>
        <x:otherwise>
          <x:value-of select="."/>
        </x:otherwise>
     </x:choose>
     </x:variable>
-    [<a href='#ref:{$ref}'><x:value-of select='$ref'/></a>]
+    [<a href='#{$ref}'><x:value-of select='$ref'/></a>]
     </x:copy>
   </x:template>
 

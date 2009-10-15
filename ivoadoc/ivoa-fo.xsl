@@ -17,17 +17,18 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -->
 
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
-                xmlns:html="http://www.w3.org/1999/xhtml">
+                xmlns:html="http://www.w3.org/1999/xhtml"
+                >
 
   <xsl:import href="xhtml2fo.xsl"/>
 
   <xsl:output method="xml"
               version="1.0"
               encoding="UTF-8"
-              indent="no"/>
+              indent="yes"/>
 
   <!--======================================================================
       Parameters

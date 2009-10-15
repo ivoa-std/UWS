@@ -4,6 +4,8 @@
 	<property name="filename" value="UWS"/>
 	<property name="latexlocation" location="/opt/local/bin"/>
 
+	
+
 	<!-- ================================= 
           target: createdoc              
          ================================= -->
@@ -17,8 +19,13 @@
 
 	<target name="createPDF">
 		<xslt style="ivoadoc/ivoa-fo.xsl" in="${filename}.html" out="out.fo" force="true">
-			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+			<factory name="org.apache.xalan.processor.TransformerFactoryImpl" >
+		     </factory>
+			<xmlcatalog >
+				<catalogpath><filelist><file name="/opt/packages/xmlcatalog/catalog.xml"/></filelist></catalogpath>
+			</xmlcatalog>
 		</xslt>
+		<echo>appling fop</echo>
 		<fop format="application/pdf" 
 		        fofile="out.fo"
 		        outfile="${filename}.pdf" />
@@ -38,13 +45,16 @@
           target: package              
          ================================= -->
     <target name="package"  description="create a zip file of document and associated files">
-        <zip destfile="uws.zip" basedir="${basedir}" includes="UWS.html,**/*.css,**/*.png,**/*.gif">
+    	<tstamp></tstamp>
+    	<copy file="UWS.html" tofile="PR-UWS-1.0-${DSTAMP}.html"></copy>
+        <zip destfile="uws.zip" basedir="${basedir}" includes="PR-UWS-1.0-${DSTAMP}.html, UWS.xsd,**/*.css,**/*.png,**/*.gif">
         	
         </zip>
+    	<delete file="PR-UWS-1.0-${DSTAMP}.html"></delete>
     </target>
 
 	
-	<property name="fop.home" value="/opt/packages/fop-0.95"/>
+	<property name="fop.home" value="/opt/packages/fop"/>
 
 	<taskdef name="fop" 
 	         classname="org.apache.fop.tools.anttasks.Fop">

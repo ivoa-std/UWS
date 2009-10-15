@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
+Adaptated to work with IVOA html documents by Paul Harrison.
+
+
 Copyright Antenna House, Inc. (http://www.antennahouse.com) 2001, 2002.
 
 Since this stylesheet is originally developed by Antenna House to be used with XSL Formatter, it may not be compatible with another XSL-FO processors.
@@ -19,7 +22,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <xsl:output method="xml"
               version="1.0"
               encoding="UTF-8"
-              indent="no"/>
+              indent="yes"/>
 
   <!--======================================================================
       Parameters
@@ -255,7 +258,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
   <xsl:param name="ul-label-3">-</xsl:param>
   <xsl:attribute-set name="ul-label-3">
-    <xsl:attribute name="font">bold 0.9em sans-serif</xsl:attribute>
+    <xsl:attribute name="font">0.9em bold sans-serif</xsl:attribute>
     <xsl:attribute name="baseline-shift">0.05em</xsl:attribute>
   </xsl:attribute-set>
 
@@ -464,6 +467,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <fo:root xsl:use-attribute-sets="root">
       <xsl:call-template name="process-common-attributes"/>
       <xsl:call-template name="make-layout-master-set"/>
+      <xsl:call-template name="make-bookmarks"/>
       <xsl:apply-templates/>
     </fo:root>
   </xsl:template>
@@ -516,6 +520,23 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         </xsl:choose>
       </fo:simple-page-master>
     </fo:layout-master-set>
+  </xsl:template>
+  
+  <xsl:template name="make-bookmarks">
+     <fo:bookmark-tree>
+        <xsl:apply-templates select="//html:div[@class='body']/html:div[@class='section' or @class='appendices' or @class='section-nonum']" mode="bookmark"/>
+     </fo:bookmark-tree>
+  </xsl:template>
+  
+  <xsl:template match="html:div[@class='section' or @class='appendices' or @class='section-nonum']" mode="bookmark">
+     <xsl:element name="bookmark" namespace="http://www.w3.org/1999/XSL/Format">
+         <xsl:variable name="title" select="html:h1[1]|html:h2[1]|html:h3[1]|html:h4[1]|html:h5[1]|html:h6[1]"/>
+         <xsl:attribute name="internal-destination"><xsl:value-of select="$title/html:a/@id"/></xsl:attribute>
+         <xsl:element name="bookmark-title" namespace="http://www.w3.org/1999/XSL/Format">
+              <xsl:value-of select="normalize-space($title)"/>
+         </xsl:element>
+         <xsl:apply-templates select="./html:div[@class='section'  or @class='appendices' or @class='section-nonum']" mode="bookmark"/>
+     </xsl:element>
   </xsl:template>
 
   <xsl:template match="html:head | html:script"/>
@@ -1001,6 +1022,14 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
        Table
   =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-->
 
+
+<xsl:template match="html:table">
+<fo:table xsl:use-attribute-sets="table">
+<xsl:call-template name="process-table"/>
+</fo:table>
+</xsl:template>
+
+<!-- captions do not work in FOP yet 20091014
   <xsl:template match="html:table">
     <fo:table-and-caption xsl:use-attribute-sets="table-and-caption">
       <xsl:call-template name="make-table-caption"/>
@@ -1009,7 +1038,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       </fo:table>
     </fo:table-and-caption>
   </xsl:template>
-
+-->
   <xsl:template name="make-table-caption">
     <xsl:if test="html:caption/@align">
       <xsl:attribute name="caption-side">
