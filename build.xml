@@ -14,6 +14,13 @@
 		<xslt style="ivoadoc/ivoarestructure.xslt" in="${filename}-old.html" out="${filename}.html" force="true" >
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
 			<param name="document-id" expression="${filename}.html"/> <!-- so that the xslt knows the filename -->
+			<xmlcatalog >
+				<catalogpath>
+					<filelist>
+						<file name="./ivoadoc/xmlcatalog/catalog.xml"/>
+					</filelist>
+				</catalogpath>
+			</xmlcatalog>
 		</xslt>
 	</target>
 
@@ -22,7 +29,11 @@
 			<factory name="org.apache.xalan.processor.TransformerFactoryImpl" >
 		     </factory>
 			<xmlcatalog >
-				<catalogpath><filelist><file name="/opt/packages/xmlcatalog/catalog.xml"/></filelist></catalogpath>
+				<catalogpath>
+					<filelist>
+						<file name="./ivoadoc/xmlcatalog/catalog.xml"/>
+					</filelist>
+				</catalogpath>
 			</xmlcatalog>
 		</xslt>
 		<echo>appling fop</echo>
