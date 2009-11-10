@@ -14,7 +14,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 -->
 
-<xsl:stylesheet version="1.0"
+<xsl:stylesheet version="2.0"
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns:fo="http://www.w3.org/1999/XSL/Format"
                 xmlns:html="http://www.w3.org/1999/xhtml">
@@ -1487,11 +1487,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     </fo:inline>
   </xsl:template>
 
-  <xsl:template match="html:span">
-    <fo:inline>
-      <xsl:call-template name="process-common-attributes-and-children"/>
-    </fo:inline>
-  </xsl:template>
+ 
+ 
 
   <xsl:template match="html:span[@dir]">
     <fo:bidi-override direction="{@dir}" unicode-bidi="embed">
@@ -1513,7 +1510,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
       </fo:block>
     </fo:inline-container>
   </xsl:template>
-
+<!--    <xsl:template match="html:span">
+    <fo:inline>
+      <xsl:call-template name="process-common-attributes-and-children"/>
+    </fo:inline>
+  </xsl:template>
+ -->
   <xsl:template match="html:bdo">
     <fo:bidi-override direction="{@dir}" unicode-bidi="bidi-override">
       <xsl:call-template name="process-common-attributes-and-children"/>
@@ -1657,6 +1659,25 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <fo:basic-link xsl:use-attribute-sets="a-link">
       <xsl:call-template name="process-a-link"/>
     </fo:basic-link>
+  </xsl:template>
+  
+  <xsl:template match="html:div[@class='toc']//html:a[@href]">
+    <fo:basic-link xsl:use-attribute-sets="a-link">
+      <xsl:call-template name="process-common-attributes"/>
+         <xsl:attribute name="internal-destination">
+          <xsl:value-of select="substring-after(@href,'#')"/>
+        </xsl:attribute>
+        <xsl:apply-templates/>
+    </fo:basic-link>
+    <fo:leader leader-length.minimum="12pt" leader-length.optimum="40pt" 
+               leader-length.maximum="100%" leader-pattern="dots"/> 
+    <xsl:text> </xsl:text>    
+    <fo:page-number-citation>
+         <xsl:attribute name="ref-id">
+          <xsl:value-of select="substring-after(@href,'#')"/>
+        </xsl:attribute>       
+    </fo:page-number-citation>
+    
   </xsl:template>
 
   <xsl:template name="process-a-link">

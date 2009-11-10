@@ -241,18 +241,113 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   </xsl:template>
 
   <!-- ul.toc { list-style: none; } -->
-  <xsl:template match="html:ul[@class = 'toc']/html:li">
+  <xsl:template match="html:div[@class='toc']//html:ul/html:li">
     <fo:list-item xsl:use-attribute-sets="ul-li">
       <xsl:call-template name="process-common-attributes"/>
       <fo:list-item-label>
         <fo:block/>
       </fo:list-item-label>
       <fo:list-item-body start-indent="body-start()">
-        <fo:block>
+        <fo:block text-align-last="justify">
           <xsl:apply-templates/>
         </fo:block>
       </fo:list-item-body>
     </fo:list-item>
   </xsl:template>
+  <!-- special raw xml markup -->
+  
+    
+  <xsl:template match="html:div[@class='viewxml']">
+  
+ 
+  <!-- perhaps put a border? -->
+  <fo:block font-size="80%" text-align="left"  font-stretch="narrower">
+    <xsl:call-template name="process-common-attributes-and-children"/>
+  </fo:block>  
+  </xsl:template>
+  
+ <xsl:template match="html:span[@class]" priority="1">
+    <fo:inline>
+    <xsl:choose>
+  <xsl:when test="@class='start-tag'">
+    <xsl:attribute name="font-weight">bold</xsl:attribute>
+    <xsl:attribute name="color">#009999</xsl:attribute>
+  </xsl:when>
+   <xsl:when test="@class='end-tag'">
+    <xsl:attribute name="font-weight">bold</xsl:attribute>
+    <xsl:attribute name="color">#009999</xsl:attribute>
+  </xsl:when>
+   <xsl:when test="@class='cdata'">
+    <xsl:attribute name="color">#CC0066</xsl:attribute>
+  </xsl:when>
+    <xsl:when test="@class='doctype'">
+    <xsl:attribute name="font-style">italic</xsl:attribute>
+    <xsl:attribute name="color">steelblue</xsl:attribute>
+  </xsl:when>
+  <xsl:when test="@class='pi'">
+    <xsl:attribute name="font-style">italic</xsl:attribute>
+    <xsl:attribute name="color">orchid</xsl:attribute>
+  </xsl:when>
+   <xsl:when test="@class='entity'">
+    <xsl:attribute name="font-weight">normal</xsl:attribute>
+    <xsl:attribute name="color">#FF4500</xsl:attribute>
+  </xsl:when>
+   <xsl:when test="@class='attribute-name'">
+    <xsl:attribute name="font-weight">bold</xsl:attribute>
+    <xsl:attribute name="color">#E88CA4</xsl:attribute>
+  </xsl:when>
+   <xsl:when test="@class='attribute-value'">
+    <xsl:attribute name="font-weight">normal</xsl:attribute>
+    <xsl:attribute name="color">blue</xsl:attribute>
+  </xsl:when>
+  <xsl:when test="@class='attribute-value'">
+    <xsl:attribute name="font-weight">normal</xsl:attribute>
+  </xsl:when>
+   <xsl:when test="@class='markup'">
+    <xsl:attribute name="font-weight">normal</xsl:attribute>
+    <xsl:attribute name="color">#009933</xsl:attribute>
+  </xsl:when>
+    
+    
+    
+    </xsl:choose>
+      
+       <xsl:call-template name="process-common-attributes-and-children"/>
+    </fo:inline>
+  </xsl:template>
+  <xsl:attribute-set name="xmlinc">
+    
+    
+  </xsl:attribute-set>
+    <xsl:template match="html:div[@class='comment']">
+   <fo:block>
+   <xsl:attribute name="font-family">monospace</xsl:attribute>
+<!--  <xsl:attribute name="white-space">pre</xsl:attribute>    -->   
+    <xsl:attribute name="font-style">italic</xsl:attribute>
+    <xsl:attribute name="color">green</xsl:attribute>
+    <xsl:attribute name="background-color">#D4EA8D</xsl:attribute>
+    <xsl:apply-templates/>
+   </fo:block>
+  </xsl:template>
+    <xsl:template match="html:div[@class='element']">
+     <fo:list-block>
+    <fo:list-item><fo:list-item-label><fo:block/></fo:list-item-label><fo:list-item-body start-indent="body-start()">
+    <fo:block xsl:use-attribute-sets="xmlinc">
+    <xsl:apply-templates/>
+    </fo:block>
+    </fo:list-item-body>
+    </fo:list-item>
+    </fo:list-block>
+   </xsl:template> 
+   <xsl:template match="html:div[@class='indent']">
+    <fo:list-block>
+    <fo:list-item><fo:list-item-label><fo:block/></fo:list-item-label><fo:list-item-body start-indent="body-start()">
+    <fo:block xsl:use-attribute-sets="xmlinc">
+    <xsl:apply-templates/>
+    </fo:block>
+    </fo:list-item-body>
+    </fo:list-item>
+    </fo:list-block>
+    </xsl:template> 
 
 </xsl:stylesheet>
