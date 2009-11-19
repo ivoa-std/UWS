@@ -46,6 +46,13 @@
 		<xslt style="ivoadoc/extractcite.xslt" in="${filename}.html" out="${filename}.aux" force="true"  >
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
 			<param name="target" expression="aux"/>
+			<xmlcatalog >
+				<catalogpath>
+					<filelist>
+						<file name="./ivoadoc/xmlcatalog/catalog.xml"/>
+					</filelist>
+				</catalogpath>
+			</xmlcatalog>
 		</xslt>
         <exec executable="/opt/local/bin/bibtex">
         	<env key="PATH" path="${env.PATH}:${latexlocation}"/>
