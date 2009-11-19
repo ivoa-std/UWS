@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?><!-- $Id:$ 
+<?xml version="1.0" encoding="ISO-8859-1"?><!-- $Id$ 
 Universal Worker Service WD 
 Note that this file should be xhtml with div to mark sections so that it can be updated with xslt.
 Paul Harrison -->
@@ -228,7 +228,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
     <p>If the JDL is very general, a single
       service-contract can be reused for many kinds of service. AstroGrid&#8217;s
       CEA<cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="# "> </a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#harrison05">harrison05</a>]
     </cite>exploits this: one JDL covers all services offering parameterized
       applications and even ADQL services. In the limit, a
       sufficiently-general JDL turns a specialized worker service into a
@@ -406,7 +406,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
     </cite>is presented, however, future versions of this document will add other bindings such as SOAP. <cite>
     [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:soap">std:soap</a>]
     </cite>. It should be noted that REST is based on HTTP <cite>
-    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#[std:http]">[std:http]</a>]
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:http">[std:http]</a>]
     </cite> and as such the REST binding inherits standard HTTP behaviours. In particular it should be noted that the REST binding makes use of HTTP status codes to control the behaviour of the client, especially the "300" class redirection codes to ensure that the client requests particular resources after state changing operations. If for some reason there is a failure in the underlying UWS machinery then a 500 "internal server error" status should be returned. However individual job failures are indicated by setting the appropriate parts of the job representation to error statuses and a request for the individual job object representation at /(jobs)/(jobid) should have a normal 200 status code response.</p>
      
       <div class="section"><h4><a name="d1e834" id="d1e834" shape="rect"/><span class="secnum">2.2.1. </span>Resources and URIs</h4>
@@ -505,7 +505,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
           <p>This initial POST will in most cases
             carry parameters for the protocol that is using the UWS pattern, as
             detailed in <h:span xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="xref"><a href="#ApplicationsOfUWS">4. </a></h:span>
-            .In addition for the intial post may contain job control parameters if allowed by the implementing protocol (i.e. if UWS job control parameter names do not clash with the implementing protocol parameters). One use of this facility might be to have the job placed into a potentally running state by adding PHASE=RUN to the job creation step.</p>
+            .In addition for the initial post may contain job control parameters if allowed by the implementing protocol (i.e. if UWS job control parameter names do not clash with the implementing protocol parameters). One use of this facility might be to have the job placed into a potentially running state by adding PHASE=RUN to the job creation step.</p>
         </div>
         <div class="section"><h4><a name="d1e1390" id="d1e1390" shape="rect"/><span class="secnum">2.2.3.2. </span>Deleting a Job</h4>
           <p>Sending a HTTP DELETE to a Job
@@ -531,7 +531,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
             response to this request must have code 303 &#8220;See other&#8221; and the
             Location header of the response must point to the /{jobs}/(job-id)
             URI so that the client receives the value that the service has
-            actually set the Destruction Time to within the Job summary response. The service may override the requested Destruction Time and substitute a value of its chosing e.g. a job owner may have reached his storage quota and so the service only allows further data to be stored for shorter times than requested.</p>
+            actually set the Destruction Time to within the Job summary response. The service may override the requested Destruction Time and substitute a value of its choosing e.g. a job owner may have reached his storage quota and so the service only allows further data to be stored for shorter times than requested.</p>
         </div>
         <div class="section"><h4><a name="d1e1420" id="d1e1420" shape="rect"/><span class="secnum">2.2.3.4. </span>Changing the Execution
             Duration</h4>
@@ -544,7 +544,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
             response to this request must have code 303 &#8220;See other&#8221; and the
             Location header of the response must point to the
             /{jobs}/(job-id) so that the client receives the value that the
-            service has actually set the Execution Duration to. The service may to override the request and substitue a value of its chosing.</p>
+            service has actually set the Execution Duration to. The service may to override the request and substitute a value of its choosing</p>
         </div>
         <div class="section"><h4><a name="d1e1439" id="d1e1439" shape="rect"/><span class="secnum">2.2.3.5. </span>        Starting a Job</h4>
           <p style="font-weight: medium">A
@@ -910,7 +910,21 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
 <dl><dt><a name="std:rfc2119" id="std:rfc2119" shape="rect">[std:rfc2119] Bradner, S. </a></dt><dd>
   <a href="http://www.ietf.org/rfc/rfc2119.txt" shape="rect">Key words for use in RFCs to Indicate Requirement Levels</a>, IETF RFC 2119, 1997</dd><dt><a name="std:xform" id="std:xform" shape="rect">[std:xform] John M. Boyer, editor.</a></dt><dd>
   <a href="http://www.w3.org/TR/xforms11/" shape="rect">Xforms 1.1</a>, 2007.
-</dd><dt><a name="std:soap" id="std:soap" shape="rect">[std:soap] Don Box, David Ehnebuske, Gopal Kakivaya,
+</dd>
+<dt><a name="std:http">[std:http] R. Fielding, J. Gettys, J. Mogul, H. Frystyk,
+  L. Masinter, P. Leach, and T. Berners-Lee.</a></dt> <dd>
+  <a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html" >Hypertext
+  transfer protocol -- http/1.1</a>.
+  {rfc2616}, June 1999.
+</dd>
+<dt><a name="std:vospace">[std:vospace] Matthew Graham, Dave Morris, and Guy
+  Rixon, Matthew Graham, editor.</a></dt> <dd>
+  <a href="http://www.ivoa.net/Documents/VOSpace/" >Vospace specification</a>.
+  {IVOA Recommendation}, 2009.
+</dd>
+
+
+<dt><a name="std:soap" id="std:soap" shape="rect">[std:soap] Don Box, David Ehnebuske, Gopal Kakivaya,
   Andrew Layman, Noah Mendelsohn, Henrik Frystyk Nielsen, Satish Thatte, and
   Dave Winer.</a></dt><dd>
   <a href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/" shape="rect">Simple object access
