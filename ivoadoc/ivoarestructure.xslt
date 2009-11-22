@@ -420,7 +420,7 @@
           <span class="markup">&lt;</span><span class="start-tag"><x:value-of select="name(.)"/></span><x:apply-templates select="@*" mode="printxml"/>
           <x:variable  name="v" select="."/> 
           <x:for-each select="in-scope-prefixes(.)">
-             <x:text> </x:text><span class="attribute-name"><x:text>xlmns:</x:text><x:value-of select="."/></span><span class="markup">=</span><span class="attribute-value">"<x:value-of select="namespace-uri-for-prefix(., $v)"/>"</span>
+             <x:text> </x:text><span class="attribute-name"><x:text>xmlns:</x:text><x:value-of select="."/></span><span class="markup">=</span><span class="attribute-value">"<x:value-of select="namespace-uri-for-prefix(., $v)"/>"</span>
           </x:for-each>
           <span class="markup">&gt;</span>
           <x:apply-templates select="child::node()"  mode="printxml"/>
