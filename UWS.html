@@ -301,9 +301,15 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
           <p>ABORTED: the job has been
             manually aborted by the user, or the system has aborted the job due
             to lack of or overuse of resources.</p>
-        </li></ul>
-        <p>A successful job will normally progress through the PENDING, QUEUED, EXECUTING, COMPLETED phases in that order. At any time before the COMPLETED phase a job may either be ABORTED or may suffer an ERROR. </p>
+        </li>
+       <li><p>UNKNOWN: The job is in an unknown state.</p></li>
+       <li><p>HELD: The job is HELD pending execution and
+                  will not automatically be executed (cf, pending)</p></li>
+                  <li><p>SUSPENDED: The job has been suspended by the system during execution. This might be because of temporary lack of resource. The UWS will automatically resume the job into the EXECUTING phase without any intervention when resource becomes available.</p></li>
+        </ul>
+        <p>A successful job will normally progress through the PENDING, QUEUED, EXECUTING, COMPLETED phases in that order. At any time before the COMPLETED phase a job may either be ABORTED or may suffer an ERROR. If the UWS reports an UNKNOWN phase, then all the client can do is requery the phase until a known phase is reported. A UWS may place a job in a HELD phase on receipt of a PHASE=RUN request if for some reason the job cannot be immediately queued - in this case it is the responsibility of the client to request PHASE=RUN again at some later time.</p>
         <p><img src="UWSStates.png" alt="UWS state diagram" width="487" height="332"/></p>
+        
       </div>
       <div class="section"><h4><a name="ExecutionDuration" id="ExecutionDuration" shape="rect"/><span class="secnum">2.1.4. </span> Execution Duration</h4>
         <p>An Execution Duration object defines
