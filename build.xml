@@ -65,7 +65,7 @@
     <target name="package"  description="create a zip file of document and associated files">
     	<tstamp></tstamp>
     	<copy file="UWS.html" tofile="PR-UWS-1.0-${DSTAMP}.html"></copy>
-        <zip destfile="uws.zip" basedir="${basedir}" includes="PR-UWS-1.0-${DSTAMP}.html, UWS.xsd,**/*.css,**/*.png,**/*.gif">
+        <zip destfile="uws.zip" basedir="${basedir}" includes="PR-UWS-1.0-${DSTAMP}.html, UWS.pdf, UWS.xsd,**/*.css,**/*.png,**/*.gif">
         	
         </zip>
     	<delete file="PR-UWS-1.0-${DSTAMP}.html"></delete>

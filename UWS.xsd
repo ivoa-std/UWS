@@ -17,12 +17,13 @@
    xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified"
    attributeFormDefault="unqualified"
 >
+<!--
    <xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="../../../stc/STC/v1.30/XLINK.xsd" />
-   <!--
+-->   
       <xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
-   -->
+   
    <xs:complexType name="ShortJobDescription">
       <xs:sequence>
          <xs:element name="phase" type="uws:ExecutionPhase">
@@ -88,14 +89,14 @@
          </xs:enumeration>
          <xs:enumeration value="UNKNOWN">
             <xs:annotation>
-               <xs:documentation> The job is in an unknown state
+               <xs:documentation> The job is in an unknown state.
                </xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="HELD">
             <xs:annotation>
                <xs:documentation> The job is HELD pending execution and
-                  will not automatically be executed (cf pending)
+                  will not automatically be executed - can occur after a PHASE=RUN request has been made (cf PENDING).
                </xs:documentation>
             </xs:annotation>
          </xs:enumeration>
