@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-   <!-- $Id: UWS.xsd,v 1.1 2009/06/15 15:30:32 pah Exp $ -->
+   <!-- $Revision: 1246 $ $Date: 2010-02-09 20:05:36 +0000 (Tue, 09 Feb 2010) $  $HeadURL: https://volute.googlecode.com/svn/trunk/projects/grid/uws/doc/UWS.html $ -->
    <!-- UWS schema - Paul Harrison May 2008 -->
    <!--
       $Log: UWS.xsd,v $
@@ -46,12 +46,6 @@
       <xs:attribute ref="xlink:href" use="optional" />
    </xs:attributeGroup>
    <xs:simpleType name="ExecutionPhase">
-      <!--
-         need to think a little here about the implication of allowing a
-         "re-entrant" application that is capable of running
-         mini-jobs...probably this is indicated with a different state
-         varible entirely
-      -->
       <xs:annotation>
          <xs:documentation> Enumeration of possible phases of job
             execution</xs:documentation>
@@ -340,6 +334,4 @@
    </xs:element>
 </xs:schema>
 
-   <!--
-
- -->
+<!-- -->
