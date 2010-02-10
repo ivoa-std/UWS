@@ -190,13 +190,13 @@
   </x:template>
 
   <x:template match="processing-instruction('toc')">
-  <copy>
+  <x:processing-instruction name="toc"/>
     <div id='toc' class='toc'>
       <ul>
         <x:apply-templates select="//h:div[@class='body']/h:div[@class='section' or @class='section-nonum']|//h:div[@class='body']/h:div[@class='appendices']/h:div" mode="make-toc"/>
       </ul>
     </div>
-   </copy>
+   
   </x:template>
 
   <x:template name="make-section-id">
@@ -273,7 +273,7 @@
   <x:key name="xrefs" match="h:div[(h:h1|h:h2|h:h3|h:h4|h:h5|h:h6)/h:a]" use="*/h:a/@id"/><!-- can only reference sections at the moment -->
 
   <x:template match="h:span[@class='xref']">
-  <h:span class="xref">
+  <span class="xref">
     
     <x:variable name="id">
       <x:choose>
@@ -296,7 +296,7 @@
     <a href='#{$id}'>
       <x:apply-templates select="key('xrefs',$id)" mode="make-section-number"/>
     </a>
-  </h:span>
+  </span>
   </x:template>
 
   <x:template match="h:span[@class='rcsinfo']">
