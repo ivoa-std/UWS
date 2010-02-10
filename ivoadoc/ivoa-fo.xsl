@@ -33,14 +33,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   <!--======================================================================
       Parameters
   =======================================================================-->
+  
+  <xsl:param name="global-font-size">10pt</xsl:param>
 
   <!-- page size -->
   <xsl:param name="page-width">auto</xsl:param>
   <xsl:param name="page-height">auto</xsl:param>
   <xsl:param name="page-margin-top">1in</xsl:param>
   <xsl:param name="page-margin-bottom">1in</xsl:param>
-  <xsl:param name="page-margin-left">1in</xsl:param>
-  <xsl:param name="page-margin-right">1in</xsl:param>
+  <xsl:param name="page-margin-left">0.8in</xsl:param>
+  <xsl:param name="page-margin-right">0.8in</xsl:param>
 
   <!-- page header and footer -->
   <xsl:param name="page-header-margin">0.5in</xsl:param>
@@ -75,6 +77,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     <xsl:attribute name="hyphenate"><xsl:value-of select="$hyphenate"/></xsl:attribute>
     <xsl:attribute name="text-align"><xsl:value-of select="$text-align"/></xsl:attribute>
     <xsl:attribute name="language"><xsl:text>en</xsl:text></xsl:attribute>
+    <xsl:attribute name="font-size"><xsl:value-of select="$global-font-size"/></xsl:attribute>
     
     <!-- specified on fo:root to change the properties' initial values -->
   </xsl:attribute-set>
