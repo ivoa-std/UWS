@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!-- $Id:$ 
-Universal Worker Service WD 
-Note that this file should be xhtml with div to mark sections
+Note that this file should be xhtml with div to mark sections - see README for more information
 Paul Harrison -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>Universal Worker Service Specification</title>
+<title>Template IVOA Document</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <meta name="Title" content="IVOA WG Internal Draft" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -15,16 +15,19 @@ Paul Harrison -->
 <link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_wd.css" type="text/css" />
 <style type="text/css"></style>
-<link href="XMLPrint.css" rel="stylesheet" type="text/css" />
+<link href="./ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css" />
 </head>
-<body bgcolor="#FFFFFF">
+<body>
 <div class="head">
-<table>
-  <tr>
-    <td><a href="http://www.ivoa.net/"><img alt="IVOA" src="http://www.ivoa.net/icons/ivoa_logo_small.jpg" /></a></td>
-  </tr>
-</table>
-<h1>Universal Worker Service<br/>
+<table border="0" cellpadding="0" cellspacing="0" width="563"><tbody><tr><td style="padding: 0cm;" rowspan="1" colspan="1"> 
+<img src="http://www.ivoa.net/pub/images/IVOA_wb_300.jpg" height="169" width="300"/></td><td style="padding: 0cm;" rowspan="1" colspan="1">
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"> I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">nternational</span></i></p>
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">    V</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">irtual</span></i></p>
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">    O</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">bservatory</span></i></p>
+ <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">lliance</span><span style="color: black;">
+</span></i></p></td></tr></tbody></table>
+
+<h1>Title<br/>
   Version @VERSION@</h1>
 <h2 >IVOA
   Internal Working Draft @RELEASEDATE@</h2>
@@ -44,8 +47,7 @@ Paul Harrison -->
     Working Draft v.0.3, 2007-04-26  Internal
     Working Draft v.04  2008-05-10</dd>
     <dt><b>Author(s):</b></dt>
-  <dd>  Paul
-    Harrison, Guy Rixon</dd>
+  <dd>  Paul Harrison</dd>
 </dl>
 
 <h2>Abstract</h2>
@@ -63,10 +65,10 @@ Paul Harrison -->
 <p> <em >A list of </em><span style="background: transparent"><a  href="http://www.ivoa.net/Documents/"><i>current
   IVOA Recommendations and other technical documents</i></a></span><em > can be found at http://www.ivoa.net/Documents/.</em></p>
 <h2 class="prologue-heading-western"  >Acknowledgements</h2>
-<p >blah</p>
+<p>blah</p>
 </div>
-<h2  >Contents</h2>
-<div id="TOC">
+<h2>Contents</h2>
+<div>
 <?toc ?>
 </div>
 <div class="body">
@@ -85,82 +87,35 @@ Paul Harrison -->
 <div class="section">
     <h1><a name="UWSpattern" id="UWSpattern"></a> Section</h1>
     <div class="section">
-      <h2 ><a name="UWSObjects" id="UWSObjects"></a> Subsection</h2>
-     
+      <h2><a name="UWSObjects" id="UWSObjects"></a> Subsection</h2>
+      <p>Subsection blah</p>
+    <div class="section"><h3>SubSubSection</h3></div>
+       <p>subsubsection blah</p>
     </div>
-    <div class="section"><div class="section"></div>
     </div>
  
     <div class="section">
-      <h3 ><a name="SOAPbinding" id="SOAPbinding"></a> SOAP binding</h3>
-      <h4 >Resources and URIs</h4>
-      <p >&nbsp;</p>
+      <h3 ><a name="SOAPbinding" id="SOAPbinding"></a> Section</h3>
+      <p >blah blah</p>
     </div>
   </div>
-  <div class="appendices"><div class="section"><div class="section"></div>
-</div>
-<div class="section">
-  <h1 ><a name="References" id="References"></a>References</h1>
-  
-  <p >[1] M. Ohishi, A. Szalay
-    (eds.), IVOA Astronomical Data query Language, <span style="background: transparent"><a  href="http://www.ivoa.net/Documents/latest/ADQL.html">http://www.ivoa.net/Documents/latest/ADQL.html</a></span></p>
-  <p >[2]
-    US NVO project, <i>NVO
-    compliance: Simple Cone Search</i>, <span style="background: transparent"><a  href="http://us-vo.org/pubs/files/conesearch.html">http://us-vo.org/pubs/files/conesearch.html</a></span></p>
-  <p ><a name="title" id="title"></a>[3]
-    D. Box, F. Curbera (eds.), <i>Web
-    Services Addressing (WS-Addressing)</i>, <span style="background: transparent"><a  href="http://www.w3.org/Submission/ws-addressing/">http://www.w3.org/Submission/ws-addressing/</a></span></p>
-  <p >[4]
-    T. Banks (ed.), <i>Web
-    Service Resource Framework (WSRF) &ndash; Primer</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-primer-1.2-primer-cd-01.pdf">http://docs.oasis-open.org/wsrf/wsrf-primer-1.2-primer-cd-01.pdf</a></span></p>
-  <p >[5]
-    S. Graham, A. Karmarkar, J. Mischkinsky, I. Robinson, I. Sedukhin
-    (eds.), <i>Web
-    Services Resource 1.2 (WS-Resource)</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-ws_resource-1.2-spec-os.pdf">http://docs.oasis-open.org/wsrf/wsrf-ws_resource-1.2-spec-os.pdf</a></span></p>
-  <p >[6]
-    S. Graham,, J. Treadwell (eds.), <i>Web
-    Services Resource Properties 1.2 (WS-ResourceProperties)</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-ws_resource_properties-1.2-spec-os.pdf">http://docs.oasis-open.org/wsrf/wsrf-ws_resource_properties-1.2-spec-os.pdf</a></span></p>
-  <p >[7]
-    L. Srinivasan, T. Banks (eds.), <i>Web
-    Services Resource Lifetime 1.2 (WS-ResourceLifetime)</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsrf/wsrf-ws_resource_lifetime-1.2-spec-os.pdf">http://docs.oasis-open.org/wsrf/wsrf-ws_resource_lifetime-1.2-spec-os.pdf</a></span></p>
-  <p >[8]
-    S. Graham, D. Hull, B. Murray, <i>Web
-    Services Base Notification 1.3</i>, <span style="background: transparent"><a  href="http://docs.oasis-open.org/wsn/wsn-ws_base_notification-1.3-spec-pr-02.pdf">http://docs.oasis-open.org/wsn/wsn-ws_base_notification-1.3-spec-pr-02.pdf</a></span></p>
-  <p >[9]
-    D. Tody, R. Plante, <i>Simple
-    Image Access Specification</i>, <span style="background: transparent"><a  href="http://www.ivoa.net/Documents/latest/SIA.html">http://www.ivoa.net/Documents/latest/SIA.html</a></span></p>
-  <p >[10]
-    Grid and Web Services Working Group of IVOA, work in progress, <span style="background: transparent"><a  href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></span></p>
-  <p >[11]
-    P. Harrison, <i>Proposal
-    for a Common Execution Architecture</i>, <span style="background: transparent"><a  href="http://www.ivoa.net/Documents/latest/CEA.html">http://www.ivoa.net/Documents/latest/CEA.html</a></span></p>
-  <p >[12]
-    P. Harrison, XML schema for namespace <i>http://www.astrogrid.org/schema/CommonExecutionArchitectureBase/v1</i>, <span style="background: transparent"><a  href="http://software.astrogrid.org/schema/cea/CommonExecutionArchitectureBase/v1.0/CommonExecutionArchitectureBase.xsd">http://software.astrogrid.org/schema/cea/CommonExecutionArchitectureBase/v1.0/CommonExecutionArchitectureBase.xsd</a></span></p>
-  <p >[13] Boyer et al., Xforms 1.0 <a  href="http://www.w3.org/TR/xforms/">http://www.w3.org/TR/xforms/</a></p>
-  <p >[14] Gudgin et.al, Web Services
-    Addressing 1.0 - WSDL Binding,<a  href="http://www.w3.org/TR/ws-addr-wsdl/">http://www.w3.org/TR/ws-addr-wsdl/</a></p>
-  <p >[15] Gudgin et al. Web Services
-    Addressing 1.0 &ndash; Core <a  href="http://www.w3.org/TR/ws-addr-core/">http://www.w3.org/TR/ws-addr-core/</a></p>
-  <p >[16] Box et al., <a  href="http://www.w3.org/Submission/ws-addressing/">http://www.w3.org/Submission/ws-addressing/</a></p>
-</div>
-<div class="section">
-  <h1 ><a name="UWSSchema" id="UWSSchema"></a> Appendix A Schema</h1>
-    <?incxml href="http://www.astrogrid.org/viewcvs/astrogrid/contracts/src/schema/cea/UWS/v0.9/UWS.xsd?view=co"?>
-    <?incxml end?>
-
-</div>
-<div class="section">
-  <h1 ><a name="UWSWSDL" id="UWSWSDL"></a> Appendix B WSDL 1.0 for SOAP binding</h1>
+  <div class="appendices">
+  <div class="section">
+  <h1 ><a name="UWSWSDL" id="UWSWSDL"></a>WSDL 1.0 for SOAP binding</h1>
   <p >Although it is not possible to
     provide a complete WSDL 1.0 contract for a general UWS service
     because WSDL requires the exact form of the createJob and getResults
     operations to be defined, the following WSDL is included as a
     template for implementors to follow.</p>
+    <div>
     <?incxml href="http://www.astrogrid.org/viewcvs/astrogrid/contracts/src/schema/cea/UWSSOAP/0.9/UWSSOAP.wsdl?view=co"?>
-    <?incxml end ?>
+    </div>
 </div>
 </div>
 
+<div class="section-nonum">
+  <h1 ><a name="References" id="References"></a>References</h1>
+  <?bibliography ivoadoc/refs.bib ?> 
 </div>
 <p style="text-align: right; font-size: x-small; color: #888;">
 $Revision: 847 $ $Date: 2008-10-29 14:33:57 +0000 (Wed, 29. Oct 2008) $
