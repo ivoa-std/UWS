@@ -14,7 +14,7 @@ Paul Harrison -->
 </span></i></p></td></tr></tbody></table>
 <h1>Universal Worker Service Pattern<br/>
   Version 1.0</h1>
-<h2>IVOA Proposed Recommendation 2010-02-10</h2>
+<h2>IVOA Proposed Recommendation 2010-09-08</h2>
 <dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/PR/GWS/PR-UWS-1.0-20100210.html" shape="rect">http://www.ivoa.net/Documents/PR/GWS/PR-UWS-1.0-20100210.html</a></dd><dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd><dt><b>Previous version(s):</b></dt><dd> Internal Working Draft
       v0.1, 2005-01-24
       <br/>
@@ -27,8 +27,9 @@ Paul Harrison -->
       Internal Working Draft v0.5, 2008-10-08<br/>
       Internal Working Draft v0.9, 2009-10-08<br/>
       Public Working Draft v1.0, 2009-08-27<br/>
-      Proposed Recommendation v1.0, 2009-09-09</dd><dt> <br/>
-  </dt><dt> </dt><dt><b>Author(s):</b></dt><dd>  P. 
+      Proposed Recommendation v1.0, 2009-09-09<br/>
+      Proposed Recommendation v1.0, 2010-02-10</dd><dt> <br/>
+  </dt><dd> </dd><dt><b>Author(s):</b></dt><dd>  P. 
     Harrison, G. Rixon</dd></dl>
 
 <h2>Abstract</h2>
@@ -55,7 +56,7 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
   respect of the Open Grid Services Infrastructure that was the
   fore-runner of Web Services Resource Framework. The REST binding came
   initially from suggestions by Norman Gray.</p>
-</div><h2>Contents</h2><div><?toc?><div xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" id="toc" class="toc"><ul><li><a href="#Introduction"><span class="secnum">1. </span>Introduction (informative)</a><ul><li><a href="#SynchronousStateless"><span class="secnum">1.1. </span> Synchronous, stateless services</a></li><li><a href="#AsynchronousServices"><span class="secnum">1.2. </span> Asynchronous and stateful services</a></li><li><a href="#JDL"><span class="secnum">1.3. </span> Job description language, service contracts and universality</a></li></ul></li><li><a href="#UWSpattern"><span class="secnum">2. </span> Universal Worker Service Pattern (normative)</a><ul><li><a href="#UWSObjects"><span class="secnum">2.1. </span> Objects within a UWS</a><ul><li><a href="#Joblist"><span class="secnum">2.1.1. </span>
+</div><h2>Contents</h2><div><?toc?><div xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" id="toc" class="toc"><ul><li><a href="#Introduction"><span class="secnum">1. </span>Introduction (informative)</a><ul><li><a href="#SynchronousStateless"><span class="secnum">1.1. </span> Synchronous, stateless services</a></li><li><a href="#AsynchronousServices"><span class="secnum">1.2. </span> Asynchronous and stateful services</a></li><li><a href="#JDL"><span class="secnum">1.3. </span> Job description language, service contracts and universality</a></li><li><a href="#IVOARCH"><span class="secnum">1.4. </span> UWS in the IVOA Architecture</a></li></ul></li><li><a href="#UWSpattern"><span class="secnum">2. </span> Universal Worker Service Pattern (normative)</a><ul><li><a href="#UWSObjects"><span class="secnum">2.1. </span> Objects within a UWS</a><ul><li><a href="#Joblist"><span class="secnum">2.1.1. </span>
         Job list </a></li><li><a href="#Job"><span class="secnum">2.1.2. </span>Job</a></li><li><a href="#ExecutionPhase"><span class="secnum">2.1.3. </span> Execution Phase</a></li><li><a href="#ExecutionDuration"><span class="secnum">2.1.4. </span> Execution Duration</a></li><li><a href="#DestructionTime"><span class="secnum">2.1.5. </span> Destruction Time</a></li><li><a href="#Quote"><span class="secnum">2.1.6. </span>Quote</a></li><li><a href="#Error"><span class="secnum">2.1.7. </span>Error</a></li><li><a href="#Error2"><span class="secnum">2.1.8. </span>Owner</a></li><li><a href="#Error3"><span class="secnum">2.1.9. </span>RunId</a></li><li><a href="#ResultsList"><span class="secnum">2.1.10. </span>Results List</a></li><li><a href="#ResultsList2"><span class="secnum">2.1.11. </span>Parameter List</a></li></ul></li><li><a href="#RESTbinding"><span class="secnum">2.2. </span>The REST Binding</a><ul><li><a href="#d1e834"><span class="secnum">2.2.1. </span>Resources and URIs</a></li><li><a href="#d1e603"><span class="secnum">2.2.2. </span>Representations of resources</a><ul><li><a href="#d1e1030"><span class="secnum">2.2.2.1. </span>Job List</a></li><li><a href="#d1e1040"><span class="secnum">2.2.2.2. </span>Job</a></li><li><a href="#d1e1344"><span class="secnum">2.2.2.3. </span>Results List</a></li><li><a href="#d1e1353"><span class="secnum">2.2.2.4. </span>Parameters List</a></li><li><a href="#d1e1556"><span class="secnum">2.2.2.5. </span> Error</a></li></ul></li><li><a href="#jobcontrol"><span class="secnum">2.2.3. </span>State changing requests</a><ul><li><a href="#d1e1375"><span class="secnum">2.2.3.1. </span>Creating a Job</a></li><li><a href="#d1e1390"><span class="secnum">2.2.3.2. </span>Deleting a Job</a></li><li><a href="#d1e1402"><span class="secnum">2.2.3.3. </span>Changing the Destruction
             Time</a></li><li><a href="#d1e1420"><span class="secnum">2.2.3.4. </span>Changing the Execution
             Duration</a></li><li><a href="#d1e1439"><span class="secnum">2.2.3.5. </span>        Starting a Job</a></li><li><a href="#d1e1448"><span class="secnum">2.2.3.6. </span>Aborting a Job</a></li></ul></li><li><a href="#d1e708"><span class="secnum">2.2.4. </span>Message pattern</a></li></ul></li></ul></li><li><a href="#security"><span class="secnum">3. </span>Security Considerations (normative)</a></li><li><a href="#ApplicationsOfUWS"><span class="secnum">4. </span> Applications of UWS (informative)</a><ul><li><a href="#Imageservice"><span class="secnum">4.1. </span> Image service with data staging</a></li><li><a href="#ADQLservice"><span class="secnum">4.2. </span> ADQL service with cursor</a></li><li><a href="#ParameterizedApplications"><span class="secnum">4.3. </span> Parameterized applications</a></li></ul></li><li><a href="#SynchronousService"><span class="secnum">5. </span> Implementing a Synchronous Service on top of UWS (informative)</a></li><li><a href="#Updates"><span class="secnum">Appendix A. </span> Updates from previous versions</a><ul><li><a href="#d1e1112"><span class="secnum">Appendix A.1. </span>At Version 0.5</a></li><li><a href="#d1e1775"><span class="secnum">Appendix A.2. </span>At Version 1.0</a></li></ul></li><li><a href="#UWSSchema"><span class="secnum">Appendix B. </span> UWS Schema</a></li></ul></div></div><div class="body">
@@ -209,6 +210,15 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
       sufficiently-general JDL turns a specialized worker service into a
       universal worker service.</p>
   </div>
+  <div class="section"><h3><a name="IVOAARCH" id="IVOARCH" shape="rect"/><span class="secnum">1.4. </span> UWS in the IVOA Architecture</h3>
+    <p><img src="ivoaarchitecture.png" alt="ivoa architectures" width="100%" /></p>
+    <p>With the IVOA Architecture above, UWS is a VO Core infrastructure standard, being used by other standards and services to enable the development of VO applications managing asynchronous and stateless execution of jobs on VO services.</p>
+    <p>UWS can be used by Data Access Services (as currently with Table Access Protocol <cite>
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:tap">std:tap</a>]
+    </cite>) or other VO Web Services (WSBP). It utilizes IVOA standards for security <cite>
+    [<a xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" href="#std:ssoauth">std:ssoauth</a>]
+    </cite> if it is desired that a non-public UWS be created. </p>
+  </div>
 </div>
   <div class="section"><h2><a name="UWSpattern" id="UWSpattern" shape="rect"/><span class="secnum">2. </span> Universal Worker Service Pattern (normative)</h2>
     <div class="section"><h3><a name="UWSObjects" id="UWSObjects" shape="rect"/><span class="secnum">2.1. </span> Objects within a UWS</h3>
@@ -244,15 +254,11 @@ Comments on this document should be posted at the RFC page <a href="http://www.i
           <p>Exactly one Quote.</p>
         </li><li>
           <p>Exactly one Results List.</p>
-        </li>
-        <li><p>Exactly one Owner.</p></li>
-        <li>
+        </li><li><p>Exactly one Owner.</p></li><li>
           <p>Zero or one Run Identifier.</p>
-        </li>
-        <li>
+        </li><li>
           <p>Zero or one Error.</p>
-        </li>
-        </ul>
+        </li></ul>
       </div>
       <div class="section"><h4><a name="ExecutionPhase" id="ExecutionPhase" shape="rect"/><span class="secnum">2.1.3. </span> Execution Phase</h4>
         <p>The job is treated as a state machine
@@ -807,6 +813,9 @@ represent the definitive source, the schema is reproduced below only for
 completeness of this document.</p>
   <div><?incxml href="../UWS.xsd"?><div xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" class="viewxml"><div class="comment">&lt;!-- $Revision$ $Date$  $HeadURL$ --&gt;</div><div class="comment">&lt;!-- UWS schema - Paul Harrison May 2008 --&gt;</div><div class="comment">&lt;!--
       $Log: UWS.xsd,v $
+      Revision 1.1.2.1  2010/02/25 11:33:41  pah
+      updates as used in the UWS 1.0 PR
+
       Revision 1.1  2009/06/15 15:30:32  pah
       made some of the global element defintions for job subobjects just local again
       added runid, ownerid
@@ -893,10 +902,9 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
   transfer protocol -- http/1.1</a>.
   {rfc2616}, June 1999.
 </dd><dt><a name="std:vospace" id="std:vospace" shape="rect">[std:vospace] Matthew Graham, Dave Morris, and Guy
-  Rixon, Matthew Graham, editor.</a></dt><dd>
-  <a href="http://www.ivoa.net/Documents/VOSpace/" shape="rect">Vospace specification</a>.
-  {IVOA Recommendation}, 2009.
-</dd><dt><a name="std:soap" id="std:soap" shape="rect">[std:soap] Don Box, David Ehnebuske, Gopal Kakivaya,
+    Rixon.</a></dt><dd> <a href="http://www.ivoa.net/Documents/VOSpace/" shape="rect">Vospace specification</a>.
+    {IVOA Recommendation}, 2009. </dd><dt><a name="std:tap" id="std:tap" shape="rect">[std:tap] Patrick Dowler, Guy Rixon, Doug Tody.</a></dt><dd> <a href="http://www.ivoa.net/Documents/VOSpace/" shape="rect">Table Access Protocol</a>.
+    {IVOA Recommendation}, 2010. </dd><dt> </dt><dt><a name="std:soap" id="std:soap" shape="rect">[std:soap] Don Box, David Ehnebuske, Gopal Kakivaya,
   Andrew Layman, Noah Mendelsohn, Henrik Frystyk Nielsen, Satish Thatte, and
   Dave Winer.</a></dt><dd>
   <a href="http://www.w3.org/TR/2000/NOTE-SOAP-20000508/" shape="rect">Simple object access

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-   <!-- $Revision: 1246 $ $Date: 2010-02-09 20:05:36 +0000 (Tue, 09 Feb 2010) $  $HeadURL: https://volute.googlecode.com/svn/trunk/projects/grid/uws/doc/UWS.html $ -->
+   <!-- $Revision: 1.1.2.1 $ $Date: 2010/02/25 11:33:41 $  $HeadURL: https://volute.googlecode.com/svn/trunk/projects/grid/uws/doc/UWS.html $ -->
    <!-- UWS schema - Paul Harrison May 2008 -->
    <!--
       $Log: UWS.xsd,v $
+      Revision 1.1.2.1  2010/02/25 11:33:41  pah
+      updates as used in the UWS 1.0 PR
+
       Revision 1.1  2009/06/15 15:30:32  pah
       made some of the global element defintions for job subobjects just local again
       added runid, ownerid
