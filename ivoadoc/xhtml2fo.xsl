@@ -547,14 +547,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
         <xsl:value-of select="/html:html/html:head/html:title"/>
       </fo:title>
       <fo:static-content flow-name="page-header">
-        <fo:block space-before.conditionality="retain"
-                  space-before="{$page-header-margin}"
-                  xsl:use-attribute-sets="page-header">
-          <xsl:if test="$title-print-in-header = 'true'">
-            <xsl:value-of select="/html:html/html:head/html:title"/>
-          </xsl:if>
-        </fo:block>
-      </fo:static-content>
+      <xsl:call-template name="page-header"/>
+       </fo:static-content>
       <fo:static-content flow-name="page-footer">
         <fo:block space-after.conditionality="retain"
                   space-after="{$page-footer-margin}"

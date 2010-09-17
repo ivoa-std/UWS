@@ -352,5 +352,50 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
     </fo:list-item>
     </fo:list-block>
     </xsl:template> 
+   <xsl:template match="html:div[@id='titlehead']">
+               <fo:block-container role="html:div" id="titlehead" position="relative" height="4cm" width="500px">
+                  <fo:block start-indent="0pt" end-indent="0pt">
+                     <fo:block-container role="html:div" id="logo" position="absolute" width="8cm" 
+                                         left="5mm"
+                                         top="0px">
+                        <fo:block start-indent="0pt" end-indent="0pt">
+	                          <fo:external-graphic color="white" border="none" content-width="8cm" scaling="uniform"
+                                                src="url('http://www.ivoa.net/pub/images/ivoa_logoc.jpg')"
+                                                />
+                        </fo:block>
+                     </fo:block-container>
+                     <fo:block-container role="html:div" id="logo-title" position="absolute" left="7.5cm" top=".9cm">
+                        <fo:block start-indent="0pt" end-indent="0pt" font-style="italic">
+    
+                           <fo:block space-before="1em" space-after="1em" role="html:p">
+                              <fo:inline font-weight="bold" >I</fo:inline>nternational
+                           </fo:block>
+                           <fo:block space-before="1em" space-after="1em" role="html:p" start-indent="1.4em">
+                             <fo:inline font-weight="bold" >V</fo:inline>irtual
+                           </fo:block>
+                           <fo:block space-before="1em" space-after="1em" role="html:p" start-indent="1.4em">
+                             <fo:inline font-weight="bold" >O</fo:inline>bservatory
+                           </fo:block>
+                           <fo:block space-before="1em" space-after="1em" role="html:p">
+                             <fo:inline font-weight="bold" >A</fo:inline>ssociation
+                           </fo:block>
+                        </fo:block>
+                     </fo:block-container>
+                  </fo:block>
+               </fo:block-container>    </xsl:template> 
+               
+    <xsl:template name="page-header">
+       <fo:block space-before.conditionality="retain" 
+                  text-align-last="right"
+                  space-before="{$page-header-margin}"
+                  xsl:use-attribute-sets="page-header">
+          <xsl:if test="$title-print-in-header = 'true'">
+            <xsl:value-of select="/html:html/html:head/html:title"/>
+          </xsl:if>
+          <fo:leader leader-pattern="space" leader-length="4cm"/>
+         <fo:external-graphic color="white" border="none" content-width="1cm" scaling="uniform" 
+                         src="url('http://www.ivoa.net/pub/images/ivoa_logoc.jpg')" />
+       </fo:block> 
+    </xsl:template>
 
 </xsl:stylesheet>
