@@ -4,15 +4,31 @@ Note that this file should be xhtml with div to mark sections so that it can be 
 Paul Harrison -->
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en" lang="en" xsi:schemalocation="http://www.w3.org/1999/xhtml                           http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd"><head xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" profile="http://www.w3.org/1999/xhtml/vocab"><title>Universal Worker Service Specification</title><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/><meta name="Title" content="IVOA WG Internal Draft"/><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/><meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk"/><meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk"/><link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css"/><link rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_pr.css" type="text/css"/><link href="./ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css"/><link href="./ivoadoc/ivoa-extras.css" rel="stylesheet" type="text/css"/></head><body><div class="head">
-<table border="0" cellpadding="0" cellspacing="0" width="563"><tbody><tr><td style="padding: 0cm;" rowspan="1" colspan="1"> 
-<img src="http://www.ivoa.net/pub/images/IVOA_wb_300.jpg" height="169" width="300"/></td><td style="padding: 0cm;" rowspan="1" colspan="1">
- <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);"> I</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">nternational</span></i></p>
- <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">    V</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">irtual</span></i></p>
- <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">    O</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">bservatory</span></i></p>
- <p><b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">A</span></i></b><i><span style="font-size: 14pt; color: rgb(0, 90, 156);">lliance</span><span style="color: black;">
-</span></i></p></td></tr></tbody></table>
-<h1>Universal Worker Service Pattern<br/>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en" lang="en" xsi:schemalocation="http://www.w3.org/1999/xhtml                           http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd"><head xmlns:h="http://www.w3.org/1999/xhtml" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" profile="http://www.w3.org/1999/xhtml/vocab">
+<title>Universal Worker Service Specification</title>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
+<meta name="Title" content="IVOA WG Internal Draft"/>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+<meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk"/>
+<meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk"/>
+<link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_pr.css" type="text/css"/>
+<link href="./ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css"/>
+<link href="./ivoadoc/ivoa-extras.css" rel="stylesheet" type="text/css"/>
+</head>
+<body><div class="head">
+  <div id="titlehead" style="position:relative;height:170px;width: 500px">
+  <div id="logo" style ="position:absolute;width:300px;height:169px;left: 50px;top: 0px;">
+	<img src="http://www.ivoa.net/pub/images/IVOA_wb_300.jpg"/></div>
+  <div  id="logo-title" style="position:absolute;width:200px;height:115px;left: 320px;top: 5px;">
+    
+    <p><b><i><span style="font-size: 14pt; color: #005A9C;"> I</span></i></b><i><span style="font-size: 14pt; color: #005A9C;">nternational</span></i></p>
+   <p><b><i><span style="font-size: 14pt; color: #005A9C;">    V</span></i></b><i><span style="font-size: 14pt; color: #005A9C;">irtual</span></i></p>
+   <p><b><i><span style="font-size: 14pt; color: #005A9C;">    O</span></i></b><i><span style="font-size: 14pt; color: #005A9C;">bservatory</span></i></p>
+   <p><b><i><span style="font-size: 14pt; color: #005A9C;">A</span></i></b><i><span style="font-size: 14pt; color: #005A9C;">lliance</span></i></p>
+</div>
+  </div>
+  <h1>Universal Worker Service Pattern<br/>
   Version 1.0</h1>
 <h2>IVOA Proposed Recommendation 2010-09-16</h2>
 <dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/20100916/PR-UWS-1.0-20100916.html" shape="rect">http://www.ivoa.net/Documents/UWS/20100916/PR-UWS-1.0-20100916.html</a></dd><dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd><dt><b>Previous version(s):</b></dt><dd> Internal Working Draft
