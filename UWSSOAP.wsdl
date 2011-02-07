@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Id: UWSSOAP.wsdl,v 1.1 2008/10/06 12:38:18 pah Exp $ -->
+<!-- UWS SOAP binding template -->
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:uwsws="http://www.ivoa.net/xml/UWS-WS/v0.9" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:wsa="http://www.w3.org/2005/08/addressing"
+name="UWS" targetNamespace="http://www.ivoa.net/xml/UWS-WS/v0.9">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.ivoa.net/xml/UWS-WS/v0.9" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0">
+       <xsd:import namespace="http://www.ivoa.net/xml/UWS/v1.0" schemaLocation="UWS.xsd"></xsd:import>
+       <xsd:element name="createJob">
+          <xsd:complexType>
+                    <xsd:annotation>
+                       <xsd:documentation>This could be properly specified in a real UWS implementation of a web service to constrain the job initialization parameters</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:sequence>
+                <xsd:any></xsd:any>
+             </xsd:sequence></xsd:complexType>
+       </xsd:element>
+       <xsd:element name="createJobResponse" type="uws:JobSummary">
+       </xsd:element>
+       <xsd:element name="listJobs">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="listJobsResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uws:jobs"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="execute">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="executeResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:phase"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="abort">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="abortResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element name="success" type="xsd:boolean"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="destroy">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="destroyResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element name="success" type="xsd:boolean"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getSummary">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getSummaryResponse" type="uws:JobSummary">
+       </xsd:element>
+       <xsd:element name="setExecutionDuration">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element name="duration" type="xsd:int"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="setExecutionDurationResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:executionDuration"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="setDestructionTime">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element name="time" type="xsd:dateTime"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="setDestructionTimeResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:destruction"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getPhase">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getPhaseResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:phase"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getExecutionDuration">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getExecutionDurationResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:executionDuration"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getDestructionTime">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getDestructionTimeResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:destruction"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getQuote">
+          <xsd:complexType>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getQuoteResponse">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element ref="uwsws:quote"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getResults">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element name="in" type="xsd:string"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getResultsResponse">
+          <xsd:complexType>
+                    <xsd:annotation>
+                       <xsd:documentation>in an implemented UWS service this should be properly defined</xsd:documentation>
+                    </xsd:annotation>
+                    <xsd:sequence>
+                <xsd:any></xsd:any>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+        <xsd:element name="getError">
+          <xsd:complexType>
+             <xsd:sequence>
+                <xsd:element name="in" type="xsd:string"></xsd:element>
+             </xsd:sequence>
+          </xsd:complexType>
+       </xsd:element>
+       <xsd:element name="getErrorResponse" type="uws:ErrorSummary">
+       </xsd:element>
+       <xsd:element name="phase" type="uws:ExecutionPhase"></xsd:element>
+       <xsd:element name="destruction" type="xsd:dateTime"></xsd:element>
+       <xsd:element name="executionDuration" type="xsd:int"></xsd:element>
+       <xsd:element name="quote" type="xsd:dateTime"></xsd:element>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="createJobRequest">
+    <wsdl:part element="uwsws:createJob" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createJobResponse">
+    <wsdl:part element="uwsws:createJobResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="listJobsRequest">
+     <wsdl:part name="parameters" element="uwsws:listJobs"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listJobsResponse">
+     <wsdl:part name="parameters" element="uwsws:listJobsResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeRequest">
+     <wsdl:part name="parameters" element="uwsws:execute"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="executeResponse">
+     <wsdl:part name="parameters" element="uwsws:executeResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="abortRequest">
+     <wsdl:part name="parameters" element="uwsws:abort"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="abortResponse">
+     <wsdl:part name="parameters" element="uwsws:abortResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="destroyRequest">
+     <wsdl:part name="parameters" element="uwsws:destroy"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="destroyResponse">
+     <wsdl:part name="parameters" element="uwsws:destroyResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSummaryRequest">
+     <wsdl:part name="parameters" element="uwsws:getSummary"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getSummaryResponse">
+     <wsdl:part name="parameters" element="uwsws:getSummaryResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setExecutionDurationRequest">
+     <wsdl:part name="parameters" element="uwsws:setExecutionDuration"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setExecutionDurationResponse">
+     <wsdl:part name="parameters" element="uwsws:setExecutionDurationResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setDestructionTimeRequest">
+     <wsdl:part name="parameters" element="uwsws:setDestructionTime"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="setDestructionTimeResponse">
+     <wsdl:part name="parameters" element="uwsws:setDestructionTimeResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPhaseRequest">
+     <wsdl:part name="parameters" element="uwsws:getPhase"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPhaseResponse">
+     <wsdl:part name="parameters" element="uwsws:getPhaseResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getExecutionDurationRequest">
+     <wsdl:part name="parameters" element="uwsws:getExecutionDuration"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getExecutionDurationResponse">
+     <wsdl:part name="parameters" element="uwsws:getExecutionDurationResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDestructionTimeRequest">
+     <wsdl:part name="parameters" element="uwsws:getDestructionTime"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getDestructionTimeResponse">
+     <wsdl:part name="parameters" element="uwsws:getDestructionTimeResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getQuoteRequest">
+     <wsdl:part name="parameters" element="uwsws:getQuote"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getQuoteResponse">
+     <wsdl:part name="parameters" element="uwsws:getQuoteResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getResultsRequest">
+     <wsdl:part name="parameters" element="uwsws:getResults"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getResultsResponse">
+     <wsdl:part name="parameters" element="uwsws:getResultsResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getErrorRequest">
+     <wsdl:part name="parameters" element="uwsws:getError"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getErrorResponse">
+     <wsdl:part name="parameters" element="uwsws:getErrorResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="UWS">
+    <wsdl:documentation></wsdl:documentation>
+    <wsdl:operation name="createJob">
+      <wsdl:documentation>create a new job</wsdl:documentation>
+      <wsdl:input message="uwsws:createJobRequest"/>
+      <wsdl:output message="uwsws:createJobResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="listJobs">
+       <wsdl:documentation>list the jobs that the UWS server currently knows abou</wsdl:documentation>
+       <wsdl:input message="uwsws:listJobsRequest"></wsdl:input>
+       <wsdl:output message="uwsws:listJobsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="execute">
+       <wsdl:documentation>execute a job that has previously been create</wsdl:documentation>
+       <wsdl:input message="uwsws:executeRequest"></wsdl:input>
+       <wsdl:output message="uwsws:executeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="abort">
+       <wsdl:documentation>abort a job that is runnin</wsdl:documentation>
+       <wsdl:input message="uwsws:abortRequest"></wsdl:input>
+       <wsdl:output message="uwsws:abortResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destroy">
+       <wsdl:documentation>destroy a job - i.e. remove all resources that a job has create</wsdl:documentation>
+       <wsdl:input message="uwsws:destroyRequest"></wsdl:input>
+       <wsdl:output message="uwsws:destroyResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getSummary">
+       <wsdl:input message="uwsws:getSummaryRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getSummaryResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setExecutionDuration">
+       <wsdl:input message="uwsws:setExecutionDurationRequest"></wsdl:input>
+       <wsdl:output message="uwsws:setExecutionDurationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setDestructionTime">
+       <wsdl:input message="uwsws:setDestructionTimeRequest"></wsdl:input>
+       <wsdl:output message="uwsws:setDestructionTimeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPhase">
+       <wsdl:input message="uwsws:getPhaseRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getPhaseResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getExecutionDuration">
+       <wsdl:input message="uwsws:getExecutionDurationRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getExecutionDurationResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDestructionTime">
+       <wsdl:input message="uwsws:getDestructionTimeRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getDestructionTimeResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQuote">
+       <wsdl:input message="uwsws:getQuoteRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getQuoteResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getResults">
+       <wsdl:input message="uwsws:getResultsRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getResultsResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getError">
+       <wsdl:input message="uwsws:getErrorRequest"></wsdl:input>
+       <wsdl:output message="uwsws:getErrorResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UWSSOAP" type="uwsws:UWS">
+     <soap:binding style="document"
+        transport="http://schemas.xmlsoap.org/soap/http"
+     />
+     <wsdl:operation name="createJob">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/NewOperation"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="listJobs">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/listJobs"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="execute">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/execute"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="abort">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/abort"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="destroy">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/destroy"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getSummary">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getSummary"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="setExecutionDuration">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/setExecutionDuration"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="setDestructionTime">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/setDestructionTime"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getPhase">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getPhase"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getExecutionDuration">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getExecutionDuration"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getDestructionTime">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getDestructionTime"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getQuote">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getQuote"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getResults">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getResults"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+     <wsdl:operation name="getError">
+        <soap:operation
+           soapAction="http://www.ivoa.net/xml/UWS-WS/v0.9/getError"
+        />
+        <wsdl:input>
+           <soap:body use="literal" />
+        </wsdl:input>
+        <wsdl:output>
+           <soap:body use="literal" />
+        </wsdl:output>
+     </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UWS">
+    <wsdl:port binding="uwsws:UWSSOAP" name="UWSSOAP">
+      <soap:address location="http://www.example.org/"/>
+      <!-- specify that ws-addressing is used -->
+      <wsaw:UsingAddressing />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
