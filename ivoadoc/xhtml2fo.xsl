@@ -530,7 +530,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
   
   <xsl:template match="html:div[@class='section' or @class='appendices' or @class='section-nonum']" mode="bookmark">
      <xsl:element name="bookmark" namespace="http://www.w3.org/1999/XSL/Format">
-         <xsl:variable name="title" select="html:h1[1]|html:h2[1]|html:h3[1]|html:h4[1]|html:h5[1]|html:h6[1]"/>
+         <xsl:variable name="title" select="(html:h1|html:h2|html:h3|html:h4|html:h5|html:h6)[1]"/>
          <xsl:attribute name="internal-destination"><xsl:value-of select="$title/html:a/@id"/></xsl:attribute>
          <xsl:element name="bookmark-title" namespace="http://www.w3.org/1999/XSL/Format">
               <xsl:value-of select="normalize-space($title)"/>
