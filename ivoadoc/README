@@ -4,6 +4,7 @@ The scripts allow for features not normally associated with HTML authoring
 1. automated section numbering and table of contents generation
 2. automated reference handling with bibtex.
 3. formatting of included xml files.
+4. formatting of schema constructs according to uniform standards
 
 Aims
 ----
@@ -16,15 +17,43 @@ that will be then auto-numbered for instance.
 Authoring
 ---------
 
-initailly can just do <cite>bibref</cite> 
+1. initially can just do <cite>bibref</cite> 
     <span class="xref">UWSSchema</span>
     
     note that <a> anchors need both an id attribute and a name attribute - it is the id attribute that the xslt keys off.
 
 
+2. Auto generated schema documentation
+
+<div><?schemadef href="../UWSRegExt.xsd" defn="UWSInterface" ?></div>
+
+where the href is url to the source and defn is the name of the schema (complex or simple) type to document.
+
+3. Inclusion and formating of xml
+
+<div><?incxml href="../UWSJobInstance.xml" ?></div>
+
+
+3. Autogeneration of TOC
+
+<div><?toc?></div>
+
+will cause the generation of a table of contents and a renumbering of sections which should have the form
+
+<div class="section"><h2><a name="Introduction" id="Introduction" shape="rect"/><span class="secnum">1. </span>Introduction (informative)</h2>
+
+.... </div>
+
+if you want auto-generation of section number/anchor then you can start with 
+
+<div class="section"><h2>blah</h2>
 
 Requirements
 ------------
+
+The xslt transformation scripts require an xslt 2.0 aware processor with evaluation extension - basically this means saxon B 9.1 http://saxon.sourceforge.net/
+
+The PDF creation uses Apache FOP
 
 Ant build file - this requires that the saxon xslt processor is available to ant - an easy way to do this is to place the saxon jar 
 in ~/.ant/lib/
@@ -38,25 +67,41 @@ in ~/.ant/lib/
 	<target name="createdoc" description="description">
 		<xslt style="ivoadoc/ivoarestructure.xslt" in="UWS.html" out="out.html" force="true">
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+        <xmlcatalog >
+            <catalogpath>
+               <filelist>
+                  <file name="./ivoadoc/xmlcatalog/catalog.xml"/>
+               </filelist>
+            </catalogpath>
+         </xmlcatalog>
 		</xslt>
 	</target>
 
 	<target name="createPDF">
 		<xslt style="ivoadoc/W3C-REC.xsl" in="UWS.html" out="out.fo" force="true">
 			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+        <xmlcatalog >
+            <catalogpath>
+               <filelist>
+                  <file name="./ivoadoc/xmlcatalog/catalog.xml"/>
+               </filelist>
+            </catalogpath>
+         </xmlcatalog>
 		</xslt>
 
 	</target>
 </project>
 
 
-to crate
+
 
 Acknowledgements
 ---------------
 
 The scripts and ideas for this are derived from originals by Norman Gray, and efforts have been made to preserve his conventions. The major 
 difference being that the formatting script may be used iteratively, rather than the final output being a 'one-shot' batch processed result of the input, that cannot again be used as input.
+
+The parts for schema documentation are from Ray Plante's xsl transformations.
 
 
 Paul Harrison paul.harrison@manchester.ac.uk 2009

@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <x:stylesheet xmlns:x="http://www.w3.org/1999/XSL/Transform"
+              xmlns:xs="http://www.w3.org/2001/XMLSchema" 
               version="2.0"
               xmlns:h="http://www.w3.org/1999/xhtml"
               xmlns="http://www.w3.org/1999/xhtml"
-              xmlns:dc="http://purl.org/dc/elements/1.1/"
-              xmlns:dcterms="http://purl.org/dc/terms/">
-
+              xmlns:vm="http://www.ivoa.net/xml/VOMetadata/v0.1" 
+              xmlns:saxon="http://saxon.sf.net/" 
+             >
+  <x:import href="vor2spec.xsl"/>
   <x:output method="xml" 
             encoding="ISO-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
+            exclude-result-prefixes="saxon"
             />
 
   <!--
@@ -39,8 +42,8 @@
       externally to this script.
       
       
-      xml documents can be literally included (and formatted) with the <?xmlinc href=""?> processing instruction. All text between
-      until the <?xmlinc end?> will be replaced.
+      xml documents can be literally included (and formatted) with the <?xmlinc href=""?> processing instruction. The <?xmlinc ?> processing instruction should be enclosed within a <div> - All text within
+      the <div> will be replaced.
 
       There's also a <span class='url'>url</span>, which formats the
       URL appropriately, and a
@@ -66,6 +69,7 @@
   <x:param name="reloadbib"/>
 
 
+
   <!-- process root node -->
   <x:template match="/">
     <x:choose>
@@ -83,7 +87,6 @@
   <x:template match="h:head">
     <head profile='http://www.w3.org/1999/xhtml/vocab'>
       <x:apply-templates select="@*"/>
-      <x:copy-of select="namespace::*[.='http://purl.org/dc/elements/1.1/']"/>
       <x:apply-templates select="child::node()"/>
     </head>
   </x:template>
@@ -177,6 +180,9 @@
   <x:template match="h:div[processing-instruction()[1][count(preceding-sibling::element()) = 0]]">
   <!-- the processing instructions will replace everything with the enclosing div if they are first - used for the toc, bibliography and xmlinc processing instucctions-->
     <x:copy>
+    <x:comment>The contents of this div are automatially generated from the following processing instruction when processed with ivoarestructure.xsl</x:comment>
+    <x:text>
+    </x:text>
     <x:choose>
       <x:when test="child::processing-instruction('bibliography') and not($reloadbib)">
          <x:apply-templates/>
@@ -342,13 +348,11 @@
       <x:apply-templates select="@*"/>
       <x:choose>
         <x:when test="h:a/@href">
-          <x:attribute name="rel">dc:creator</x:attribute>
           <x:attribute name="href">
             <x:value-of select="h:a/@href"/>
           </x:attribute>
         </x:when>
         <x:otherwise>
-          <x:attribute name="property">dc:creator</x:attribute>
           <x:attribute name="content">
             <x:value-of select="h:a/text()"/>
           </x:attribute>
@@ -362,7 +366,6 @@
     <x:copy>
       <x:apply-templates select="@*"/>
       <x:element name='meta' namespace='http://www.w3.org/1999/xhtml'>
-        <x:attribute name='property'>dcterms:abstract</x:attribute>
         <x:attribute name='about'/>
         <x:attribute name="content">
           <x:apply-templates select="h:p[not(@class)]" mode="text-only"/>
@@ -397,7 +400,26 @@
         
       </x:choose>
   </x:template>
-
+  <x:template match="processing-instruction('schemadef')">
+      <x:copy/>
+      <x:message>schemadef <x:value-of select="."/></x:message>
+      <x:choose>
+        <x:when test="starts-with(., 'href')">
+        <x:analyze-string regex="href=['&quot;]([^'&quot;]+)['&quot;] +defn=['&quot;]([^'&quot;]+)['&quot;]" select=".">
+          <x:matching-substring>
+          <x:message>Including schema from <x:value-of select="regex-group(1)"/> element <x:value-of select="regex-group(2)"/></x:message>
+             <x:apply-templates select="document(regex-group(1))/saxon:evaluate('/xs:schema/(xs:complexType|xs:simpleType)[@name=$p1]',regex-group(2))" mode="def">
+              <x:with-param name="thisprefix" select="document(regex-group(1))/xs:schema/xs:annotation/xs:appinfo/vm:targetPrefix" ></x:with-param>
+            </x:apply-templates>
+          </x:matching-substring>
+          <x:non-matching-substring>
+          <x:message>did not match <x:value-of select="."/></x:message>
+          </x:non-matching-substring>
+        </x:analyze-string>
+        </x:when>
+        
+      </x:choose>
+  </x:template>
 
    <!-- default identity transformation -->
   <x:template match="node()|@*">
@@ -455,7 +477,7 @@
     </div>
   </x:template>
 
-<!-- this template causes ambiguity with the next one - seems harmless in saxon, but need to understand how to remove - possibly because of newlines... -->
+<!-- this template causes ambiguity with the next one - seems harmless in saxon, but need to understand how to remove - cause of ambiguity is that there can be more than one child -->
   <x:template match="*[text()]" mode="printxml">
     <div class="indent">
       <span class="markup">&lt;</span>
@@ -491,6 +513,215 @@
     </x:if>
   </x:template>
 
+<!-- from Ray's schema formatting via Markus -->
+ 
+<x:template match="xs:complexType|xs:simpleType" mode="xsddef" xml:space="preserve">
+<div class="schemaOuter">
+<a name="s:{@name}">
+</a><div class="schemaHeader"><x:apply-templates select="." mode="schemaDefTitle"/></div>
+<div class="schemaInner">
+<pre><x:apply-templates select="." mode="xsdcode"/></pre>
+</div></div>
+    </x:template>
 
+    <x:template match="xs:complexType[xs:simpleContent]" mode="content"/>
+
+    <x:template match="xs:complexType" mode="content" xml:space="preserve">
+<p>
+<table border="2" width="100%" id="d:{@name}">
+<thead>
+  <tr><th colspan="2" align="left"><x:apply-templates select="." mode="MetadataTitle"/></th>
+  </tr><tr><th>Element</th><th>Definition</th>
+</tr></thead>
+<tbody>
+<x:apply-templates select=".//xs:element" mode="content"/>
+</tbody>
+</table>
+</p>
+    </x:template>
+
+    <x:template match="xs:simpleType" mode="content"/>
+
+    <x:template match="xs:complexType|xs:simpleType" mode="attributes">
+      <x:if test=".//xs:attribute" xml:space="preserve">
+<p>
+<table border="2" width="100%">
+<thead>
+  <tr><th colspan="2" align="left"><x:apply-templates select="." mode="attributeTitle"/></th>
+  </tr><tr><th>Attribute</th><th>Definition</th>
+</tr></thead>
+<tbody>
+<x:apply-templates select=".//xs:attribute" mode="attributes"/>
+</tbody>
+</table>
+</p>
+      </x:if>
+    </x:template>
+
+    <x:template match="xs:element" mode="content" xml:space="preserve">
+  <tr><td valign="top"><x:value-of select="@name"/></td>
+      <td valign="top"><table border="0" width="100%"><tbody>
+<x:apply-templates select="." mode="nextContentItem"/>      </tbody></table>
+  </td></tr>
+    </x:template>
+
+    <x:template match="xs:attribute" mode="attributes" xml:space="preserve">
+  <tr><td valign="top"><x:value-of select="@name"/></td>
+      <td valign="top"><table border="0" width="100%"><tbody>
+<x:apply-templates select="." mode="nextContentItem"/>      </tbody></table>
+  </td></tr>
+    </x:template>
+
+    <x:template match="xs:element" mode="content.rmname">
+        <x:param name="row" select="1"/>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="#dddddd"><td nowrap="nowrap" valign="top"><em>RM Name:</em></td>
+              <td valign="top"><x:for-each select="xs:annotation/xs:appinfo/vm:dcterm" xml:space="default">
+              <x:if test="position()!=1">
+                 <x:text>, </x:text>
+              </x:if>
+              <x:value-of select="."/>
+            </x:for-each></td>
+          </tr>
+</x:for-each>
+    </x:template>
+
+    <x:template match="xs:element|xs:attribute" mode="content.type">
+        <x:param name="row" select="1"/>
+
+        <x:variable name="type">
+           <x:choose>
+              <x:when test="@type">
+                 <x:apply-templates select="@type" mode="type"/>
+              </x:when>
+              <x:otherwise>
+                 <x:apply-templates select="xs:complexType|xs:simpleType" 
+                                      mode="type"/>
+              </x:otherwise>
+           </x:choose>
+        </x:variable>
+
+        <x:variable name="color">
+           <x:call-template name="rowBgColor">
+              <x:with-param name="row" select="$row"/>
+           </x:call-template>
+        </x:variable>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Value type:</em></td>
+              <td valign="top"><x:copy-of select="$type"/></td>
+          </tr>
+</x:for-each>
+    </x:template>
+
+    <x:template match="xs:element|xs:attribute" mode="content.meaning">
+        <x:param name="row" select="1"/>
+
+        <x:variable name="color">
+           <x:call-template name="rowBgColor">
+              <x:with-param name="row" select="$row"/>
+           </x:call-template>
+        </x:variable>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Semantic Meaning:</em></td>
+              <td valign="top" width="90%"><x:value-of select="xs:annotation/xs:documentation[1]"/></td>
+          </tr>
+</x:for-each>
+    </x:template>
+
+    <x:template match="xs:attribute" mode="content.default">
+        <x:param name="row" select="1"/>
+
+        <x:variable name="color">
+           <x:call-template name="rowBgColor">
+              <x:with-param name="row" select="$row"/>
+           </x:call-template>
+        </x:variable>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap"
+              valign="top"><em>Default Value:</em></td>
+              <td valign="top" width="90%"><code><x:value-of select="@default"/></code></td> 
+          </tr>
+</x:for-each>
+    </x:template>
+
+    <x:template match="xs:element|xs:attribute" mode="content.occurrences">
+        <x:param name="row" select="1"/>
+
+        <x:variable name="color">
+           <x:call-template name="rowBgColor">
+              <x:with-param name="row" select="$row"/>
+           </x:call-template>
+        </x:variable>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Occurrences:</em></td>
+              <td valign="top"><x:apply-templates select="." mode="occurrences"/></td>
+          </tr>
+</x:for-each>
+    </x:template>
+
+    <x:template match="xs:element|xs:attribute" mode="content.allowedValues">
+        <x:param name="row" select="1"/>
+        <x:param name="type" select="@type"/>
+
+        <x:variable name="color">
+           <x:call-template name="rowBgColor">
+              <x:with-param name="row" select="$row"/>
+           </x:call-template>
+        </x:variable>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Allowed Values:</em></td>
+              <td valign="top"><x:apply-templates select="xs:simpleType/xs:restriction|/xs:schema/xs:simpleType[@name=substring-after($type,':')]/xs:restriction" mode="howtolist" /></td> 
+          </tr>
+</x:for-each>
+    </x:template>
+
+    <x:template match="xs:restriction[xs:enumeration]" mode="howtolist">
+      <x:choose>
+        <x:when test="xs:enumeration/xs:annotation/xs:documentation"
+                  xml:space="preserve"><table border="0" width="100%"><tbody>
+<x:apply-templates select="xs:enumeration" mode="controlledVocab" />
+              </tbody></table></x:when>
+        <x:otherwise>
+           <x:for-each select="xs:enumeration">
+              <code><x:value-of select="@value"/></code>
+              <x:if test="position()!=last()">
+                 <x:text>, </x:text>
+              </x:if>
+</x:for-each>
+        </x:otherwise>
+      </x:choose>
+    </x:template>
+
+    <x:template match="xs:enumeration" mode="controlledVocab" xml:space="preserve">
+                 <tr><td valign="top"><code><x:value-of select="@value"/></code> </td>
+                     <td><x:value-of select="xs:annotation/xs:documentation"/></td></tr>
+    </x:template>
+
+    <x:template match="xs:element|xs:attribute" mode="content.comment">
+        <x:param name="row" select="1"/>
+
+        <x:variable name="color">
+           <x:call-template name="rowBgColor">
+              <x:with-param name="row" select="$row"/>
+           </x:call-template>
+        </x:variable>
+
+        <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Comments:</em></td>
+              <td valign="top"><x:for-each select="xs:annotation/xs:documentation[position() > 1]">
+<p><x:value-of select="."/></p>
+              </x:for-each></td> 
+          </tr>
+</x:for-each>
+    </x:template>
+
+
+
+    <x:template name="rowBgColor">
+       <x:param name="row" select="1"/>
+       <x:choose>
+          <x:when test="$row mod 2 = 1">#dddddd</x:when>
+          <x:otherwise>#f5f5f5</x:otherwise>
+       </x:choose>
+    </x:template>    
  
 </x:stylesheet>
