@@ -388,18 +388,24 @@
 
   <x:template match="processing-instruction('incxml')">
       <x:copy/>
-      <x:choose>
-        <x:when test="starts-with(., 'href')">
-        <x:analyze-string regex="href=['&quot;]([^'&quot;]+)['&quot;]" select=".">
+        <x:analyze-string regex="href=['&quot;]([^'&quot;]+)['&quot;] +select=['&quot;]([^'&quot;]+)['&quot;]"  select=".">
           <x:matching-substring>
-          <x:message>Including xml from <x:value-of select="regex-group(1)"/></x:message>
-            <x:apply-templates select="document(regex-group(1))" mode="printxml"></x:apply-templates>
+                <!-- crude ability to select an element & children - neets to be smartened up to more xpath like, but namespaces a problem -->
+                   <x:message>Including only <x:value-of select="regex-group(2)"/> element xml from <x:value-of select="regex-group(1)"/> </x:message>
+                   <x:apply-templates select="document(regex-group(1))//saxon:evaluate(regex-group(2))" mode="printxml"></x:apply-templates>
+                             
           </x:matching-substring>
+          <x:non-matching-substring>
+          <x:analyze-string regex="href=['&quot;]([^'&quot;]+)['&quot;]" select=".">
+                <x:matching-substring>                
+                   <x:message>Including xml from <x:value-of select="regex-group(1)"/></x:message>
+                   <x:apply-templates select="document(regex-group(1))" mode="printxml"></x:apply-templates>
+                </x:matching-substring>
+          </x:analyze-string>
+          </x:non-matching-substring>
         </x:analyze-string>
-        </x:when>
         
-      </x:choose>
-  </x:template>
+   </x:template>
   <x:template match="processing-instruction('schemadef')">
       <x:copy/>
       <x:message>schemadef <x:value-of select="."/></x:message>
