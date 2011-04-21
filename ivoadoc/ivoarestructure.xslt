@@ -623,7 +623,7 @@
         </x:variable>
 
         <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Semantic Meaning:</em></td>
-              <td valign="top" width="90%"><x:value-of select="xs:annotation/xs:documentation[1]"/></td>
+              <td valign="top" width="90%"><x:copy-of select="xs:annotation/xs:documentation[1]/node()"/></td>
           </tr>
 </x:for-each>
     </x:template>
@@ -708,7 +708,7 @@
 
         <x:for-each select="." xml:space="preserve">          <tr bgcolor="{$color}"><td nowrap="nowrap" valign="top"><em>Comments:</em></td>
               <td valign="top"><x:for-each select="xs:annotation/xs:documentation[position() > 1]">
-<p><x:value-of select="."/></p>
+<p><x:copy-of select="./node()"/></p>
               </x:for-each></td> 
           </tr>
 </x:for-each>
