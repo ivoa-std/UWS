@@ -6,9 +6,10 @@
               xmlns="http://www.w3.org/1999/xhtml"
               xmlns:vm="http://www.ivoa.net/xml/VOMetadata/v0.1" 
               xmlns:saxon="http://saxon.sf.net/" 
+              exclude-result-prefixes="saxon"
              >
   <x:import href="vor2spec.xsl"/>
-  <x:output method="xml" 
+  <x:output method="xml" indent="yes" 
             encoding="ISO-8859-1" doctype-public="-//W3C//DTD XHTML 1.0 Strict//EN" doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"
             exclude-result-prefixes="saxon"
             />
@@ -396,16 +397,16 @@
                              
           </x:matching-substring>
           <x:non-matching-substring>
-          <x:analyze-string regex="href=['&quot;]([^'&quot;]+)['&quot;]" select=".">
-                <x:matching-substring>                
-                   <x:message>Including xml from <x:value-of select="regex-group(1)"/></x:message>
-                   <x:apply-templates select="document(regex-group(1))" mode="printxml"></x:apply-templates>
-                </x:matching-substring>
-          </x:analyze-string>
+        <x:analyze-string regex="href=['&quot;]([^'&quot;]+)['&quot;]" select=".">
+          <x:matching-substring>
+          <x:message>Including xml from <x:value-of select="regex-group(1)"/></x:message>
+            <x:apply-templates select="document(regex-group(1))" mode="printxml"></x:apply-templates>
+          </x:matching-substring>
+        </x:analyze-string>
           </x:non-matching-substring>
         </x:analyze-string>
         
-   </x:template>
+  </x:template>
   <x:template match="processing-instruction('schemadef')">
       <x:copy/>
       <x:message>schemadef <x:value-of select="."/></x:message>
