@@ -1,10 +1,15 @@
 This directory contains files to help with the authorship of IVOA documents, which must be primarily be delivered as HTML.
+
+The scripts in this directory are generally expected to be installed as a subdirectory "ivoadoc" of the directory containing the file to be edited (This has been done to allow easy update an coping of this directory using the svn external mechanism).
+ The only exception to this is the build.xml ant file which should be copied up to the directory containing the target document.
+
 The scripts allow for features not normally associated with HTML authoring
 
 1. automated section numbering and table of contents generation
 2. automated reference handling with bibtex.
 3. formatting of included xml files.
 4. formatting of schema constructs according to uniform standards
+5. final output of IVOA mandated PDF file with associated pdf bookmarks.
 
 Aims
 ----
@@ -58,40 +63,26 @@ The PDF creation uses Apache FOP
 Ant build file - this requires that the saxon xslt processor is available to ant - an easy way to do this is to place the saxon jar 
 in ~/.ant/lib/
 
-<?xml version="1.0" encoding="UTF-8"?>
-<project name="UWSbuild">
+An example ant build file is included in this directory - it is intended that 
 
-	<!-- ================================= 
-          target: createdoc              
-         ================================= -->
-	<target name="createdoc" description="description">
-		<xslt style="ivoadoc/ivoarestructure.xslt" in="UWS.html" out="out.html" force="true">
-			<factory name="net.sf.saxon.TransformerFactoryImpl" />
-        <xmlcatalog >
-            <catalogpath>
-               <filelist>
-                  <file name="./ivoadoc/xmlcatalog/catalog.xml"/>
-               </filelist>
-            </catalogpath>
-         </xmlcatalog>
-		</xslt>
-	</target>
 
-	<target name="createPDF">
-		<xslt style="ivoadoc/W3C-REC.xsl" in="UWS.html" out="out.fo" force="true">
-			<factory name="net.sf.saxon.TransformerFactoryImpl" />
-        <xmlcatalog >
-            <catalogpath>
-               <filelist>
-                  <file name="./ivoadoc/xmlcatalog/catalog.xml"/>
-               </filelist>
-            </catalogpath>
-         </xmlcatalog>
-		</xslt>
+File List
+---------
 
-	</target>
-</project>
-
+README - this file
+XMLPrint.css - css for the xml pretty printing
+build.xml - example ant build file for running the processing
+extractcite.xslt - XSL for extracting citations from document
+ivoa-extras.css
+ivoa-fo.xsl - XSL-FO for formatting PDF
+ivoarestructure.xslt - main XSL that does the toc, numbering xml pretty printing etc.
+plainhtml.bst - 
+refs.bib - standard set of references of IVOA documents
+structure.py - small script to add div sectioning to a plain html file
+template.html - template IVOA document illustrating various capabilities of the system.
+vor2spec.xsl - transform IVOA schema into standardized description.
+xhtml2fo.xsl - transform the document to XSL-FO
+xmlcatalog - directory containing various entity files so that they do not have to be downloaded from W3C site.
 
 
 
