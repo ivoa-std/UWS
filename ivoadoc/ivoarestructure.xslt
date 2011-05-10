@@ -6,9 +6,11 @@
               xmlns="http://www.w3.org/1999/xhtml"
               xmlns:vm="http://www.ivoa.net/xml/VOMetadata/v0.1" 
               xmlns:saxon="http://saxon.sf.net/" 
-              exclude-result-prefixes="saxon"
+              exclude-result-prefixes="saxon vm"
              >
   <x:import href="vor2spec.xsl"/>
+  <x:param name="docversion">0.1</x:param>
+  <x:param name="pubstatus">WD</x:param>
   <x:character-map name="cm1">
   <!-- stop &amp; being translated -->
     <x:output-character character="&#38;" string="&amp;amp;amp;"/>
@@ -114,8 +116,9 @@
     </x:variable>
       <x:message>section <x:value-of select="$level"/></x:message>
     <x:element name='{$level}'>
-      <x:element name="a"><x:attribute name='name' select="$id"/>
-      <x:copy-of select="./(h:h2|h:h3|h:h4)/h:a/@*" />     
+      <x:element name="a">
+      <x:copy-of select="./(h:h2|h:h3|h:h4)/h:a/@*[not(name()='name')]" />   
+      <x:attribute name='id' select="$id"/>  
       </x:element>
       <x:apply-templates select="." mode="make-section-name"/>
     </x:element>
@@ -219,6 +222,9 @@
       <x:when test="child::*[1]/h:a/@id">
         <x:value-of select="child::*[1]/h:a/@id"/>
       </x:when>
+      <x:when test="child::*[1]/h:a/@name"> <!-- prefer id to name, but pick up name as that is allowable in html references -->
+        <x:value-of select="child::*[1]/h:a/@name"/>
+      </x:when>
       <x:otherwise>
         <x:value-of select="generate-id()"/>
       </x:otherwise>
@@ -314,6 +320,12 @@
     <x:value-of select="substring-before(substring-after(.,': '),' $')"/>
   </x:template>
 
+  <x:template match="h:span[@class='docversion']">
+      <x:element name="span">
+      <x:attribute name="class">docversion</x:attribute>
+      <x:value-of select="$docversion"/>
+      </x:element>
+  </x:template>
 
 <!-- maybe later
   <x:template xmlns:owl="http://www.w3.org/2002/07/owl#" match="h:meta">
