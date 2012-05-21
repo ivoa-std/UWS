@@ -640,7 +640,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
         parameterised by the query parameters FIRST and LAST in the query
         string of its URI: these parameters state the index of the first and
         last row to be returned; e.g.</p>
-      <p> http://whatever.org/adlqService/results/cursor?FIRST=1&amp;amp;amp;amp;amp;amp;amp;amp;LAST=100</p>
+      <p> http://whatever.org/adlqService/results/cursor?FIRST=1&amp;LAST=100</p>
       <p>If the parameters are missing, the
         service decides which rows to return.</p>
     </div>
@@ -769,7 +769,9 @@ The document has been reviewed by IVOA Members and other interested parties, and
   <ul><li>Removed all SOAP binding - deferred to later version.</li><li>Added parameterList</li><li>Added ownerId and jobId as subsidiary job object</li></ul>
   </div>
   <div class="section"><h3><a id="ver11" shape="rect"><span class="secnum">A.3. </span>At Version 1.1</a></h3>
-  <ul><li>Allowed content in the  result element.</li><li>A</li></ul>
+  <p>This version is intended to clarify use, and add a small number of facilities that should not break existing 1.0 clients.
+  </p>
+  <ul><li>Allowed content in the  result element.</li><li>Added the ability to filter on the job list.</li></ul>
   </div>
 </div>
 
