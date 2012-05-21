@@ -17,6 +17,7 @@
    </uws:parameters>
    <uws:results>
        <uws:result id="correctedImage" xlink:href="http://myserver.org/uws/jobs/jobid123/result/image"></uws:result>
+       <uws:result id="name">inline</uws:result>
    </uws:results>
    <uws:errorSummary type="transient" hasDetail="true">
      <uws:message>we have problem</uws:message>
