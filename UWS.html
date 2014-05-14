@@ -23,7 +23,7 @@ Paul Harrison -->
   </div>
   <h1>Universal Worker Service Pattern<br clear="none"/>
   Version <span class="docversion">1.1</span></h1>
-<h2 class="subtitle">IVOA Working Draft  13 May 2014</h2>
+<h2 class="subtitle">IVOA Working Draft  14 May 2014</h2>
 <dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/20140514/WD-UWS-1.1-20140514.html" shape="rect">http://www.ivoa.net/Documents/UWS/20140514/WD-UWS-1.1-20140514.html</a></dd><dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd><dt><b>Previous version(s):</b></dt><dd> Proposed Recommendation v1.0, 2009-09-09<br clear="none"/>
   Recommendation v1.0 2010-10-10<br clear="none"/>
 </dd><dt> <br clear="none"/>
@@ -381,9 +381,9 @@ The document has been reviewed by IVOA Members and other interested parties, and
             </p></td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/phase</td><td rowspan="1" colspan="1"> the Phase of job
           (job-id)</td><td rowspan="1" colspan="1">One of the fixed strings</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/executionduration</td><td rowspan="1" colspan="1">the
           maximum execution duration of (job-id)</td><td rowspan="1" colspan="1">Integer number of seconds.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/destruction</td><td rowspan="1" colspan="1"> the
-          destruction instant for (job-id)</td><td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite>. if no destruction time then return empty string.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/error</td><td rowspan="1" colspan="1">any error
+          destruction instant for (job-id)</td><td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite>. If no destruction time then return empty string.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/error</td><td rowspan="1" colspan="1">any error
           message associated with (job-id)</td><td rowspan="1" colspan="1">any representation appropriate to the implementing service</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/quote </td><td rowspan="1" colspan="1">the Quote for
-          (job-id)</td><td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite></td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/results</td><td rowspan="1" colspan="1">any parameters for the job 
+          (job-id)</td><td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite>If no quote available then return empty string.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/results</td><td rowspan="1" colspan="1">any results for the job 
           (job-id)</td><td rowspan="1" colspan="1">the <span class="xmlelement">&lt;results&gt;</span> element in the UWS schema.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/parameters</td><td rowspan="1" colspan="1">any parameters for the job 
           (job-id)</td><td rowspan="1" colspan="1">the <span class="xmlelement">&lt;parameters&gt;</span> element in the UWS schema.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/owner</td><td rowspan="1" colspan="1">the owner of the job (job-id)</td><td rowspan="1" colspan="1">an appropriate identifier as discussed in 
               <span class="xref"><a href="#security">3</a></span></td></tr></table>
@@ -482,7 +482,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
           <p>This initial POST will in most cases
             carry parameters for the protocol that is using the UWS pattern, as
             detailed in <span class="xref"><a href="#ApplicationsOfUWS">4</a></span>
-            .In addition for the initial post may contain job control parameters if allowed by the implementing protocol (i.e. if UWS job control parameter names do not clash with the implementing protocol parameters). One use of this facility might be to have the job placed into a potentially running state by adding &amp;PHASE=RUN query part to the job creation URL.</p>
+            .In addition for the initial post may contain job control parameters if allowed by the implementing protocol (i.e. if UWS job control parameter names do not clash with the implementing protocol parameters). One use of this facility might be to have the job placed into a potentially running state by adding ?PHASE=RUN query part to the job creation URL.</p>
           <div class="section"><h4><a id="d2e1612" shape="rect"><span class="secnum">2.2.3.1.1. </span>Inline Parameters</a></h4>
             <p>The JDL may allow parameter values to be uploaded in-line - in this case the UWS should accept the parameter content as multipart/form-data encoded in the POST with the formal value of the parameter being a "byReference" type using the special URI scheme "param" with the path part of the URI matching the name attribute of the multipart/form-data encoding content part. The content of such an in-line parameter should be made available as part of the job resource tree at /{jobs}/{job-id}/parameters/{parameter-name}, and then described as a "byReference" parameter in the <span class="xmlelement">&lt;job&gt;</span> XML description.</p>
           </div>
