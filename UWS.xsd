@@ -127,7 +127,7 @@
            <xs:annotation>
                <xs:documentation>
                   The job has been archived by the server at destruction time. An archived job
-                  may have of the results destroyed, must have job metadata preserved.
+                  may have deleted the results to reclaim resources, but must have job metadata preserved.
                   This is an alternative that the server may choose in contrast to completely destroying all record of the job.
                </xs:documentation>
             </xs:annotation>
@@ -268,7 +268,7 @@
          </xs:sequence>
       </xs:complexType>
    </xs:element>
-   <xs:complexType name="ResultReference" mixed="true">
+   <xs:complexType name="ResultReference" mixed="false">
       <xs:annotation>
          <xs:documentation> A reference to a UWS result. If the 
          </xs:documentation>
