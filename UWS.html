@@ -4,10 +4,22 @@ Note that this file should be xhtml with div to mark sections so that it can be 
 Paul Harrison -->
 <!DOCTYPE html
   PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en" lang="en" xsi:schemalocation="http://www.w3.org/1999/xhtml                           http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd"><head profile="http://www.w3.org/1999/xhtml/vocab"><title>Universal Worker Service Pattern 1.1 - IVOA Working Draft  14 May 2014</title><meta xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/><meta xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" name="Title" content="IVOA WG Internal Draft"/><meta xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/><meta xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk"/><meta xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk"/><link xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css"/><link xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" rel="stylesheet" href="http://www.ivoa.net/misc/ivoa_rec.css" type="text/css"/><link xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" href="http://volute.googlecode.com/svn/trunk/projects/ivoapub/ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css"/><link xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:h="http://www.w3.org/1999/xhtml" href="http://volute.googlecode.com/svn/trunk/projects/ivoapub/ivoadoc/ivoa-extras.css" rel="stylesheet" type="text/css"/><link rel="stylesheet" type="text/css" href="http://www.ivoa.net/misc/ivoa_wd.css"/><link rel="stylesheet" type="text/css" href="http://www.ivoa.net/misc/ivoa_wd.css"/><link rel="stylesheet" type="text/css" href="http://www.ivoa.net/misc/ivoa_wd.css"/></head><body><div class="head">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en" lang="en" xsi:schemalocation="http://www.w3.org/1999/xhtml                           http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd" xml:space="preserve">
+<head profile="http://www.w3.org/1999/xhtml/vocab"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Universal Worker Service Pattern 1.1   - IVOA Working Draft  27 May 2014</title> 
+<meta name="Title" content="IVOA WG Internal Draft" />
+<meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
+<meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
+<link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css" />
+<link href="http://volute.googlecode.com/svn/trunk/projects/ivoapub/ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css" />
+<link href="http://volute.googlecode.com/svn/trunk/projects/ivoapub/ivoadoc/ivoa-extras.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" type="text/css" href="http://www.ivoa.net/misc/ivoa_wd.css" />
+</head>
+<body><div class="head">
   <div id="titlehead" style="position:relative;height:170px;width: 500px">
     <div id="logo" style="position:absolute;width:300px;height:169px;left: 50px;top: 0px;">
-    <img src="http://www.ivoa.net/pub/images/IVOA_wb_300.jpg" alt="IVOA logo"/></div>
+    <img src="http://www.ivoa.net/pub/images/IVOA_wb_300.jpg" alt="IVOA logo" /></div>
     <div id="logo-title" style="position: absolute; width: 200px; height: 115px; left: 320px; top: 5px; font-size: 14pt; color: #005A9C; font-style: italic;">
       <p style="position: absolute; left: 0px; top: 0px;"><span style="font-weight: bold;">I</span> nternational</p>
       <p style="position: absolute; left: 15pt; top: 25pt;"><span style="font-weight: bold;">V</span> irtual</p>
@@ -15,12 +27,12 @@ Paul Harrison -->
       <p style="position: absolute; left: 0px; top: 75pt;"><span style="font-weight: bold;">A</span> lliance</p>
     </div>
   </div>
-  <h1>Universal Worker Service Pattern<br clear="none"/>
+  <h1>Universal Worker Service Pattern<br clear="none" />
   Version <span class="docversion">1.1</span></h1>
-<h2 class="subtitle">IVOA Working Draft  14 May 2014</h2>
-<dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/20140514/WD-UWS-1.1-20140514.html" shape="rect">http://www.ivoa.net/Documents/UWS/20140514/WD-UWS-1.1-20140514.html</a></dd><dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd><dt><b>Previous version(s):</b></dt><dd> Proposed Recommendation v1.0, 2009-09-09<br clear="none"/>
-  Recommendation v1.0 2010-10-10<br clear="none"/>
-</dd><dt> <br clear="none"/>
+<h2 class="subtitle">IVOA Working Draft  27 May 2014</h2>
+<dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd><dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/20140514/WD-UWS-1.1-20140514.html" shape="rect">http://www.ivoa.net/Documents/UWS/20140514/WD-UWS-1.1-20140514.html</a></dd><dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd><dt><b>Previous version(s):</b></dt><dd> Proposed Recommendation v1.0, 2009-09-09<br clear="none" />
+  Recommendation v1.0 2010-10-10<br clear="none" />
+</dd><dt> <br clear="none" />
   </dt><dd>&nbsp;</dd><dt><b>Author(s):</b></dt><dd>  P. 
     Harrison, G. Rixon</dd></dl>
 
@@ -43,9 +55,9 @@ The document has been reviewed by IVOA Members and other interested parties, and
   statefulness are distilled from debates in the Global Grid Forum in
   respect of the Open Grid Services Infrastructure that was the
   fore-runner of Web Services Resource Framework. The REST binding came
-  initially from suggestions by Norman Gray. Enhancements introduced in version 1.1 were as a result of feedback from implementors, particularly Pat Dowler and Petr Skoda.</p>
+  initially from suggestions by Norman Gray. Enhancements introduced in version 1.1 were as a result of feedback from implementors, particularly Pat Dowler and Petr Škoda.</p>
 </div><h2>Contents</h2><div><!--The contents of this div are automatically generated from the following processing instruction when processed with ivoarestructure.xsl-->
-    <?toc?><div id="toc" class="toc"><ul><li><a href="#Introduction"><span class="secnum">1. </span>Introduction (informative)</a><ul><li><a href="#SynchronousStateless"><span class="secnum">1.1. </span>Synchronous, stateless services</a></li><li><a href="#AsynchronousServices"><span class="secnum">1.2. </span>Asynchronous and stateful services</a></li><li><a href="#JDL"><span class="secnum">1.3. </span>Job description language, service contracts and universality</a></li><li><a href="#IVOARCH"><span class="secnum">1.4. </span>UWS in the IVOA Architecture</a></li></ul></li><li><a href="#UWSpattern"><span class="secnum">2. </span>Universal Worker Service Pattern (normative)</a><ul><li><a href="#UWSObjects"><span class="secnum">2.1. </span>Objects within a UWS</a><ul><li><a href="#Joblist"><span class="secnum">2.1.1. </span>Job list</a></li><li><a href="#Job"><span class="secnum">2.1.2. </span>Job</a></li><li><a href="#ExecutionPhase"><span class="secnum">2.1.3. </span>Execution Phase</a></li><li><a href="#ExecutionDuration"><span class="secnum">2.1.4. </span>Execution Duration</a></li><li><a href="#DestructionTime"><span class="secnum">2.1.5. </span>Destruction Time</a></li><li><a href="#Quote"><span class="secnum">2.1.6. </span>Quote</a></li><li><a href="#Error"><span class="secnum">2.1.7. </span>Error</a></li><li><a href="#Error2"><span class="secnum">2.1.8. </span>Owner</a></li><li><a href="#Error3"><span class="secnum">2.1.9. </span>RunId</a></li><li><a href="#ResultsList"><span class="secnum">2.1.10. </span>Results List</a></li><li><a href="#ResultsList2"><span class="secnum">2.1.11. </span>Parameter List</a></li></ul></li><li><a href="#RESTbinding"><span class="secnum">2.2. </span>The REST Binding</a><ul><li><a href="#d1e834"><span class="secnum">2.2.1. </span>Resources and URIs</a></li><li><a href="#d1e603"><span class="secnum">2.2.2. </span>Representations of resources</a><ul><li><a href="#jobList"><span class="secnum">2.2.2.1. </span>Job List</a></li><li><a href="#d1e1040"><span class="secnum">2.2.2.2. </span>Job</a></li><li><a href="#resultList"><span class="secnum">2.2.2.3. </span>Results List</a></li><li><a href="#d1e1353"><span class="secnum">2.2.2.4. </span>Parameters List</a></li><li><a href="#d1e1556"><span class="secnum">2.2.2.5. </span>Error</a></li></ul></li><li><a href="#jobcontrol"><span class="secnum">2.2.3. </span>State changing requests</a><ul><li><a href="#jobCreation"><span class="secnum">2.2.3.1. </span>Creating a Job</a><ul><li><a href="#d2e1612"><span class="secnum">2.2.3.1.1. </span>Inline Parameters</a></li></ul></li><li><a href="#d1e1390"><span class="secnum">2.2.3.2. </span>Deleting a Job</a></li><li><a href="#d1e1402"><span class="secnum">2.2.3.3. </span>Changing the Destruction Time</a></li><li><a href="#d1e1420"><span class="secnum">2.2.3.4. </span>Changing the Execution Duration</a></li><li><a href="#d1e1439"><span class="secnum">2.2.3.5. </span>Starting a Job</a></li><li><a href="#d1e1448"><span class="secnum">2.2.3.6. </span>Aborting a Job</a></li></ul></li><li><a href="#d1e708"><span class="secnum">2.2.4. </span>Message pattern</a></li></ul></li></ul></li><li><a href="#security"><span class="secnum">3. </span>Security Considerations (normative)</a></li><li><a href="#ApplicationsOfUWS"><span class="secnum">4. </span>Applications of UWS (informative)</a><ul><li><a href="#Imageservice"><span class="secnum">4.1. </span>Image service with data staging</a></li><li><a href="#ADQLservice"><span class="secnum">4.2. </span>ADQL service with cursor</a></li><li><a href="#ParameterizedApplications"><span class="secnum">4.3. </span>Parameterised applications</a></li></ul></li><li><a href="#SynchronousService"><span class="secnum">5. </span>Implementing a Synchronous Service on top of UWS (informative)</a></li><li><a href="#Updates"><span class="secnum">A. </span>Updates from previous versions</a><ul><li><a href="#d1e1112"><span class="secnum">A.1. </span>At Version 0.5</a></li><li><a href="#d1e1775"><span class="secnum">A.2. </span>At Version 1.0</a></li><li><a href="#ver11"><span class="secnum">A.3. </span>At Version 1.1</a></li></ul></li><li><a href="#UWSSchema"><span class="secnum">B. </span>UWS Schema</a></li></ul></div>
+    <?toc?><div id="toc" class="toc"><ul><li><a href="#Introduction"><span class="secnum">1. </span>Introduction (informative)</a><ul><li><a href="#SynchronousStateless"><span class="secnum">1.1. </span>Synchronous, stateless services</a></li><li><a href="#AsynchronousServices"><span class="secnum">1.2. </span>Asynchronous and stateful services</a></li><li><a href="#JDL"><span class="secnum">1.3. </span>Job description language, service contracts and universality</a></li><li><a href="#IVOARCH"><span class="secnum">1.4. </span>UWS in the IVOA Architecture</a></li></ul></li><li><a href="#UWSpattern"><span class="secnum">2. </span>Universal Worker Service Pattern (normative)</a><ul><li><a href="#UWSObjects"><span class="secnum">2.1. </span>Objects within a UWS</a><ul><li><a href="#Joblist"><span class="secnum">2.1.1. </span>Job list</a></li><li><a href="#Job"><span class="secnum">2.1.2. </span>Job</a></li><li><a href="#ExecutionPhase"><span class="secnum">2.1.3. </span>Execution Phase</a></li><li><a href="#ExecutionDuration"><span class="secnum">2.1.4. </span>Execution Duration</a></li><li><a href="#DestructionTime"><span class="secnum">2.1.5. </span>Destruction Time</a></li><li><a href="#Quote"><span class="secnum">2.1.6. </span>Quote</a></li><li><a href="#Error"><span class="secnum">2.1.7. </span>Error</a></li><li><a href="#Error2"><span class="secnum">2.1.8. </span>Owner</a></li><li><a href="#Error3"><span class="secnum">2.1.9. </span>RunId</a></li><li><a href="#ResultsList"><span class="secnum">2.1.10. </span>Results List</a></li><li><a href="#ResultsList2"><span class="secnum">2.1.11. </span>Parameter List</a></li></ul></li><li><a href="#RESTbinding"><span class="secnum">2.2. </span>The REST Binding</a><ul><li><a href="#d1e834"><span class="secnum">2.2.1. </span>Resources and URIs</a><ul><li><a href="#blocking"><span class="secnum">2.2.1.1. </span>Blocking Endpoints</a></li></ul></li><li><a href="#d1e603"><span class="secnum">2.2.2. </span>Representations of resources</a><ul><li><a href="#jobList"><span class="secnum">2.2.2.1. </span>Job List</a></li><li><a href="#d1e1040"><span class="secnum">2.2.2.2. </span>Job</a></li><li><a href="#resultList"><span class="secnum">2.2.2.3. </span>Results List</a></li><li><a href="#d1e1353"><span class="secnum">2.2.2.4. </span>Parameters List</a></li><li><a href="#d1e1556"><span class="secnum">2.2.2.5. </span>Error</a></li></ul></li><li><a href="#jobcontrol"><span class="secnum">2.2.3. </span>State changing requests</a><ul><li><a href="#jobCreation"><span class="secnum">2.2.3.1. </span>Creating a Job</a><ul><li><a href="#d2e1612"><span class="secnum">2.2.3.1.1. </span>Inline Parameters</a></li></ul></li><li><a href="#d1e1390"><span class="secnum">2.2.3.2. </span>Deleting a Job</a></li><li><a href="#d1e1402"><span class="secnum">2.2.3.3. </span>Changing the Destruction Time</a></li><li><a href="#d1e1420"><span class="secnum">2.2.3.4. </span>Changing the Execution Duration</a></li><li><a href="#d1e1439"><span class="secnum">2.2.3.5. </span>Starting a Job</a></li><li><a href="#d1e1448"><span class="secnum">2.2.3.6. </span>Aborting a Job</a></li></ul></li><li><a href="#d1e708"><span class="secnum">2.2.4. </span>Message pattern</a></li></ul></li></ul></li><li><a href="#security"><span class="secnum">3. </span>Security Considerations (normative)</a></li><li><a href="#ApplicationsOfUWS"><span class="secnum">4. </span>Applications of UWS (informative)</a><ul><li><a href="#Imageservice"><span class="secnum">4.1. </span>Image service with data staging</a></li><li><a href="#ADQLservice"><span class="secnum">4.2. </span>ADQL service with cursor</a></li><li><a href="#ParameterizedApplications"><span class="secnum">4.3. </span>Parameterised applications</a></li></ul></li><li><a href="#SynchronousService"><span class="secnum">5. </span>Implementing a Synchronous Service on top of UWS (informative)</a></li><li><a href="#Updates"><span class="secnum">A. </span>Updates from previous versions</a><ul><li><a href="#d1e1112"><span class="secnum">A.1. </span>At Version 0.5</a></li><li><a href="#d1e1775"><span class="secnum">A.2. </span>At Version 1.0</a></li><li><a href="#ver11"><span class="secnum">A.3. </span>At Version 1.1</a></li></ul></li><li><a href="#UWSSchema"><span class="secnum">B. </span>UWS Schema</a></li></ul></div>
     <!--end of autogenerated content--></div><div class="body">
 <div class="section"><h2><a id="Introduction" shape="rect"><span class="secnum">1. </span>Introduction (informative)</a></h2>
   <p>The Universal Worker Service (UWS)
@@ -186,7 +198,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
       universal worker service.</p>
   </div>
   <div class="section"><h3><a id="IVOARCH" shape="rect"><span class="secnum">1.4. </span>UWS in the IVOA Architecture</a></h3>
-    <p><img src="ivoaarchitecture.png" alt="ivoa architectures"/></p>
+    <p><img src="ivoaarchitecture.png" alt="ivoa architectures" /></p>
     <p>With the IVOA Architecture above, UWS is a VO  infrastructure standard, being used by other standards and services to enable the development of VO applications managing asynchronous and stateless execution of jobs on VO services. Examples of such jobs include the case where the response must be computed, and that computation time takes longer than the normal expectation in an interactive web session. Additionally the UWS pattern allows a simple form of data sharing of the results of a job that is suitable for "workflow" situations and can be used by Data Access Services (currently Table Access Protocol <cite>[<a href="#std:tap">std:tap</a>]</cite>, but potentially by other DAL standards).  It utilizes IVOA standards for security <cite>[<a href="#std:ssoauth">std:ssoauth</a>]</cite> if it is desired that a non-public UWS be created. </p>
     </div>
 </div>
@@ -196,7 +208,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
         objects that may be read and written to in order to control jobs. The objects are  represented by elements within the XML schema detailed in <span class="xref"><a href="#UWSSchema">B</a></span>. In a REST binding, these objects are addressed as distinct web-resources each with its own URI. </p>
       <p> The following sub-sections explain the semantics of the objects. The
         UML diagram below shows the relationships more succinctly.</p>
-      <p><img src="Class_Diagram__UWS__UWSObjects.png" alt="UWS Objects Class Diagram" width="460" height="390" id="graphics2"/></p>
+      <p><img src="Class_Diagram__UWS__UWSObjects.png" alt="UWS Objects Class Diagram" width="460" height="390" id="graphics2" /></p>
       <div class="section"><h4><a id="Joblist" shape="rect"><span class="secnum">2.1.1. </span>Job list</a></h4>
         <p>The Job List is the outermost object:
           it contains all the other objects in the UWS. The immediate children
@@ -262,7 +274,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
                   will not automatically be executed (cf, PENDING)</p>
         </li><li><p>SUSPENDED: The job has been suspended by the system during execution. This might be because of temporary lack of resource. The UWS will automatically resume the job into the EXECUTING phase without any intervention when resource becomes available.</p></li><li>ARCHIVED: At destruction time the results associated with a job have been deleted to free up resource, but the metadata associated with the job is retained.</li></ul>
         <p>A successful job will normally progress through the PENDING, QUEUED, EXECUTING, COMPLETED phases in that order. At any time before the COMPLETED phase a job may either be ABORTED or may suffer an ERROR. If the UWS reports an UNKNOWN phase, then all the client can do is re-query the phase until a known phase is reported. A UWS may place a job in a HELD phase on receipt of a PHASE=RUN request if for some reason the job cannot be immediately queued - in this case it is the responsibility of the client to request PHASE=RUN again at some later time.</p>
-        <p><img src="UWSStates.png" alt="UWS state diagram" width="487" height="332"/></p>
+        <p><img src="UWSStates.png" alt="UWS state diagram" width="487" height="332" /></p>
         
       </div>
       <div class="section"><h4><a id="ExecutionDuration" shape="rect"><span class="secnum">2.1.4. </span>Execution Duration</a></h4>
@@ -369,37 +381,97 @@ The document has been reviewed by IVOA Members and other interested parties, and
           Transfer) binding of UWS, each of the objects defined above is
           available as a web resource with its own URI. These URIs must form a
           hierarchy as shown in the table below:</p>
-        <table border="1" cellpadding="2" cellspacing="0"><tr><th scope="col" rowspan="1" colspan="1">URI</th><th scope="col" rowspan="1" colspan="1">Description</th><th scope="col" rowspan="1" colspan="1">Representation</th></tr><tr><td rowspan="1" colspan="1">/{jobs}</td><td rowspan="1" colspan="1">the Job List</td><td rowspan="1" colspan="1"> the <span class="xmlelement">&lt;jobs&gt;</span> element in the UWS schema</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)</td><td rowspan="1" colspan="1">a Job</td><td rowspan="1" colspan="1"><p>the <span class="xmlelement">&lt;job&gt;</span> element in the UWS schema<br clear="none"/>
-            </p></td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/phase</td><td rowspan="1" colspan="1"> the Phase of job
-          (job-id)</td><td rowspan="1" colspan="1">One of the fixed strings</td></tr>
-            <tr>
-              <td colspan="1">/{jobs}/(job-id)/blockingphase</td>
-              <td colspan="1">the Phase of job
-          (job-id) that blocks (see below for more detail)</td>
-              <td colspan="1">One of the fixed strings for phase</td>
-          </tr>
-          <tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/executionduration</td><td rowspan="1" colspan="1">the
-          maximum execution duration of (job-id)</td><td rowspan="1" colspan="1">Integer number of seconds.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/destruction</td><td rowspan="1" colspan="1"> the
-          destruction instant for (job-id)</td><td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite>. If no destruction time then return empty string.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/error</td><td rowspan="1" colspan="1">any error
-          message associated with (job-id)</td><td rowspan="1" colspan="1">any representation appropriate to the implementing service</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/quote </td><td rowspan="1" colspan="1">the Quote for
-          (job-id)</td>
-          <td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]. </cite>If no quote available then return empty string.</td>
-          </tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/results</td><td rowspan="1" colspan="1">any results of the job 
-          (job-id)</td><td rowspan="1" colspan="1">the <span class="xmlelement">&lt;results&gt;</span> element in the UWS schema.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/parameters</td><td rowspan="1" colspan="1">any parameters for the job 
-          (job-id)</td><td rowspan="1" colspan="1">the <span class="xmlelement">&lt;parameters&gt;</span> element in the UWS schema.</td></tr><tr><td rowspan="1" colspan="1">/{jobs}/(job-id)/owner</td><td rowspan="1" colspan="1">the owner of the job (job-id)</td><td rowspan="1" colspan="1">an appropriate identifier as discussed in 
-              <span class="xref"><a href="#security">3</a></span></td></tr></table>
-        <p>The service implementer is free to
+     <table border="1" cellpadding="2" cellspacing="0">
+      <tr>
+       <th scope="col" rowspan="1" colspan="1">URI</th>
+       <th scope="col" rowspan="1" colspan="1">Description</th>
+       <th scope="col" rowspan="1" colspan="1">Representation</th>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}</td>
+       <td rowspan="1" colspan="1">the Job List</td>
+       <td rowspan="1" colspan="1">the <span class="xmlelement">&lt;jobs&gt;</span>
+        element in the UWS schema
+       </td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)</td>
+       <td rowspan="1" colspan="1">a Job</td>
+       <td rowspan="1" colspan="1"><p>
+         the <span class="xmlelement">&lt;job&gt;</span> element in the
+         UWS schema<br clear="none" />
+        </p></td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/phase</td>
+       <td rowspan="1" colspan="1">the Phase of job (job-id)</td>
+       <td rowspan="1" colspan="1">One of the fixed strings</td>
+      </tr>
+      <tr>
+       <td colspan="1" rowspan="1">/{jobs}/(job-id)/blockingphase</td>
+       <td colspan="1" rowspan="1">the Phase of job (job-id) that
+        blocks (see <span class="xref"><a href="#blocking">2.2.1.1</a></span>)</td>
+       <td colspan="1" rowspan="1">One of the fixed strings for
+        phase</td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/executionduration</td>
+       <td rowspan="1" colspan="1">the maximum execution duration
+        of (job-id)</td>
+       <td rowspan="1" colspan="1">Integer number of seconds.</td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/destruction</td>
+       <td rowspan="1" colspan="1">the destruction instant for
+        (job-id)</td>
+       <td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite>. If no destruction time then return empty string.</td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/error</td>
+       <td rowspan="1" colspan="1">any error message associated
+        with (job-id)</td>
+       <td rowspan="1" colspan="1">any representation appropriate
+        to the implementing service</td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/quote</td>
+       <td rowspan="1" colspan="1">the Quote for (job-id)</td>
+       <td rowspan="1" colspan="1"><cite>[<a href="#std:iso8601">std:iso8601</a>]</cite>If no quote available then return empty string.</td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/results</td>
+       <td rowspan="1" colspan="1">any results of the job (job-id)</td>
+       <td rowspan="1" colspan="1">the <span class="xmlelement">&lt;results&gt;</span>
+        element in the UWS schema.
+       </td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/parameters</td>
+       <td rowspan="1" colspan="1">any parameters for the job
+        (job-id)</td>
+       <td rowspan="1" colspan="1">the <span class="xmlelement">&lt;parameters&gt;</span>
+        element in the UWS schema.
+       </td>
+      </tr>
+      <tr>
+       <td rowspan="1" colspan="1">/{jobs}/(job-id)/owner</td>
+       <td rowspan="1" colspan="1">the owner of the job (job-id)</td>
+       <td rowspan="1" colspan="1">an appropriate identifier as
+        discussed in <span class="xref"><a href="#security">3</a></span>
+       </td>
+      </tr>
+     </table>
+     <p>The service implementer is free to
           choose the names given in parentheses above, i.e. the root of the URI tree, and the form that the job identifier takes (though note that it should be a legal URI path element) - the other names are part
           of the UWS standard.</p>
         <p>The URI for the Job List, in its
           absolute form is the root URI for the whole UWS. This URI should be
           given as the access URL in the UWS registration.</p>
-        <div class="section">
-          <h4><a id="blocking" shape="rect"><span class="secnum">2.2.2.1. </span>Blocking Endpoints</a></h4>
-          <p>UWS 1.1 introduces the /{jobs}/(job-id)/blockingphase endpoint, which is intended not to  return (i.e. block) when requested
-           until the Phase of the job has changed from &quot;EXECUTING&quot; to some other state. If requested when the Job is in any other
+        <div class="section"><h4><a id="blocking" shape="rect"><span class="secnum">2.2.1.1. </span>Blocking Endpoints</a></h4>
+          <p>UWS 1.1 introduces the /{jobs}/(job-id)/blockingphase endpoint, which should not to return (i.e. block) when requested
+           until the Phase of the job has changed from "EXECUTING" to some other state. If requested when the Job is in any other
             phase then the value should be returned immediately. The purpose of this functionality is for the client to be able to do a
-             &quot;slow poll&quot; of the Job Phase when it is running. the client may make a request on the /{jobs}/(job-id)/blockingphase 
+             "slow poll" of the Job Phase whilst the job is running. The client may make a request on the /{jobs}/(job-id)/blockingphase 
              endpoint which will potentially time-out before the job finishes executing, at which time the client can resubmit a request. 
              The advantage for the client is that it can know almost immediately when a job has results without having to execute polling 
              with a very short timescale - this also has advantages for the server in terms of reduced nework traffic. 
@@ -442,7 +514,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
           an example or such a job instance is shown below</p>
           <div><!--The contents of this div are automatically generated from the following processing instruction when processed with ivoarestructure.xsl-->
     <?incxml href="../UWSJobInstance.xml" ?><h:div xmlns:h="http://www.w3.org/1999/xhtml" class="viewxml"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:job</span> <span class="attribute-name">xsi:schemaLocation</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0 UWS.xsd "</span> <span class="attribute-name">xmlns:xml</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/XML/1998/namespace"</span> <span class="attribute-name">xmlns:uws</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0"</span> <span class="attribute-name">xmlns:xlink</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span> <span class="attribute-name">xmlns:xsi</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/2001/XMLSchema-instance"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:jobId</span><span class="markup">&gt;</span><span class="text">cea-agdevel.jb.man.ac.uk-130.88.24.18-1242749568029-508182314</span><span class="markup">&lt;/</span><span class="end-tag">uws:jobId</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:ownerId</span> <span class="attribute-name">xsi:nil</span><span class="markup">=</span><span class="attribute-value">"true"</span><span class="markup">/&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:phase</span><span class="markup">&gt;</span><span class="text">COMPLETED</span><span class="markup">&lt;/</span><span class="end-tag">uws:phase</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:startTime</span><span class="markup">&gt;</span><span class="text">2009-05-19T17:12:48.038+01:00</span><span class="markup">&lt;/</span><span class="end-tag">uws:startTime</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:endTime</span><span class="markup">&gt;</span><span class="text">2009-05-19T17:12:48.041+01:00</span><span class="markup">&lt;/</span><span class="end-tag">uws:endTime</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:executionDuration</span><span class="markup">&gt;</span><span class="text">86400</span><span class="markup">&lt;/</span><span class="end-tag">uws:executionDuration</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:destruction</span><span class="markup">&gt;</span><span class="text">2009-05-29T17:12:48.035+01:00</span><span class="markup">&lt;/</span><span class="end-tag">uws:destruction</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:parameters</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:parameter</span> <span class="attribute-name">id</span><span class="markup">=</span><span class="attribute-value">"scaleFactor"</span><span class="markup">&gt;</span><span class="text">1.8</span><span class="markup">&lt;/</span><span class="end-tag">uws:parameter</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:parameter</span> <span class="attribute-name">id</span><span class="markup">=</span><span class="attribute-value">"image"</span> <span class="attribute-name">byReference</span><span class="markup">=</span><span class="attribute-value">"true"</span><span class="markup">&gt;</span><span class="text">
-         http://myserver.org/uws/jobs/jobid123/param/image</span><span class="markup">&lt;/</span><span class="end-tag">uws:parameter</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:parameters</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:results</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:result</span> <span class="attribute-name">id</span><span class="markup">=</span><span class="attribute-value">"correctedImage"</span> <span class="attribute-name">xlink:href</span><span class="markup">=</span><span class="attribute-value">"http://myserver.org/uws/jobs/jobid123/result/image"</span><span class="markup">/&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:result</span> <span class="attribute-name">id</span><span class="markup">=</span><span class="attribute-value">"name"</span><span class="markup">&gt;</span><span class="text">inline</span><span class="markup">&lt;/</span><span class="end-tag">uws:result</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:results</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:errorSummary</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"transient"</span> <span class="attribute-name">hasDetail</span><span class="markup">=</span><span class="attribute-value">"true"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:message</span><span class="markup">&gt;</span><span class="text">we have problem</span><span class="markup">&lt;/</span><span class="end-tag">uws:message</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:errorSummary</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:jobInfo</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">any</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xml</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">thatyouwant</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xml</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">any</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:jobInfo</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:job</span><span class="markup">&gt;</span></div></h:div>
+         http://myserver.org/uws/jobs/jobid123/param/image</span><span class="markup">&lt;/</span><span class="end-tag">uws:parameter</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:parameters</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:results</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:result</span> <span class="attribute-name">id</span><span class="markup">=</span><span class="attribute-value">"correctedImage"</span> <span class="attribute-name">xlink:href</span><span class="markup">=</span><span class="attribute-value">"http://myserver.org/uws/jobs/jobid123/result/image"</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:results</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:errorSummary</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"transient"</span> <span class="attribute-name">hasDetail</span><span class="markup">=</span><span class="attribute-value">"true"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:message</span><span class="markup">&gt;</span><span class="text">we have problem</span><span class="markup">&lt;/</span><span class="end-tag">uws:message</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:errorSummary</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">uws:jobInfo</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">any</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xml</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">thatyouwant</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xml</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">any</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:jobInfo</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">uws:job</span><span class="markup">&gt;</span></div></h:div>
     <!--end of autogenerated content--></div>
     
     
@@ -455,8 +527,8 @@ The document has been reviewed by IVOA Members and other interested parties, and
         </div>
         <div class="section"><h4><a id="resultList" shape="rect"><span class="secnum">2.2.2.3. </span>Results List</a></h4>
           <p>The representation of a Results List
-            is a list of links to the resources representing the results<span class="issue">
-            element. The linked  </span>
+            is a list of links to the resources representing the results
+            element. The linked 
             resources may have any URI and any MIME type. A sensible default for
             their URIs is to make them children of /{jobs}/(job-id)/results, but
             this is not required. It may sometimes be easier for a service
@@ -565,8 +637,8 @@ The document has been reviewed by IVOA Members and other interested parties, and
           message pattern shown in figure 2.</p>
         <p><i>Illustration 2:
         Typical calling sequence for the REST binding of UWS</i></p>
-        <p><img src="Sequence_Diagram__UWS__Rest_Message_Pattern__Rest_Message_Pattern__Rest_Message_Pattern.png" width="100%" id="graphics3" alt="rest message pattern"/></p>
-        <br style="clear: both;" clear="none"/>
+        <p><img src="Sequence_Diagram__UWS__Rest_Message_Pattern__Rest_Message_Pattern__Rest_Message_Pattern.png" width="100%" id="graphics3" alt="rest message pattern" /></p>
+        <br style="clear: both;" clear="none" />
       </div>
     </div>
     </div>
@@ -780,7 +852,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
       containing references to the desired data.</p>
   </div>
  
-<div class="appendices"><h2><a name="Appendices" id="Appendices" shape="rect"/>Appendices</h2>
+<div class="appendices"><h2><a name="Appendices" id="Appendices" shape="rect"></a>Appendices</h2>
 
 <div class="section"><h2><a id="Updates" shape="rect"><span class="secnum">A. </span>Updates from previous versions</a></h2>
   <div class="section"><h3><a id="d1e1112" shape="rect"><span class="secnum">A.1. </span>At Version 0.5</a></h3>
@@ -801,9 +873,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
   The Enhancements that have been added are</p>
      <ul><li>Informative section on how to start a job in a
        running state <span class="xref"><a href="#jobCreation">2.2.3.1</a></span>
-      </li><li>Added the ability to filter on the job list <span class="xref"><a href="#jobList">2.2.2.1</a></span></li><li>Added a new phase "ARCHIVED" <span class="xref"><a href="#ExecutionPhase">2.1.3</a></span> and <span class="xref"><a href="#jobList">2.2.2.1</a></span></li>
-      <li>Added a /{jobs}/{jobid}/blockingphase object to allow "slow poll"<span class="xref">blocking</span>.</li>
-     </ul>
+      </li><li>Added the ability to filter on the job list <span class="xref"><a href="#jobList">2.2.2.1</a></span></li><li>Added a new phase "ARCHIVED" <span class="xref"><a href="#ExecutionPhase">2.1.3</a></span> and <span class="xref"><a href="#jobList">2.2.2.1</a></span></li><li>Added a /{jobs}/{jobid}/blockingphase object to allow "slow poll"<span class="xref"><a href="#blocking">2.2.1.1</a></span>.</li></ul>
     </div>
 </div>
 
@@ -858,7 +928,7 @@ completeness of this document.</p>
                   the server because of lack or overuse of resources.
                </span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:enumeration</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span><span class="markup">=</span><span class="attribute-value">"ARCHIVED"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text">
                   The job has been archived by the server at destruction time. An archived job
-                  may have of the results destroyed, must have job metadata preserved.
+                  may have deleted the results to reclaim resources, but must have job metadata preserved.
                   This is an alternative that the server may choose in contrast to completely destroying all record of the job.
                </span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:enumeration</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:restriction</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:simpleType</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"JobSummary"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text">The complete representation of the state
             of a job</span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"jobId"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:JobIdentifier"</span><span class="markup">/&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"runId"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"xs:string"</span> <span class="attribute-name">maxOccurs</span><span class="markup">=</span><span class="attribute-value">"1"</span> <span class="attribute-name">minOccurs</span><span class="markup">=</span><span class="attribute-value">"0"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text"> this is a client supplied identifier -
@@ -885,7 +955,7 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
             /(jobs)</span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text"> ISSUE - do we want to have any sort of
                paging or selection mechanism in case the job list gets
                very large? Or is that an unnecessary complication...
-            </span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"jobref"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:ShortJobDescription"</span> <span class="attribute-name">maxOccurs</span><span class="markup">=</span><span class="attribute-value">"unbounded"</span> <span class="attribute-name">minOccurs</span><span class="markup">=</span><span class="attribute-value">"0"</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:sequence</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:complexType</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:element</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"ResultReference"</span> <span class="attribute-name">mixed</span><span class="markup">=</span><span class="attribute-value">"true"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text"> A reference to a UWS result. If the 
+            </span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"jobref"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:ShortJobDescription"</span> <span class="attribute-name">maxOccurs</span><span class="markup">=</span><span class="attribute-value">"unbounded"</span> <span class="attribute-name">minOccurs</span><span class="markup">=</span><span class="attribute-value">"0"</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:sequence</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:complexType</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:element</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"ResultReference"</span> <span class="attribute-name">mixed</span><span class="markup">=</span><span class="attribute-value">"false"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text"> A reference to a UWS result. If the 
          </span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"id"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"xs:string"</span> <span class="attribute-name">use</span><span class="markup">=</span><span class="attribute-value">"required"</span><span class="markup">/&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:attributeGroup</span> <span class="attribute-name">ref</span><span class="markup">=</span><span class="attribute-value">"uws:reference"</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:complexType</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"results"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text"> The element returned for
             /(jobs)/(jobid)/results</span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"result"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:ResultReference"</span> <span class="attribute-name">maxOccurs</span><span class="markup">=</span><span class="attribute-value">"unbounded"</span> <span class="attribute-name">minOccurs</span><span class="markup">=</span><span class="attribute-value">"0"</span><span class="markup">/&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:sequence</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:complexType</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:element</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"ErrorSummary"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text">
             A short summary of an error - a fuller representation of the
@@ -915,7 +985,7 @@ can also be retrieved at /(jobs)/(jobid)/parameters</span><span class="markup">&
     
 </div>
 </div>
-<div class="section-nonum'"><h2><a name="References" id="References" shape="rect"/>References</h2>
+<div class="section-nonum'"><h2><a name="References" id="References" shape="rect"></a>References</h2>
  <div>
 <!--   <?bibliography ivoadoc/refs.bib ?> -->
 
