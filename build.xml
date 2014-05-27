@@ -16,10 +16,15 @@
 	<target name="formatdoc" description="add TOC, numbering etc">
 		<copy file="${ivoname}.html" tofile="${ivoname}-old.html"/> 
 		<xslt style="ivoadoc/ivoarestructure.xslt" in="${ivoname}.html" out="${ivoname}-new.html" >
-			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+			<factory name="net.sf.saxon.TransformerFactoryImpl" >
+           <attribute name="http://saxon.sf.net/feature/strip-whitespace" 
+                value="none"/> <!-- preserve whitespace between elements -http://www.saxonica.com/documentation/sourcedocs/whitespace.html -->
+         </factory>
+           
                <param name="docversion" expression="${docversion}"/>
                <param name="pubstatus" expression="${pubstatus}"/>
 			<param name="docdate" expression="${docdate}"/>
+         
 			<xmlcatalog >
 				<catalogpath>
 					<filelist>
@@ -75,8 +80,8 @@
          ================================= -->
     <target name="package"  description="create a zip file of document and associated files">
     	<tstamp></tstamp>
-    	<copy file="UWS.html" tofile="REC-UWS-1.0-${DSTAMP}.html"></copy>
-    	<copy file="UWS.pdf" tofile="REC-UWS-1.0-${DSTAMP}.pdf"></copy>
+    	<copy file="UWS.html" tofile="${pubstatus}-UWS-${docversion}-${DSTAMP}.html"></copy>
+    	<copy file="UWS.pdf" tofile="${pubstatus}-UWS-${docversion}-${DSTAMP}.pdf"></copy>
     	
         <zip destfile="uws.zip" basedir="${basedir}" includes="REC-UWS-1.0-${DSTAMP}.html, REC-UWS-1.0-${DSTAMP}.pdf, UWS.xsd,**/*.css,**/*.png,**/*.gif">
         	
@@ -84,7 +89,7 @@
     </target>
 
 	
-	<property name="fop.home" value="/opt/packages/fop-1.0"/>
+	<property name="fop.home" value="/opt/packages/fop-1.1"/>
 
 	<taskdef name="fop" 
 	         classname="org.apache.fop.tools.anttasks.Fop">
