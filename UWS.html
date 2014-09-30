@@ -7,7 +7,7 @@ Paul Harrison -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en" lang="en" xsi:schemalocation="http://www.w3.org/1999/xhtml                           http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd" xml:space="preserve">
 <head profile="http://www.w3.org/1999/xhtml/vocab"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Universal Worker Service Pattern 1.1   - IVOA Working Draft  27 May 2014</title> 
+<title>Universal Worker Service Pattern 1.1    - IVOA Working Draft  30 September 2014</title> 
 <meta name="Title" content="IVOA WG Internal Draft" />
 <meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
 <meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
@@ -29,13 +29,17 @@ Paul Harrison -->
   </div>
   <h1>Universal Worker Service Pattern<br clear="none" />
   Version <span class="docversion">1.1</span></h1>
-<h2 class="subtitle">IVOA Working Draft  27 May 2014</h2>
+<h2 class="subtitle">IVOA Working Draft  30 September 2014</h2>
 <dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd>
 <dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/20140527/WD-UWS-1.1-20140527.html" shape="rect">http://www.ivoa.net/Documents/UWS/201405127/WD-UWS-1.1-20140527.html</a></dd>
 <dt><b>Latest version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd>
 <dt><b>Previous version(s):</b></dt><dd> Proposed Recommendation v1.0, 2009-09-09<br clear="none" />
-  <a href="http://www.ivoa.net/documents/UWS/20101010/">Recommendation v1.0 2010-10-10</a><br clear="none" />
-</dd><dt> <br clear="none" />
+  <a href="http://www.ivoa.net/documents/UWS/20101010/" shape="rect">Recommendation v1.0 2010-10-10</a><br clear="none" />
+  <a href="http://www.ivoa.net/documents/UWS/20140527/" shape="rect">Working Draft v1.1 2014-05-27</a><br clear="none" />
+  </dd>
+<dt>	
+</dt>
+<dt> <br clear="none" />
   </dt><dd>&nbsp;</dd><dt><b>Author(s):</b></dt><dd>  P. 
     Harrison, G. Rixon</dd></dl>
 
@@ -58,9 +62,9 @@ The document has been reviewed by IVOA Members and other interested parties, and
   statefulness are distilled from debates in the Global Grid Forum in
   respect of the Open Grid Services Infrastructure that was the
   fore-runner of Web Services Resource Framework. The REST binding came
-  initially from suggestions by Norman Gray. Enhancements introduced in version 1.1 were as a result of feedback from implementors, particularly Pat Dowler and Petr Škoda.</p>
+  initially from suggestions by Norman Gray. Enhancements introduced in version 1.1 were as a result of feedback from implementors, particularly Pat Dowler, Dave Morris and Petr Škoda.</p>
 </div><h2>Contents</h2><div><!--The contents of this div are automatically generated from the following processing instruction when processed with ivoarestructure.xsl-->
-    <?toc?><div id="toc" class="toc"><ul><li><a href="#Introduction"><span class="secnum">1. </span>Introduction (informative)</a><ul><li><a href="#SynchronousStateless"><span class="secnum">1.1. </span>Synchronous, stateless services</a></li><li><a href="#AsynchronousServices"><span class="secnum">1.2. </span>Asynchronous and stateful services</a></li><li><a href="#JDL"><span class="secnum">1.3. </span>Job description language, service contracts and universality</a></li><li><a href="#IVOARCH"><span class="secnum">1.4. </span>UWS in the IVOA Architecture</a></li></ul></li><li><a href="#UWSpattern"><span class="secnum">2. </span>Universal Worker Service Pattern (normative)</a><ul><li><a href="#UWSObjects"><span class="secnum">2.1. </span>Objects within a UWS</a><ul><li><a href="#Joblist"><span class="secnum">2.1.1. </span>Job list</a></li><li><a href="#Job"><span class="secnum">2.1.2. </span>Job</a></li><li><a href="#ExecutionPhase"><span class="secnum">2.1.3. </span>Execution Phase</a></li><li><a href="#ExecutionDuration"><span class="secnum">2.1.4. </span>Execution Duration</a></li><li><a href="#DestructionTime"><span class="secnum">2.1.5. </span>Destruction Time</a></li><li><a href="#Quote"><span class="secnum">2.1.6. </span>Quote</a></li><li><a href="#Error"><span class="secnum">2.1.7. </span>Error</a></li><li><a href="#Error2"><span class="secnum">2.1.8. </span>Owner</a></li><li><a href="#Error3"><span class="secnum">2.1.9. </span>RunId</a></li><li><a href="#ResultsList"><span class="secnum">2.1.10. </span>Results List</a></li><li><a href="#ResultsList2"><span class="secnum">2.1.11. </span>Parameter List</a></li></ul></li><li><a href="#RESTbinding"><span class="secnum">2.2. </span>The REST Binding</a><ul><li><a href="#d1e834"><span class="secnum">2.2.1. </span>Resources and URIs</a><ul><li><a href="#blocking"><span class="secnum">2.2.1.1. </span>Blocking Endpoints</a></li></ul></li><li><a href="#d1e603"><span class="secnum">2.2.2. </span>Representations of resources</a><ul><li><a href="#jobList"><span class="secnum">2.2.2.1. </span>Job List</a></li><li><a href="#d1e1040"><span class="secnum">2.2.2.2. </span>Job</a></li><li><a href="#resultList"><span class="secnum">2.2.2.3. </span>Results List</a></li><li><a href="#d1e1353"><span class="secnum">2.2.2.4. </span>Parameters List</a></li><li><a href="#d1e1556"><span class="secnum">2.2.2.5. </span>Error</a></li></ul></li><li><a href="#jobcontrol"><span class="secnum">2.2.3. </span>State changing requests</a><ul><li><a href="#jobCreation"><span class="secnum">2.2.3.1. </span>Creating a Job</a><ul><li><a href="#d2e1612"><span class="secnum">2.2.3.1.1. </span>Inline Parameters</a></li></ul></li><li><a href="#d1e1390"><span class="secnum">2.2.3.2. </span>Deleting a Job</a></li><li><a href="#d1e1402"><span class="secnum">2.2.3.3. </span>Changing the Destruction Time</a></li><li><a href="#d1e1420"><span class="secnum">2.2.3.4. </span>Changing the Execution Duration</a></li><li><a href="#d1e1439"><span class="secnum">2.2.3.5. </span>Starting a Job</a></li><li><a href="#d1e1448"><span class="secnum">2.2.3.6. </span>Aborting a Job</a></li></ul></li><li><a href="#d1e708"><span class="secnum">2.2.4. </span>Message pattern</a></li></ul></li></ul></li><li><a href="#security"><span class="secnum">3. </span>Security Considerations (normative)</a></li><li><a href="#ApplicationsOfUWS"><span class="secnum">4. </span>Applications of UWS (informative)</a><ul><li><a href="#Imageservice"><span class="secnum">4.1. </span>Image service with data staging</a></li><li><a href="#ADQLservice"><span class="secnum">4.2. </span>ADQL service with cursor</a></li><li><a href="#ParameterizedApplications"><span class="secnum">4.3. </span>Parameterised applications</a></li></ul></li><li><a href="#SynchronousService"><span class="secnum">5. </span>Implementing a Synchronous Service on top of UWS (informative)</a></li><li><a href="#Updates"><span class="secnum">A. </span>Updates from previous versions</a><ul><li><a href="#d1e1112"><span class="secnum">A.1. </span>At Version 0.5</a></li><li><a href="#d1e1775"><span class="secnum">A.2. </span>At Version 1.0</a></li><li><a href="#ver11"><span class="secnum">A.3. </span>At Version 1.1</a></li></ul></li><li><a href="#UWSSchema"><span class="secnum">B. </span>UWS Schema</a></li></ul></div>
+    <?toc?><div id="toc" class="toc"><ul><li><a href="#Introduction"><span class="secnum">1. </span>Introduction (informative)</a><ul><li><a href="#SynchronousStateless"><span class="secnum">1.1. </span>Synchronous, stateless services</a></li><li><a href="#AsynchronousServices"><span class="secnum">1.2. </span>Asynchronous and stateful services</a></li><li><a href="#JDL"><span class="secnum">1.3. </span>Job description language, service contracts and universality</a></li><li><a href="#IVOARCH"><span class="secnum">1.4. </span>UWS in the IVOA Architecture</a></li></ul></li><li><a href="#UWSpattern"><span class="secnum">2. </span>Universal Worker Service Pattern (normative)</a><ul><li><a href="#UWSObjects"><span class="secnum">2.1. </span>Objects within a UWS</a><ul><li><a href="#Joblist"><span class="secnum">2.1.1. </span>Job list</a></li><li><a href="#Job"><span class="secnum">2.1.2. </span>Job</a></li><li><a href="#ExecutionPhase"><span class="secnum">2.1.3. </span>Execution Phase</a></li><li><a href="#ExecutionDuration"><span class="secnum">2.1.4. </span>Execution Duration</a></li><li><a href="#DestructionTime"><span class="secnum">2.1.5. </span>Destruction Time</a></li><li><a href="#Quote"><span class="secnum">2.1.6. </span>Quote</a></li><li><a href="#Error"><span class="secnum">2.1.7. </span>Error</a></li><li><a href="#Error2"><span class="secnum">2.1.8. </span>Owner</a></li><li><a href="#Error3"><span class="secnum">2.1.9. </span>RunId</a></li><li><a href="#ResultsList"><span class="secnum">2.1.10. </span>Results List</a></li><li><a href="#ResultsList2"><span class="secnum">2.1.11. </span>Parameter List</a></li></ul></li><li><a href="#RESTbinding"><span class="secnum">2.2. </span>The REST Binding</a><ul><li><a href="#d1e834"><span class="secnum">2.2.1. </span>Resources and URIs</a><ul><li><a href="#blocking"><span class="secnum">2.2.1.1. </span>Blocking Behaviour</a></li></ul></li><li><a href="#d1e603"><span class="secnum">2.2.2. </span>Representations of resources</a><ul><li><a href="#jobList"><span class="secnum">2.2.2.1. </span>Job List</a></li><li><a href="#d1e1040"><span class="secnum">2.2.2.2. </span>Job</a></li><li><a href="#resultList"><span class="secnum">2.2.2.3. </span>Results List</a></li><li><a href="#d1e1353"><span class="secnum">2.2.2.4. </span>Parameters List</a></li><li><a href="#d1e1556"><span class="secnum">2.2.2.5. </span>Error</a></li></ul></li><li><a href="#jobcontrol"><span class="secnum">2.2.3. </span>State changing requests</a><ul><li><a href="#jobCreation"><span class="secnum">2.2.3.1. </span>Creating a Job</a><ul><li><a href="#d2e1612"><span class="secnum">2.2.3.1.1. </span>Inline Parameters</a></li></ul></li><li><a href="#d1e1390"><span class="secnum">2.2.3.2. </span>Deleting a Job</a></li><li><a href="#d1e1402"><span class="secnum">2.2.3.3. </span>Changing the Destruction Time</a></li><li><a href="#d1e1420"><span class="secnum">2.2.3.4. </span>Changing the Execution Duration</a></li><li><a href="#d1e1439"><span class="secnum">2.2.3.5. </span>Starting a Job</a></li><li><a href="#d1e1448"><span class="secnum">2.2.3.6. </span>Aborting a Job</a></li></ul></li><li><a href="#d1e708"><span class="secnum">2.2.4. </span>Message pattern</a></li></ul></li></ul></li><li><a href="#security"><span class="secnum">3. </span>Security Considerations (normative)</a></li><li><a href="#ApplicationsOfUWS"><span class="secnum">4. </span>Applications of UWS (informative)</a><ul><li><a href="#Imageservice"><span class="secnum">4.1. </span>Image service with data staging</a></li><li><a href="#ADQLservice"><span class="secnum">4.2. </span>ADQL service with cursor</a></li><li><a href="#ParameterizedApplications"><span class="secnum">4.3. </span>Parameterised applications</a></li></ul></li><li><a href="#SynchronousService"><span class="secnum">5. </span>Implementing a Synchronous Service on top of UWS (informative)</a></li><li><a href="#Updates"><span class="secnum">A. </span>Updates from previous versions</a><ul><li><a href="#d1e1112"><span class="secnum">A.1. </span>At Version 0.5</a></li><li><a href="#d1e1775"><span class="secnum">A.2. </span>At Version 1.0</a></li><li><a href="#ver11"><span class="secnum">A.3. </span>At Version 1.1</a></li></ul></li><li><a href="#UWSSchema"><span class="secnum">B. </span>UWS Schema</a></li></ul></div>
     <!--end of autogenerated content--></div><div class="body">
 <div class="section"><h2><a id="Introduction" shape="rect"><span class="secnum">1. </span>Introduction (informative)</a></h2>
   <p>The Universal Worker Service (UWS)
@@ -394,8 +398,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
        <td rowspan="1" colspan="1">/{jobs}</td>
        <td rowspan="1" colspan="1">the Job List</td>
        <td rowspan="1" colspan="1">the <span class="xmlelement">&lt;jobs&gt;</span>
-        element in the UWS schema
-       </td>
+        element in the UWS schema       </td>
       </tr>
       <tr>
        <td rowspan="1" colspan="1">/{jobs}/(job-id)</td>
@@ -409,13 +412,6 @@ The document has been reviewed by IVOA Members and other interested parties, and
        <td rowspan="1" colspan="1">/{jobs}/(job-id)/phase</td>
        <td rowspan="1" colspan="1">the Phase of job (job-id)</td>
        <td rowspan="1" colspan="1">One of the fixed strings</td>
-      </tr>
-      <tr>
-       <td colspan="1" rowspan="1">/{jobs}/(job-id)/blockingphase</td>
-       <td colspan="1" rowspan="1">the Phase of job (job-id) that
-        blocks (see <span class="xref"><a href="#blocking">2.2.1.1</a></span>)</td>
-       <td colspan="1" rowspan="1">One of the fixed strings for
-        phase</td>
       </tr>
       <tr>
        <td rowspan="1" colspan="1">/{jobs}/(job-id)/executionduration</td>
@@ -445,23 +441,20 @@ The document has been reviewed by IVOA Members and other interested parties, and
        <td rowspan="1" colspan="1">/{jobs}/(job-id)/results</td>
        <td rowspan="1" colspan="1">any results of the job (job-id)</td>
        <td rowspan="1" colspan="1">the <span class="xmlelement">&lt;results&gt;</span>
-        element in the UWS schema.
-       </td>
+        element in the UWS schema.       </td>
       </tr>
       <tr>
        <td rowspan="1" colspan="1">/{jobs}/(job-id)/parameters</td>
        <td rowspan="1" colspan="1">any parameters for the job
         (job-id)</td>
        <td rowspan="1" colspan="1">the <span class="xmlelement">&lt;parameters&gt;</span>
-        element in the UWS schema.
-       </td>
+        element in the UWS schema.       </td>
       </tr>
       <tr>
        <td rowspan="1" colspan="1">/{jobs}/(job-id)/owner</td>
        <td rowspan="1" colspan="1">the owner of the job (job-id)</td>
        <td rowspan="1" colspan="1">an appropriate identifier as
-        discussed in <span class="xref"><a href="#security">3</a></span>
-       </td>
+        discussed in <span class="xref"><a href="#security">3</a></span>       </td>
       </tr>
      </table>
      <p>The service implementer is free to
@@ -470,16 +463,13 @@ The document has been reviewed by IVOA Members and other interested parties, and
         <p>The URI for the Job List, in its
           absolute form is the root URI for the whole UWS. This URI should be
           given as the access URL in the UWS registration.</p>
-        <div class="section"><h4><a id="blocking" shape="rect"><span class="secnum">2.2.1.1. </span>Blocking Endpoints</a></h4>
-          <p>UWS 1.1 introduces the /{jobs}/(job-id)/blockingphase endpoint, which should not to return (i.e. block) when requested
-           until the Phase of the job has changed from "EXECUTING" to some other state. If requested when the Job is in any other
-            phase then the value should be returned immediately. The purpose of this functionality is for the client to be able to do a
-             "slow poll" of the Job Phase whilst the job is running. The client may make a request on the /{jobs}/(job-id)/blockingphase 
-             endpoint which will potentially time-out before the job finishes executing, at which time the client can resubmit a request. 
-             The advantage for the client is that it can know almost immediately when a job has results without having to execute polling 
-             with a very short timescale - this also has advantages for the server in terms of reduced nework traffic. 
-             A client that is UWS1.1 compliant should be aware that it will receive a 404 (not known) HTTP status code if it attempts to
-             perform this operation on a UWS 1.0 server.</p>
+        <div class="section"><h4><a id="blocking" shape="rect"><span class="secnum">2.2.1.1. </span>Blocking Behaviour</a></h4>
+          <p>UWS 1.1 introduces blocking behaviour where the server may not return the result of a request immediately (i.e. block) under certain circumstances. The purpose of this functionality is to allow  the client to be able to do a
+             "slow poll" of the Job status whilst the job is running. The advantage for the client is that it can know almost immediately when a job has results without having to execute polling 
+             with a very short timescale - this also has advantages for the server in terms of reduced nework traffic. The blocking behaviour is restricted to the <code> /{jobs}/(job-id) </code>endpoint, and is invoked by adding a <code>?WAIT</code> query parameter to the GET request to that endpoint. When the server receives such a request it should not return a response (i.e. block) 
+           until there is some significant change in the job status, which means that, at a minimum, it must return when the Job Phase changes. The server, however, may  block only when in one of the "active" phases (PENDING, QUEUED or EXECUTING), and otherwise  must return immediately and not block, even if a blocking request is made,  to avoid the possibility of a client waiting indefinitely. The <code>?WAIT</code> query parameter may be assigned an integer value e.g. <code>?WAIT=60</code> which is be interpreted as a maximum time to block in seconds - in this case the server must return after the given value of seconds whether there has been a significant change of Job status or not. A <code>?WAIT=0</code> should be interpreted as equivalent to <code>?WAIT</code> - i.e. a wait value of 0 seconds means block indefinitely until Job status change.</p>
+          <p>A client that is UWS1.1 compliant should be aware that it will receive immediate responses if it attempts to
+            perform this operation on a UWS 1.0 server.</p>
         </div>
         <p>&nbsp;</p>
       </div>
@@ -509,7 +499,7 @@ The document has been reviewed by IVOA Members and other interested parties, and
             The server may respond to a request from the client to filter the jobs shown by using URL query parameter on the PHASE for example</p>
           <pre xml:space="preserve">/{jobs}?PHASE=EXECUTING
 </pre>
-          <p>would list only the jobs in an EXECUTING state. If the PHASE filtering parameter is repeated, then the service should list all the jobs in the enumerated PHASEs.
+          <p>would list only the jobs in an EXECUTING state. If the PHASE filtering parameter is repeated, then the service should list all the jobs in the union of the enumerated PHASEs.
           The only way to list any jobs in the "ARCHIVED" phase is to use this mechanism.</p>
         </div>
         <div class="section"><h4><a id="d1e1040" shape="rect"><span class="secnum">2.2.2.2. </span>Job</a></h4>
@@ -570,7 +560,9 @@ The document has been reviewed by IVOA Members and other interested parties, and
           <p>This initial POST will in most cases
             carry parameters for the protocol that is using the UWS pattern, as
             detailed in <span class="xref"><a href="#ApplicationsOfUWS">4</a></span>
-            .In addition for the initial post may contain job control parameters if allowed by the implementing protocol (i.e. if UWS job control parameter names do not clash with the implementing protocol parameters). One use of this facility might be to have the job placed into a potentially running state by adding ?PHASE=RUN query part to the job creation URL.</p>
+            .In addition for the initial post may contain job control parameters if allowed by the implementing protocol 
+            (i.e. if UWS job control parameter names do not clash with the implementing protocol parameters). One use of this 
+            facility might be to have the job placed into a potentially running state by adding ?PHASE=RUN query part to the job creation URL.</p>
           <div class="section"><h4><a id="d2e1612" shape="rect"><span class="secnum">2.2.3.1.1. </span>Inline Parameters</a></h4>
             <p>The JDL may allow parameter values to be uploaded in-line - in this case the UWS should accept the parameter content as multipart/form-data encoded in the POST with the formal value of the parameter being a "byReference" type using the special URI scheme "param" with the path part of the URI matching the name attribute of the multipart/form-data encoding content part. The content of such an in-line parameter should be made available as part of the job resource tree at /{jobs}/{job-id}/parameters/{parameter-name}, and then described as a "byReference" parameter in the <span class="xmlelement">&lt;job&gt;</span> XML description.</p>
           </div>
@@ -876,7 +868,9 @@ The document has been reviewed by IVOA Members and other interested parties, and
   The Enhancements that have been added are</p>
      <ul><li>Informative section on how to start a job in a
        running state <span class="xref"><a href="#jobCreation">2.2.3.1</a></span>
-      </li><li>Added the ability to filter on the job list <span class="xref"><a href="#jobList">2.2.2.1</a></span></li><li>Added a new phase "ARCHIVED" <span class="xref"><a href="#ExecutionPhase">2.1.3</a></span> and <span class="xref"><a href="#jobList">2.2.2.1</a></span></li><li>Added a /{jobs}/{jobid}/blockingphase object to allow "slow poll"<span class="xref"><a href="#blocking">2.2.1.1</a></span>.</li></ul>
+      </li><li>Added the ability to filter on the job list <span class="xref"><a href="#jobList">2.2.2.1</a></span></li><li>Added a new phase "ARCHIVED" <span class="xref"><a href="#ExecutionPhase">2.1.3</a></span> and <span class="xref"><a href="#jobList">2.2.2.1</a></span></li>
+      <li>Added blocking behaviour to allow "slow poll" <span class="xref"><a href="#blocking">2.2.1.1</a></span>.</li>
+     </ul>
     </div>
 </div>
 
