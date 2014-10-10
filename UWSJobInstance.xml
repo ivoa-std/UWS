@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uws:job xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0"
+<uws:job xmlns:uws="http://www.ivoa.net/xml/UWS/v1.1"
    xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.ivoa.net/xml/UWS/v1.0 UWS.xsd "
+   xmlns:uwsc="urn:uwscustom"
+   xsi:schemaLocation="http://www.ivoa.net/xml/UWS/v1.1 UWS.xsd"
 >
    <uws:jobId>cea-agdevel.jb.man.ac.uk-130.88.24.18-1242749568029-508182314</uws:jobId>
    <uws:ownerId xsi:nil="true"/>
@@ -16,7 +17,8 @@
          http://myserver.org/uws/jobs/jobid123/param/image</uws:parameter>
    </uws:parameters>
    <uws:results>
-       <uws:result id="correctedImage" xlink:href="http://myserver.org/uws/jobs/jobid123/result/image"></uws:result>
+       <uws:result id="correctedImage" xlink:href="http://myserver.org/uws/jobs/jobid123/result/image" 
+              size="3000960" mime-type="image/fits" uwsc:anyattribute="a custom attribute"/>
    </uws:results>
    <uws:errorSummary type="transient" hasDetail="true">
      <uws:message>we have problem</uws:message>
