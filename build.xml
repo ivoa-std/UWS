@@ -5,7 +5,7 @@
 	<property name="ivoname" value="UWS"/>
 	<property name="latexlocation" location="/opt/local/bin"/>
      <property name="docversion" value="1.1"/>
-	<property name="docdate"  value="${DSTAMP}"/>
+	  <property name="docdate"  value="${DSTAMP}"/>
      <property name="pubstatus" value="WD"/><!-- set to the status of the document WD, PR, REC, NOTE -->
 
 	
@@ -78,12 +78,12 @@
 	<!-- ================================= 
           target: package              
          ================================= -->
-    <target name="package"  description="create a zip file of document and associated files">
+    <target name="package"  description="create a zip file of document and associated files" depends="createPDF" >
     	<tstamp></tstamp>
     	<copy file="UWS.html" tofile="${pubstatus}-UWS-${docversion}-${DSTAMP}.html"></copy>
     	<copy file="UWS.pdf" tofile="${pubstatus}-UWS-${docversion}-${DSTAMP}.pdf"></copy>
     	
-        <zip destfile="uws.zip" basedir="${basedir}" includes="REC-UWS-1.0-${DSTAMP}.html, REC-UWS-1.0-${DSTAMP}.pdf, UWS.xsd,**/*.css,**/*.png,**/*.gif">
+        <zip destfile="uws.zip" basedir="${basedir}" includes="${pubstatus}-UWS-${docversion}-${DSTAMP}.html, ${pubstatus}-UWS-${docversion}-${DSTAMP}.pdf, UWS.xsd,**/*.css,**/*.png,**/*.gif">
         	
         </zip>
     </target>
