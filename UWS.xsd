@@ -1,20 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-   <!-- $Revision: 1.2 $ $Date: 2011/09/01 14:03:58 $  $HeadURL: https://volute.googlecode.com/svn/trunk/projects/grid/uws/doc/UWS.html $ -->
+   <!-- $Revision$ $Date$  $HeadURL$ -->
    <!-- UWS schema - Paul Harrison May 2008 -->
-   <!--
-      $Log: UWS.xsd,v $
-      Revision 1.1.2.1  2010/02/25 11:33:41  pah
-      updates as used in the UWS 1.0 PR
-
-      Revision 1.1  2009/06/15 15:30:32  pah
-      made some of the global element defintions for job subobjects just local again
-      added runid, ownerid
-      added ParamList
-      changed some element names to be consistent with the uris
- Revision 1.6 2008/10/01 11:54:02 pah fix up cvs
-      header Revision 1.5 2008/09/25 00:22:35 pah change termination
-      time to execution duration
-   -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
    targetNamespace="http://www.ivoa.net/xml/UWS/v1.1" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.1"
    xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified"
@@ -67,20 +53,20 @@
          <xs:enumeration value="QUEUED">
             <xs:annotation>
                <xs:documentation>
-                  An job has been accepted for execution but is waiting
+                  A job has been accepted for execution but is waiting
                   in a queue
                </xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="EXECUTING">
             <xs:annotation>
-               <xs:documentation>An job is running</xs:documentation>
+               <xs:documentation>A job is running</xs:documentation>
             </xs:annotation>
          </xs:enumeration>
          <xs:enumeration value="COMPLETED">
             <xs:annotation>
                <xs:documentation>
-                  An job has completed successfully
+                  A job has completed successfully
                </xs:documentation>
             </xs:annotation>
          </xs:enumeration>
