@@ -2,14 +2,10 @@
    <!-- $Revision$ $Date$  $HeadURL$ -->
    <!-- UWS schema - Paul Harrison May 2008 -->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-   targetNamespace="http://www.ivoa.net/xml/UWS/v1.1" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.1"
+   targetNamespace="http://www.ivoa.net/xml/UWS/v1.0" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0"
    xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified"
    attributeFormDefault="unqualified"
 >
-<!--
-   <xs:import namespace="http://www.w3.org/1999/xlink"
-      schemaLocation="../../../stc/STC/v1.30/XLINK.xsd" />
- -->  
       <xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
    
@@ -122,8 +118,9 @@
    </xs:simpleType>
    <xs:complexType name="JobSummary">
       <xs:annotation>
-         <xs:documentation>The complete representation of the state
-            of a job</xs:documentation>
+         <xs:documentation>
+            The complete representation of the state of a job
+         </xs:documentation>
       </xs:annotation>
       <xs:sequence>
          <xs:element name="jobId" type="uws:JobIdentifier" />
@@ -131,100 +128,133 @@
             minOccurs="0"
          >
             <xs:annotation>
-               <xs:documentation> this is a client supplied identifier -
-                  the UWS system does nothing other than to return it as
-                  part of the description of the job</xs:documentation>
+               <xs:documentation>
+                  this is a client supplied identifier - the UWS system
+                  does nothing other than to return it as part of the
+                  description of the job
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="ownerId" type="xs:string"
-            nillable="true"
-         >
+         <xs:element name="ownerId" type="xs:string" nillable="true">
             <xs:annotation>
-               <xs:documentation>the owner (creator) of the job -
-                  this should be expressed as a string that can be
-                  parsed in accordance with IVOA security standards. If
-                  there was no authenticated job creator then this
-                  should be set to NULL.</xs:documentation>
+               <xs:documentation>
+                  the owner (creator) of the job - this should be
+                  expressed as a string that can be parsed in accordance
+                  with IVOA security standards. If there was no
+                  authenticated job creator then this should be set to
+                  NULL.
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="phase" type="uws:ExecutionPhase">
             <xs:annotation>
-               <xs:documentation> the execution phase - returned at
-                  /(jobs)/(jobid)/phase</xs:documentation>
+               <xs:documentation>
+                  the execution phase - returned at
+                  /(jobs)/(jobid)/phase
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element name="quote" type="xs:dateTime"
-            nillable="true" maxOccurs="1" minOccurs="0"
+         <xs:element name="quote" type="xs:dateTime" nillable="true"
+            maxOccurs="1" minOccurs="0"
          >
             <xs:annotation>
-               <xs:documentation> A Quote predicts when the job is likely to complete - returned at /(jobs)/(jobid)/quote
-                  "don't know" is encoded by setting to the XML null value xsi:nil="true"</xs:documentation>
+               <xs:documentation>
+                  A Quote predicts when the job is likely to complete -
+                  returned at /(jobs)/(jobid)/quote "don't know" is
+                  encoded by setting to the XML null value
+                  xsi:nil="true"
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="startTime" type="xs:dateTime"
-            nillable="true" >
+            nillable="true"
+         >
             <xs:annotation>
-               <xs:documentation>The instant at which the job started execution.</xs:documentation>
-            </xs:annotation></xs:element>
+               <xs:documentation>
+                  The instant at which the job started execution.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="endTime" type="xs:dateTime"
-            nillable="true" >
+            nillable="true"
+         >
             <xs:annotation>
-               <xs:documentation>The instant at which the job finished execution</xs:documentation>
-            </xs:annotation></xs:element>
+               <xs:documentation>
+                  The instant at which the job finished execution
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="executionDuration" type="xs:int"
             nillable="false"
          >
-            <!-- TODO look if xs:duration here has any benefits -->
             <xs:annotation>
-               <xs:documentation> The duration (in seconds) for which
-                  the job should be allowed to run - a value of 0 is
-                  intended to mean unlimited - returned at
-                  /(jobs)/(jobid)/executionduration</xs:documentation>
+               <xs:documentation>
+                  The duration (in seconds) for which the job should be
+                  allowed to run - a value of 0 is intended to mean
+                  unlimited - returned at
+                  /(jobs)/(jobid)/executionduration
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
          <xs:element name="destruction" type="xs:dateTime"
             nillable="true"
          >
             <xs:annotation>
-               <xs:documentation> The time at which the whole job +
-                  records + results will be destroyed. returned at
-                  /(jobs)/(jobid)/destruction</xs:documentation>
+               <xs:documentation>
+                  The time at which the whole job + records + results
+                  will be destroyed. returned at
+                  /(jobs)/(jobid)/destruction
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
-         <xs:element ref="uws:parameters" maxOccurs="1"
-            minOccurs="0"
-         >
-                <xs:annotation>
-                   <xs:documentation>The parameters to the job (where appropriate)
-can also be retrieved at /(jobs)/(jobid)/parameters</xs:documentation>
-                </xs:annotation>
+         <xs:element ref="uws:parameters" maxOccurs="1" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>
+                  The parameters to the job (where appropriate) can also
+                  be retrieved at /(jobs)/(jobid)/parameters
+               </xs:documentation>
+            </xs:annotation>
          </xs:element>
          <xs:element ref="uws:results">
             <xs:annotation>
-               <xs:documentation>The results for the job - can also be retrieved at /(jobs)/(jobid)/results</xs:documentation>
-            </xs:annotation></xs:element>
+               <xs:documentation>
+                  The results for the job - can also be retrieved at
+                  /(jobs)/(jobid)/results
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
          <xs:element name="errorSummary" type="uws:ErrorSummary"
             maxOccurs="1" minOccurs="0"
          >
          </xs:element>
          <xs:element name="jobInfo" maxOccurs="1" minOccurs="0">
             <xs:annotation>
-               <xs:documentation> This is arbitrary information that can
-                  be added to the job description by the UWS
-                  implementation.</xs:documentation>
+               <xs:documentation>
+                  This is arbitrary information that can be added to the
+                  job description by the UWS implementation.
+               </xs:documentation>
             </xs:annotation>
             <xs:complexType>
                <xs:sequence>
                   <xs:any namespace="##any" processContents="lax"
-                     minOccurs="0" maxOccurs="unbounded" />
+                     minOccurs="0" maxOccurs="unbounded"
+                  />
                </xs:sequence>
             </xs:complexType>
          </xs:element>
       </xs:sequence>
+      <xs:attribute name="version" type="uws:UWSVersion" use="required"/>
    </xs:complexType>
    <xs:simpleType name="JobIdentifier">
       <xs:annotation>
          <xs:documentation> The identifier for the job
+         </xs:documentation>
+      </xs:annotation>
+      <xs:restriction base="xs:string" />
+   </xs:simpleType>
+   <xs:simpleType name="UWSVersion">
+      <xs:annotation>
+         <xs:documentation>The version of the UWS standard that the server complies with.
          </xs:documentation>
       </xs:annotation>
       <xs:restriction base="xs:string" />
@@ -240,24 +270,21 @@ can also be retrieved at /(jobs)/(jobid)/parameters</xs:documentation>
       <xs:annotation>
          <xs:documentation> The list of job references returned at
             /(jobs)</xs:documentation>
+          <xs:documentation>The list presented may be affected by the current securiity context and may be filtered</xs:documentation>
       </xs:annotation>
       <xs:complexType>
-         <xs:annotation>
-            <xs:documentation> ISSUE - do we want to have any sort of
-               paging or selection mechanism in case the job list gets
-               very large? Or is that an unnecessary complication...
-            </xs:documentation>
-         </xs:annotation>
          <xs:sequence>
             <xs:element name="jobref" type="uws:ShortJobDescription"
                maxOccurs="unbounded" minOccurs="0"
-            ></xs:element>
+            >
+            </xs:element>
          </xs:sequence>
+         <xs:attribute name="version" type="uws:UWSVersion" use="required"/>
       </xs:complexType>
    </xs:element>
    <xs:complexType name="ResultReference" mixed="false">
       <xs:annotation>
-         <xs:documentation> A reference to a UWS result. If the 
+         <xs:documentation> A reference to a UWS result. 
          </xs:documentation>
       </xs:annotation>
       <xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
