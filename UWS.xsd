@@ -5,7 +5,7 @@
    targetNamespace="http://www.ivoa.net/xml/UWS/v1.0" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0"
    xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified"
    attributeFormDefault="unqualified"
-   version="1.1-PR-20150626"
+   version="1.1-PR-201507??"
 >
       <xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
@@ -15,7 +15,7 @@
          <xs:element name="phase" type="uws:ExecutionPhase">
             <xs:annotation>
                <xs:documentation> the execution phase - returned at
-                  /(jobs)/(jobid)/phase</xs:documentation>
+                  /{jobs}/{job-id}/phase</xs:documentation>
             </xs:annotation>
          </xs:element>
       </xs:sequence>
@@ -151,7 +151,7 @@
             <xs:annotation>
                <xs:documentation>
                   the execution phase - returned at
-                  /(jobs)/(jobid)/phase
+                  /{jobs}/{job-id}/phase
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -161,7 +161,7 @@
             <xs:annotation>
                <xs:documentation>
                   A Quote predicts when the job is likely to complete -
-                  returned at /(jobs)/(jobid)/quote "don't know" is
+                  returned at /{jobs}/{job-id}/quote "don't know" is
                   encoded by setting to the XML null value
                   xsi:nil="true"
                </xs:documentation>
@@ -193,7 +193,7 @@
                   The duration (in seconds) for which the job should be
                   allowed to run - a value of 0 is intended to mean
                   unlimited - returned at
-                  /(jobs)/(jobid)/executionduration
+                  /{jobs}/{job-id}/executionduration
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -204,7 +204,7 @@
                <xs:documentation>
                   The time at which the whole job + records + results
                   will be destroyed. returned at
-                  /(jobs)/(jobid)/destruction
+                  /{jobs}/{job-id}/destruction
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -212,7 +212,7 @@
             <xs:annotation>
                <xs:documentation>
                   The parameters to the job (where appropriate) can also
-                  be retrieved at /(jobs)/(jobid)/parameters
+                  be retrieved at /{jobs}/{job-id}/parameters
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -220,7 +220,7 @@
             <xs:annotation>
                <xs:documentation>
                   The results for the job - can also be retrieved at
-                  /(jobs)/(jobid)/results
+                  /{jobs}/{job-id}/results
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -244,7 +244,13 @@
             </xs:complexType>
          </xs:element>
       </xs:sequence>
-      <xs:attribute name="version" type="uws:UWSVersion" use="required"/>
+      <xs:attribute name="version" type="uws:UWSVersion" use="optional">
+         <xs:annotation>
+           <xs:documentation>note that this attribute is actually required by the 1.1 specification - however remains optional in the schema
+           for backwards compatibility. It will be formally required in the next major revision.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
+      
    </xs:complexType>
    <xs:simpleType name="JobIdentifier">
       <xs:annotation>
@@ -264,7 +270,7 @@
       <xs:annotation>
          <xs:documentation> This is the information that is returned
             when a GET is made for a single job resource - i.e.
-            /(jobs)/(jobid)</xs:documentation>
+            /{jobs}/{job-id}</xs:documentation>
       </xs:annotation>
    </xs:element>
    <xs:element name="jobs">
@@ -280,7 +286,12 @@
             >
             </xs:element>
          </xs:sequence>
-         <xs:attribute name="version" type="uws:UWSVersion" use="required"/>
+      <xs:attribute name="version" type="uws:UWSVersion" use="optional">
+         <xs:annotation>
+           <xs:documentation>note that this attribute is actually required by the 1.1 specification - however remains optional in the schema
+           for backwards compatibility. It will be formally required in the next major revision.</xs:documentation>
+         </xs:annotation>
+      </xs:attribute>
       </xs:complexType>
    </xs:element>
    <xs:complexType name="ResultReference" mixed="false">
@@ -297,7 +308,7 @@
    <xs:element name="results">
       <xs:annotation>
          <xs:documentation> The element returned for
-            /(jobs)/(jobid)/results</xs:documentation>
+            /{jobs}/{job-id}/results</xs:documentation>
       </xs:annotation>
       <xs:complexType>
          <xs:sequence>
@@ -311,7 +322,7 @@
       <xs:annotation>
          <xs:documentation>
             A short summary of an error - a fuller representation of the
-            error may be retrieved from /(jobs)/(jobid)/error
+            error may be retrieved from /{jobs}/{job-id}/error
          </xs:documentation>
       </xs:annotation>
       <xs:sequence>
@@ -326,7 +337,7 @@
       </xs:attribute>
       <xs:attribute name="hasDetail" type="xs:boolean" use="required">
          <xs:annotation>
-            <xs:documentation>if true then there is a more detailed error message available at /(jobs)/(jobid)/error</xs:documentation>
+            <xs:documentation>if true then there is a more detailed error message available at /{jobs}/{job-id}/error</xs:documentation>
          </xs:annotation></xs:attribute>
    </xs:complexType>
    <xs:simpleType name="ErrorType">

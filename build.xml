@@ -6,7 +6,7 @@
 	<property name="latexlocation" location="/opt/local/bin"/>
      <property name="docversion" value="1.1"/>
 	  <property name="docdate"  value="${DSTAMP}"/>
-     <property name="pubstatus" value="WD"/><!-- set to the status of the document WD, PR, REC, NOTE -->
+     <property name="pubstatus" value="PR"/><!-- set to the status of the document WD, PR, REC, NOTE -->
 
 	
 
