@@ -288,7 +288,7 @@ Paul Harrison -->
           <p>HELD: The job is HELD pending execution and
                   will not automatically be executed (cf, PENDING)</p>
         </li><li><p>SUSPENDED: The job has been suspended by the system during execution. This might be because of temporary lack of resource. The UWS will automatically resume the job into the EXECUTING phase without any intervention when resource becomes available.</p></li>
-        <li>ARCHIVED: At destruction time the results associated with a job have been deleted to free up resource, but the metadata associated with the job must be retained. <span class="text">This is an alternative that the server may choose in contrast to completely destroying all record of the job to allow a longer historical record of the existence of the job to be kept that would otherwise be the case if limited result storage resources forces destruction.</span></li>
+        <li>ARCHIVED: At destruction time the results associated with a job have been deleted to free up resource, but the metadata associated with the job have been retained. <span class="text">This is an alternative that the server may choose in contrast to completely destroying all record of the job to allow a longer historical record of the existence of the job to be kept that would otherwise be the case if limited result storage resources forces destruction.</span></li>
         </ul>
         <p>A successful job will normally progress through the PENDING, QUEUED, EXECUTING, COMPLETED phases in that order. At any time before the COMPLETED phase a job may either be ABORTED or may suffer an ERROR. If the UWS reports an UNKNOWN phase, then all the client can do is re-query the phase until a known phase is reported. A UWS may place a job in a HELD phase on receipt of a PHASE=RUN request if for some reason the job cannot be immediately queued - in this case it is the responsibility of the client to request PHASE=RUN again at some later time. The state diagram below represents these states, where the blue transitions are ones that can be initiated by the client, and the black transitions are ones that the server may make.</p>
         <p><img src="UWSStates.png" alt="UWS state diagram" width="100%" /></p>
@@ -341,7 +341,7 @@ Paul Harrison -->
           sets the initial Destruction Time. The client may write to the
           Destruction Time to try to change the life expectancy of the job. The
           service may forbid changes, or may set limits on the allowed
-          destruction time. If there is no destruction time set by the service then this should be indicated in the job XML as a Nill element and as a null string in the returned value for the resource.</p>
+          destruction time. If there is no destruction time set by the service then this should be indicated in the job XML as an <span class="xmlelement">xsi:nil</span> element and as a null string in the returned value for the resource.</p>
       </div>
       <div class="section"><h4><a id="Quote" shape="rect"><span class="secnum">2.1.6. </span>Quote</a></h4>
         <p>A Quote object predicts when the job
@@ -349,10 +349,10 @@ Paul Harrison -->
           same job on several services, compares the quotes and then accepts
           the best quote. From the server perspective it is possible to indicate that a job will not be run by specifying a Quote that is greater than the Destruction time.</p>
         <p>Quoting for a computational job is
-          notoriously difficult. A UWS implementation must always provide a
+          notoriously difficult. A UWS implementation should provide a
           quote object, in order that the two-phase committal of jobs be
           uniform across all UWS, but it may supply a “don't know” answer
-          for the completion time, indicated by a negative value or an XML nil element in an XML representation of the quote object.</p>
+          for the completion time, indicated by an XML <span class="xmlelement">xsi:nil</span> element in an XML representation of the quote object.</p>
       </div>
       <div class="section"><h4><a id="Error" shape="rect"><span class="secnum">2.1.7. </span>Error</a></h4>
         <p>The error object gives a human-readable error message for the underlying job. This object
@@ -517,7 +517,7 @@ Paul Harrison -->
             the server should respond to a request from the client to filter the jobs shown by using URL query parameter on the PHASE for example</p>
           <pre xml:space="preserve"><code>/{jobs}?PHASE=EXECUTING</code>
 </pre>
-          <p>would list only the jobs in an EXECUTING state. If the PHASE filtering parameter is repeated, then the service should list all the jobs in the union of the enumerated PHASEs.
+          <p>would list only the jobs in an EXECUTING state. If the PHASE filtering parameter is repeated, then the service should list all the jobs in the union of the repeated PHASEs.
           The only way to list any jobs in the "ARCHIVED" phase is to use this mechanism.</p>
           <p>Other filters that that server should recognise on the job list are</p>
           <ul>
