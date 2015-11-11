@@ -5,7 +5,7 @@
    targetNamespace="http://www.ivoa.net/xml/UWS/v1.0" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0"
    xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified"
    attributeFormDefault="unqualified"
-   version="1.1-PR-201509??"
+   version="1.1-PR-20151111"
 >
       <xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
@@ -301,8 +301,8 @@
       </xs:annotation>
       <xs:attribute name="id" type="xs:string" use="required"></xs:attribute>
       <xs:attributeGroup ref="uws:reference"></xs:attributeGroup>
-      <xs:attribute name="size" type="xs:long" use="required" ></xs:attribute>
-      <xs:attribute name="mime-type" type="xs:string" use="required"></xs:attribute>
+      <xs:attribute name="size" type="xs:long" use="optional" ></xs:attribute>
+      <xs:attribute name="mime-type" type="xs:string" use="optional"></xs:attribute>
       <xs:anyAttribute namespace="urn:uwscustom" processContents="lax" />
    </xs:complexType>
    <xs:element name="results">
