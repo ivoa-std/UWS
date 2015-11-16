@@ -6,6 +6,7 @@
 >
    <uws:jobId>cea-agdevel.jb.man.ac.uk-130.88.24.18-1242749568029-508182314</uws:jobId>
    <uws:ownerId xsi:nil="true"/>
+   <uws:runId>myjobref</uws:runId>
    <uws:phase>COMPLETED</uws:phase>
    <uws:startTime>2009-05-19T17:12:48.038+01:00</uws:startTime>
    <uws:endTime>2009-05-19T17:12:48.041+01:00</uws:endTime>

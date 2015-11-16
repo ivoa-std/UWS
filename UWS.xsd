@@ -5,24 +5,50 @@
    targetNamespace="http://www.ivoa.net/xml/UWS/v1.0" xmlns:uws="http://www.ivoa.net/xml/UWS/v1.0"
    xmlns:xlink="http://www.w3.org/1999/xlink" elementFormDefault="qualified"
    attributeFormDefault="unqualified"
-   version="1.1-PR-20151111"
+   version="1.1-PR-20151116"
 >
       <xs:import namespace="http://www.w3.org/1999/xlink"
       schemaLocation="http://www.ivoa.net/xml/Xlink/xlink.xsd"/>
-   
-   <xs:complexType name="ShortJobDescription">
-      <xs:sequence>
-         <xs:element name="phase" type="uws:ExecutionPhase">
+      <xs:complexType name="ShortJobDescription">
+         <xs:sequence>
+            <xs:element name="phase" type="uws:ExecutionPhase">
+               <xs:annotation>
+                  <xs:documentation>
+                     the execution phase - returned at
+                     /{jobs}/{job-id}/phase
+                  </xs:documentation>
+               </xs:annotation>
+            </xs:element>
+          <xs:element name="runId" type="xs:string" maxOccurs="1"
+            minOccurs="0" >
             <xs:annotation>
-               <xs:documentation> the execution phase - returned at
-                  /{jobs}/{job-id}/phase</xs:documentation>
+               <xs:documentation>
+                  this is a client supplied identifier - the UWS system
+                  does nothing other than to return it as part of the
+                  description of the job
+               </xs:documentation>
             </xs:annotation>
          </xs:element>
-      </xs:sequence>
-      <xs:attribute name="id" type="uws:JobIdentifier" use="required"></xs:attribute>
-      <xs:attributeGroup ref="uws:reference"></xs:attributeGroup>
-   </xs:complexType>
-   <xs:attributeGroup name="reference">
+         <xs:element name="ownerId" type="xs:string" nillable="true" minOccurs="0" maxOccurs="1">
+            <xs:annotation>
+               <xs:documentation>
+                  the owner (creator) of the job - this should be
+                  expressed as a string that can be parsed in accordance
+                  with IVOA security standards. If there was no
+                  authenticated job creator then this should be set to
+                  NULL.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+            
+         </xs:sequence>
+         <xs:attribute name="id" type="uws:JobIdentifier"
+            use="required"
+         >
+         </xs:attribute>
+         <xs:attributeGroup ref="uws:reference"></xs:attributeGroup>
+      </xs:complexType>
+      <xs:attributeGroup name="reference">
       <xs:annotation>
          <xs:documentation>standard xlink references
          </xs:documentation>
