@@ -40,6 +40,15 @@
                </xs:documentation>
             </xs:annotation>
          </xs:element>
+         <xs:element name="creationTime" type="xs:dateTime"
+            nillable="false"
+         maxOccurs="1" minOccurs="0"> 
+            <xs:annotation>
+               <xs:documentation>
+                  The instant at which the job was created.
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
             
          </xs:sequence>
          <xs:attribute name="id" type="uws:JobIdentifier"
@@ -190,6 +199,17 @@
                   returned at /{jobs}/{job-id}/quote "don't know" is
                   encoded by setting to the XML null value
                   xsi:nil="true"
+               </xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="creationTime" type="xs:dateTime"
+            nillable="false"
+         maxOccurs="1" minOccurs="0"> <!-- note that this is optional only in versions 1.x of the schema for backwards compatibility.
+                                          It is mandatory for a 1.1 UWS to include this value.
+                                          2.0+ versions of the schema will make this formally mandatory in an XML sense. -->
+            <xs:annotation>
+               <xs:documentation>
+                  The instant at which the job was created.
                </xs:documentation>
             </xs:annotation>
          </xs:element>
