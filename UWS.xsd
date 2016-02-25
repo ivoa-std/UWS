@@ -204,12 +204,15 @@
          </xs:element>
          <xs:element name="creationTime" type="xs:dateTime"
             nillable="false"
-         maxOccurs="1" minOccurs="0"> <!-- note that this is optional only in versions 1.x of the schema for backwards compatibility.
-                                          It is mandatory for a 1.1 UWS to include this value.
-                                          2.0+ versions of the schema will make this formally mandatory in an XML sense. -->
+         maxOccurs="1" minOccurs="0"> 
             <xs:annotation>
                <xs:documentation>
                   The instant at which the job was created.
+               </xs:documentation>
+               <xs:documentation>               
+                Note that the version 1.1 of the specification requires that this element be present.
+                It is optional only in versions 1.x of the schema for backwards compatibility.
+                2.0+ versions of the schema will make this formally mandatory in an XML sense.
                </xs:documentation>
             </xs:annotation>
          </xs:element>
@@ -323,7 +326,7 @@
       <xs:annotation>
          <xs:documentation> The list of job references returned at
             /(jobs)</xs:documentation>
-          <xs:documentation>The list presented may be affected by the current securiity context and may be filtered</xs:documentation>
+          <xs:documentation>The list presented may be affected by the current security context and may be filtered</xs:documentation>
       </xs:annotation>
       <xs:complexType>
          <xs:sequence>
