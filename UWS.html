@@ -246,7 +246,7 @@ Paul Harrison -->
         </li><li>
           <p>Exactly one Execution Duration.</p>
         </li><li>
-          <p>Exactly one Deletion Time</p>
+          <p>Exactly one Destruction Time</p>
         </li><li>
           <p>Zero or one Quote.</p>
         </li><li>
@@ -524,7 +524,7 @@ Paul Harrison -->
           The only way to list any jobs in the "ARCHIVED" phase is to use this mechanism.</p>
           <p>Other filters based on time base propertied of a job that that server should recognise on the job list are</p>
           <ul>
-            <li><code>/{jobs}?AFTER=2014-09-10T10:01:02.000</code> The server should only list jobs with startTimes after the given <cite>[<a href="#std:iso8601">std:iso8601</a>]</cite> time in UTC.</li>
+            <li><code>/{jobs}?AFTER=2014-09-10T10:01:02.000Z</code> The server should only list jobs with startTimes after the given <cite>[<a href="#std:iso8601">std:iso8601</a>]</cite> date and time.</li>
             <li><code>/{jobs}?LAST=100</code> The server should list only the given number (an integer greater than 0) of most recent jobs ordered by descending creationTimes.</li>
           </ul>
           <p>In first cases the UWS must not list jobs that have a null startTime, and in general a job only acquires an startTime at the instant it enters the EXECUTING phase.</p>
