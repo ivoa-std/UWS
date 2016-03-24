@@ -8,11 +8,11 @@
    <uws:runId>myjobref</uws:runId>
    <uws:ownerId xsi:nil="true"/>
    <uws:phase>COMPLETED</uws:phase>
-   <uws:creationTime>2009-05-19T17:01:44.038+01:00</uws:creationTime>
-   <uws:startTime>2009-05-19T17:12:48.038+01:00</uws:startTime>
-   <uws:endTime>2009-05-19T17:12:48.041+01:00</uws:endTime>
+   <uws:creationTime>2009-05-19T17:01:44.038Z</uws:creationTime>
+   <uws:startTime>2009-05-19T17:12:48.038Z</uws:startTime>
+   <uws:endTime>2009-05-19T17:12:49.041Z</uws:endTime>
    <uws:executionDuration>86400</uws:executionDuration>
-   <uws:destruction>2009-05-29T17:12:48.035+01:00</uws:destruction>
+   <uws:destruction>2009-05-29T17:12:48.035Z</uws:destruction>
    <uws:parameters>
       <uws:parameter id="scaleFactor">1.8</uws:parameter>
       <uws:parameter id="image"  byReference="true">
