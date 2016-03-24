@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!-- The resource record for UWS; this will be uploaded into the RofR -->
+<ri:Resource 
+	xsi:type="vstd:Standard" 
+	created="2016-03-22T17:19:00" 
+	updated="2016-03-22T17:19:00" 
+	status="active"
+	xmlns:vr="http://www.ivoa.net/xml/VOResource/v1.0" 
+	xmlns:vstd="http://www.ivoa.net/xml/StandardsRegExt/v1.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:ri="http://www.ivoa.net/xml/RegistryInterface/v1.0"
+	xsi:schemaLocation="http://www.ivoa.net/xml/VOResource/v1.0
+		http://www.ivoa.net/xml/VOResource/v1.0
+	http://www.ivoa.net/xml/StandardsRegExt/v1.0
+		http://www.ivoa.net/xml/StandardsRegExt/v1.0
+	http://www.ivoa.net/xml/VOResource/v1.0
+		http://www.ivoa.net/xml/VOResource/v1.0">
+
+  <title>UWS: An asynchronous job management pattern</title>
+  <identifier>ivo://ivoa.net/std/UWS</identifier>
+  <curation>
+    <publisher>IVOA</publisher>
+    <creator>
+      <name>IVOA Registry WG</name>
+      <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+    </creator>
+    <creator>
+      <name>IVOA Grid and Web Services WG</name>
+      <logo>http://www.ivoa.net/icons/ivoa_logo_small.jpg</logo>
+    </creator>
+    <date role="representative">2016-03-22</date>
+    <version>1.0</version>
+    <contact>
+      <name>IVOA GWS WG</name>
+      <email>grid@ivoa.net</email>
+    </contact>
+  </curation>
+  <content>
+    <subject>standard language identifiers</subject>
+    <subject>virtual observatory</subject>
+    <description>
+        This document describes the standard for UWS.  
+      </description>
+    <referenceURL>http://www.ivoa.net/Documents/UWS</referenceURL>
+  </content>
+  <endorsedVersion status="rec">1.1</endorsedVersion>
+    <key>
+    <name>rest-1.1</name>
+    <description>
+      The standard REST HTTP interface for version 1.1 of the service.
+      </description>
+  </key>
+  
+
+</ri:Resource>
