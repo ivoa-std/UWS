@@ -532,7 +532,6 @@ Paul Harrison -->
             <li><code>/{jobs}?AFTER=2014-09-10T10:01:02.000Z</code> The server should only list jobs with creationTimes after the given <cite>[<a href="#std:iso8601">std:iso8601</a>]</cite> date and time in UTC.</li>
             <li><code>/{jobs}?LAST=100</code> The server should list only the given number (an integer greater than 0) of most recent jobs ordered by descending creationTimes.</li>
           </ul>
-          <p>In first cases the UWS must not list jobs that have a null startTime, and in general a job only acquires an startTime at the instant it enters the EXECUTING phase.</p>
           <p>If multiple filters are specified by the client, then the server should return a jobs list which is the result of a logical AND of the various filter conditions. A server may use the LAST filter in a 303 redirection response  if it is desired to limit the size of the default returned list after operations that result in a return to the job list (see section <span class="xref"><a href="#RESTbinding">2.2</a></span>). The size of the returned list should be large enough that all active jobs are likely to be returned. A client can deduce that there might be further jobs in the job list by parsing this returned URL.</p>
         </div>
         <div class="section"><h4><a id="jobobj" shape="rect"><span class="secnum">2.2.2.2. </span>Job</a></h4>
