@@ -266,7 +266,7 @@ Paul Harrison -->
       </div>
       <div class="section"><h4><a id="ExecutionPhase" shape="rect"><span class="secnum">2.1.3. </span>Execution Phase</a></h4>
         <p>The job is treated as a state machine
-          with the Execution Phase naming the state. The phases are:</p>
+          with the Execution Phase naming the state (labelled simply as &quot;Phase&quot; in the UML diagram above). The phases are:</p>
         <ul><li>
             <p>PENDING: the job is accepted by
               the service but not yet committed for execution by the client. In
@@ -398,7 +398,7 @@ Paul Harrison -->
       </div>
     </div>
     <div class="section"><h3><a id="RESTbinding" shape="rect"><span class="secnum">2.2. </span>The REST Binding</a></h3>
-      <p>In order to create a usable service the objects discussed in the section above must be exposed in a particular interface which can be addressed over a particular transport mechanism - this combination is known as a "binding". In this first version of the UWS pattern only a REST (Representational State
+      <p>In order to create a usable service the objects discussed in the section above must be exposed in a particular interface which can be addressed over a particular transport mechanism - this combination is known as a "binding". In this  version of the UWS pattern only a REST (Representational State
       Transfer) style binding <cite>[<a href="#fielding00">fielding00</a>]</cite>is presented, however, future versions of this document may add other bindings. It should be noted that REST is based on HTTP <cite>[<a href="#std:http">std:http</a>]</cite> and as such the REST binding inherits standard HTTP behaviours. In particular it should be noted that the REST binding makes use of HTTP status codes to control the behaviour of the client, especially the "300" class redirection codes to ensure that the client requests particular resources after state changing operations. If a request is made to a resource that does not exist (e.g. an non-existent job-id) then a 404 error should be returned, or if a request is made that is illegal for the current state of the UWS then a 403 status should be returned. If for some reason there is a complete failure in the underlying UWS machinery then a 500 "internal server error" status should be returned. However individual job failures are indicated by setting the appropriate parts of the job representation to error statuses and a request for the individual job object representation at /{jobs}/{job-id} should have a normal 200 status code response.</p>
      
       <div class="section"><h4><a id="resourceuri" shape="rect"><span class="secnum">2.2.1. </span>Resources and URIs</a></h4>
