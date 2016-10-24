@@ -7,14 +7,14 @@ Paul Harrison -->
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xml:lang="en" lang="en" xsi:schemalocation="http://www.w3.org/1999/xhtml                           http://www.w3.org/2002/08/xhtml/xhtml1-transitional.xsd" xml:space="preserve">
 <head profile="http://www.w3.org/1999/xhtml/vocab"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-<title>Universal Worker Service Pattern 1.1                   - IVOA Proposed Recommendation  5 May 2016</title> 
+<title>Universal Worker Service Pattern 1.1                    - IVOA Recommendation  24 October 2016</title> 
 <meta name="Title" content="IVOA WG Internal Draft" />
 <meta name="author" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
 <meta name="maintainedBy" content="Paul Harrison, paul.harrison@manchester.ac.uk" />
 <link href="http://www.ivoa.net/misc/ivoa_a.css" rel="stylesheet" type="text/css" />
 <link href="http://volute.googlecode.com/svn/trunk/projects/ivoapub/ivoadoc/XMLPrint.css" rel="stylesheet" type="text/css" />
 <link href="http://volute.googlecode.com/svn/trunk/projects/ivoapub/ivoadoc/ivoa-extras.css" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" type="text/css" href="http://www.ivoa.net/misc/ivoa_pr.css" />
+<link rel="stylesheet" type="text/css" href="http://www.ivoa.net/misc/ivoa_rec.css" />
 </head>
 <body>
 <div class="head">
@@ -30,7 +30,7 @@ Paul Harrison -->
   </div>
   <h1>Universal Worker Service Pattern<br clear="none" />
   Version <span class="docversion">1.1</span></h1>
-<h2 class="subtitle">IVOA Proposed Recommendation  5 May 2016</h2>
+<h2 class="subtitle">IVOA Recommendation  24 October 2016</h2>
 <dl><dt>Working Group:</dt><dd><a href="http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices" shape="rect">http://www.ivoa.net/twiki/bin/view/IVOA/IvoaGridAndWebServices</a></dd>
 <dt><b>This version:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/20150519/" shape="rect">http://www.ivoa.net/Documents/UWS/20150519/</a></dd>
 <dt><b>Latest Recommendation:</b></dt><dd><a href="http://www.ivoa.net/Documents/UWS/" shape="rect">http://www.ivoa.net/Documents/UWS/</a></dd>
@@ -41,6 +41,7 @@ Paul Harrison -->
   <a href="http://www.ivoa.net/documents/UWS/20150615/" shape="rect">Working Draft v1.1 2015-06-15</a><br clear="none" />
   <a href="http://www.ivoa.net/documents/UWS/20150626/" shape="rect">Proposed Recommendation v1.1 2015-06-26</a><br clear="none" />
   <a href="http://www.ivoa.net/documents/UWS/20151130/" shape="rect">Proposed Recommendation v1.1 2015-11-30</a><br clear="none" />
+  <a href="http://www.ivoa.net/documents/UWS/20160505/" shape="rect">Proposed Recommendation v1.1 2016-05-05</a><br clear="none" />
   </dd>
 <dt>	
 </dt>
@@ -60,11 +61,15 @@ Paul Harrison -->
   services with a common service contract. Possible uses of the pattern are also described.</p>
 <h2> Status of This Document</h2>
 <p id="statusdecl"><em>
-                    This is an IVOA Proposed Recommendation made available for
-                    public review. It is appropriate to reference this document
-                    only as a recommended standard that is under review and
-                    which may be changed before it is accepted as a full
-                    Recommendation.
+                    This document has been reviewed by IVOA Members and other
+                    interested parties, and has been endorsed by the IVOA
+                    Executive Committee as an IVOA Recommendation. It is a
+                    stable document and may be used as reference material or
+                    cited as a normative reference from another document.
+                    IVOA's role in making the Recommendation is to draw
+                    attention to the specification and to promote its
+                    widespread deployment. This enhances the functionality and
+                    interoperability inside the Astronomical Community.
                 </em></p>
 <p> <em>A list of </em><span style="background: transparent"><a href="http://www.ivoa.net/Documents/" shape="rect"><i>current
   IVOA Recommendations and other technical documents</i></a></span><em> can be found at http://www.ivoa.net/Documents/.</em></p>
@@ -266,7 +271,7 @@ Paul Harrison -->
       </div>
       <div class="section"><h4><a id="ExecutionPhase" shape="rect"><span class="secnum">2.1.3. </span>Execution Phase</a></h4>
         <p>The job is treated as a state machine
-          with the Execution Phase naming the state (labelled simply as &quot;Phase&quot; in the UML diagram above). The phases are:</p>
+          with the Execution Phase naming the state (labelled simply as "Phase" in the UML diagram above). The phases are:</p>
         <ul><li>
             <p>PENDING: the job is accepted by
               the service but not yet committed for execution by the client. In
@@ -925,7 +930,7 @@ can also be used as a URL for the schema.) This location should
 represent the definitive source, the schema is reproduced below only for
 completeness of this document.</p>
   <div><!--The contents of this div are automatically generated from the following processing instruction when processed with ivoarestructure.xsl-->
-    <?incxml href="../UWS.xsd"?><h:div xmlns:h="http://www.w3.org/1999/xhtml" class="viewxml"><div class="comment">&lt;!-- $Revision$ $Date$  $HeadURL$ --&gt;</div><div class="comment">&lt;!-- UWS schema - Paul Harrison May 2008 --&gt;</div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:schema</span> <span class="attribute-name">targetNamespace</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0"</span> <span class="attribute-name">elementFormDefault</span><span class="markup">=</span><span class="attribute-value">"qualified"</span> <span class="attribute-name">attributeFormDefault</span><span class="markup">=</span><span class="attribute-value">"unqualified"</span> <span class="attribute-name">version</span><span class="markup">=</span><span class="attribute-value">"1.1-PR-20160505"</span> <span class="attribute-name">xmlns:xml</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/XML/1998/namespace"</span> <span class="attribute-name">xmlns:xs</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/2001/XMLSchema"</span> <span class="attribute-name">xmlns:uws</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0"</span> <span class="attribute-name">xmlns:xlink</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:import</span> <span class="attribute-name">namespace</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span> <span class="attribute-name">schemaLocation</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/Xlink/xlink.xsd"</span><span class="markup">/&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"ShortJobDescription"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"phase"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:ExecutionPhase"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text">
+    <?incxml href="../UWS.xsd"?><h:div xmlns:h="http://www.w3.org/1999/xhtml" class="viewxml"><div class="comment">&lt;!-- $Revision$ $Date$  $HeadURL$ --&gt;</div><div class="comment">&lt;!-- UWS schema - Paul Harrison May 2008 --&gt;</div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:schema</span> <span class="attribute-name">targetNamespace</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0"</span> <span class="attribute-name">elementFormDefault</span><span class="markup">=</span><span class="attribute-value">"qualified"</span> <span class="attribute-name">attributeFormDefault</span><span class="markup">=</span><span class="attribute-value">"unqualified"</span> <span class="attribute-name">version</span><span class="markup">=</span><span class="attribute-value">"1.1-REC-20161024"</span> <span class="attribute-name">xmlns:xml</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/XML/1998/namespace"</span> <span class="attribute-name">xmlns:xs</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/2001/XMLSchema"</span> <span class="attribute-name">xmlns:uws</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/UWS/v1.0"</span> <span class="attribute-name">xmlns:xlink</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:import</span> <span class="attribute-name">namespace</span><span class="markup">=</span><span class="attribute-value">"http://www.w3.org/1999/xlink"</span> <span class="attribute-name">schemaLocation</span><span class="markup">=</span><span class="attribute-value">"http://www.ivoa.net/xml/Xlink/xlink.xsd"</span><span class="markup">/&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"ShortJobDescription"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:sequence</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"phase"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"uws:ExecutionPhase"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text">
                      the execution phase - returned at
                      /{jobs}/{job-id}/phase
                   </span><span class="markup">&lt;/</span><span class="end-tag">xs:documentation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:annotation</span><span class="markup">&gt;</span></div></div><span class="markup">&lt;/</span><span class="end-tag">xs:element</span><span class="markup">&gt;</span></div><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:element</span> <span class="attribute-name">name</span><span class="markup">=</span><span class="attribute-value">"runId"</span> <span class="attribute-name">type</span><span class="markup">=</span><span class="attribute-value">"xs:string"</span> <span class="attribute-name">maxOccurs</span><span class="markup">=</span><span class="attribute-value">"1"</span> <span class="attribute-name">minOccurs</span><span class="markup">=</span><span class="attribute-value">"0"</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:annotation</span><span class="markup">&gt;</span><div class="indent"><div class="element"><span class="markup">&lt;</span><span class="start-tag">xs:documentation</span><span class="markup">&gt;</span><span class="text">
