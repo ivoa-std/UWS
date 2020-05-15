@@ -2,7 +2,7 @@
 
 This is the source for the [IVOA UWS Recommendation](http://www.ivoa.net/documents/UWS/index.html)
 
-The [document](UWS.html) is authored as pure HTML - however the now deprecated https://github.com/pahjbo/ivoapub
+The [document](UWS.html) is authored as pure HTML - however the now deprecated https://github.com/pahjbo/ivoapub was used int the preparation of the document.
 
 Future major revisions of the document should use the https://github.com/ivoa-std/ivoatex system
 
