@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="UWSbuild" default="createPDF">
+
+	<tstamp></tstamp>
+	<property name="ivoname" value="UWS"/>
+     <property name="docversion" value="1.1"/>
+	  <property name="docdate"  value="${DSTAMP}"/>
+     <property name="pubstatus" value="REC"/><!-- set to the status of the document WD, PR, REC, NOTE -->
+
+   <property environment="env"/>
+   <property name="latexlocation" location="${env.TEX_HOME}/bin"/>
+	<condition property="ivoadoc" value="${env.IVOAPUB_DIR}" else="./ivoadoc">
+         <isset property="env.IVOAPUB_DIR" />
+   </condition>
+
+	<!-- ================================= 
+          target: createdoc              
+         ================================= -->
+	<target name="formatdoc" description="add TOC, numbering etc">
+		<copy file="${ivoname}.html" tofile="${ivoname}-old.html"/> 
+		<xslt style="${ivoadoc}/ivoarestructure.xslt" in="${ivoname}.html" out="${ivoname}-new.html" >
+			<factory name="net.sf.saxon.TransformerFactoryImpl" >
+           <attribute name="http://saxon.sf.net/feature/strip-whitespace" 
+                value="none"/> <!-- preserve whitespace between elements -http://www.saxonica.com/documentation/sourcedocs/whitespace.html -->
+         </factory>
+           
+               <param name="docversion" expression="${docversion}"/>
+               <param name="pubstatus" expression="${pubstatus}"/>
+			<param name="docdate" expression="${docdate}"/>
+         
+			<xmlcatalog >
+				<catalogpath>
+					<filelist>
+						<file name="${ivoadoc}/xmlcatalog/catalog.xml"/>
+					</filelist>
+				</catalogpath>
+			</xmlcatalog>
+		</xslt>
+		<copy file="${ivoname}-new.html" tofile="${ivoname}.html"/> 
+
+	</target>
+
+	<target name="createPDF">
+		<xslt style="${ivoadoc}/ivoa-fo.xsl" in="${ivoname}.html" out="out.fo" force="true">
+			<factory name="net.sf.saxon.TransformerFactoryImpl" >
+		     </factory>
+			<param name="page-width" expression="210mm"/>
+			<param name="page-height" expression="297mm"/>
+			<param name="global-font-size" expression="11pt"/>
+			<xmlcatalog >
+				<catalogpath>
+					<filelist>
+						<file name="${ivoadoc}/xmlcatalog/catalog.xml"/>
+					</filelist>
+				</catalogpath>
+			</xmlcatalog>
+		</xslt>
+		<echo>applying fop</echo>
+		<fop format="application/pdf" 
+		        fofile="out.fo"
+		        outfile="${ivoname}.pdf" force="true" />
+	</target>
+	
+	<target name="regenerateRefs"> 
+		<xslt style="${ivoadoc}/extractcite.xslt" in="${ivoname}.html" out="${ivoname}.aux" force="true"  >
+			<factory name="net.sf.saxon.TransformerFactoryImpl" />
+			<param name="target" expression="aux"/>
+			<xmlcatalog >
+				<catalogpath>
+					<filelist>
+						<file name="${ivoadoc}/xmlcatalog/catalog.xml"/>
+					</filelist>
+				</catalogpath>
+			</xmlcatalog>
+		</xslt>
+        <exec executable="/opt/local/bin/bibtex">
+        	<env key="PATH" path="${env.PATH}:${latexlocation}"/>
+        	<arg   value="${ivoname}" />
+        </exec>
+	</target>
+	<!-- ================================= 
+          target: package              
+         ================================= -->
+    <target name="package"  description="create a zip file of document and associated files" depends="createPDF" >
+    	<tstamp></tstamp>
+    	<copy file="UWS.html" tofile="${pubstatus}-UWS-${docversion}-${DSTAMP}.html"></copy>
+    	<copy file="UWS.pdf" tofile="${pubstatus}-UWS-${docversion}-${DSTAMP}.pdf"></copy>
+    	
+        <zip destfile="uws.zip" basedir="${basedir}" includes="${pubstatus}-UWS-${docversion}-${DSTAMP}.html, ${pubstatus}-UWS-${docversion}-${DSTAMP}.pdf, UWS.xsd,**/*.css,**/*.png,**/*.gif">
+        	
+        </zip>
+    </target>
+
+	
+	<property name="fop.home" value="${env.FOP_HOME}"/>
+
+	<taskdef name="fop" 
+	         classname="org.apache.fop.tools.anttasks.Fop">
+	  <classpath>
+	    <fileset dir="${fop.home}/lib">
+	      <include name="*.jar"/>
+	    </fileset>
+	    <fileset dir="${fop.home}/build">
+	      <include name="fop.jar"/>
+	      <include name="fop-hyph.jar" />
+	      <include name="fop-sandbox.jar"/>
+	    </fileset>
+	  </classpath>
+	</taskdef>
+</project>
